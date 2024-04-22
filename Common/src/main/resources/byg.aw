@@ -30,3 +30,7 @@ Extendable method net/minecraft/world/level/biome/OverworldBiomeBuilder pickPeak
 Extendable method net/minecraft/world/level/biome/OverworldBiomeBuilder pickSlopeBiome (IILnet/minecraft/world/level/biome/Climate$Parameter;)Lnet/minecraft/resources/ResourceKey;
 
 Extendable class net/minecraft/world/level/biome/OverworldBiomeBuilder
+
+Accessible field net/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplate palettes Ljava/util/List;
+Accessible method net/minecraft/world/level/block/LeavesBlock updateDistance (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;
+Accessible method net/minecraft/world/level/block/BaseFireBlock canBurn (Lnet/minecraft/world/level/block/state/BlockState;)Z
