@@ -52,7 +52,7 @@ reobf {
 }
 
 minecraft {
-    mappings channel: 'parchment', version: "1.19.4-${parchment_version}-1.19.4"
+    mappings channel: 'parchment', version: "${minecraft_version}-${parchment_version}-${minecraft_version}"
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -120,7 +120,7 @@ dependencies {
     compileOnly project(":Common")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     implementation fg.deobf("com.github.glitchfiend:TerraBlender-forge:${minecraft_version}-${terrablender_version}")
-    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.19.4:${geckolib_version}")
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
     implementation fg.deobf("maven.modrinth:corgilib:${minecraft_version}-${corgilib_version}-forge")
 
     dataImplementation sourceSets.main.output
