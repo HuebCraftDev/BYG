@@ -32,7 +32,7 @@ public record BYGPlayerTrackedData(Map<String, Set<ResourceKey<Biome>>> discover
 
 
     public void tickPerSecond(ServerPlayer player) {
-        ResourceKey<Biome> biomeResourceKey = player.level.getBiome(player.blockPosition()).unwrapKey().orElseThrow();
+        ResourceKey<Biome> biomeResourceKey = player.level().getBiome(player.blockPosition()).unwrapKey().orElseThrow();
         if (this.discoveredBiomesByNameSpace.computeIfAbsent(biomeResourceKey.location().getNamespace(), key -> new ObjectOpenHashSet<>()).add(biomeResourceKey)) {
             ModPlatform.INSTANCE.sendToClient(player, new DiscoveredBiomesPacket(this.discoveredBiomesByNameSpace));
         }
@@ -40,8 +40,8 @@ public record BYGPlayerTrackedData(Map<String, Set<ResourceKey<Biome>>> discover
 
     public interface Access {
 
-        BYGPlayerTrackedData getPlayerTrackedData();
+        BYGPlayerTrackedData byg_getPlayerTrackedData();
 
-        BYGPlayerTrackedData setPlayerTrackedData(BYGPlayerTrackedData newVal);
+        BYGPlayerTrackedData byg_setPlayerTrackedData(BYGPlayerTrackedData newVal);
     }
 }

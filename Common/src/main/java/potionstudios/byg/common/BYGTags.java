@@ -21,9 +21,12 @@ import java.util.*;
 @SuppressWarnings("all")
 @ParametersAreNonnullByDefault
 public enum BYGTags {
+    WOODS("woods", null, "woods", "woods", RegistryType.BLOCKS, RegistryType.ITEMS),
+    STONES("stones", null, "stone", "stones", RegistryType.BLOCKS, RegistryType.ITEMS),
     LOGS("logs", "logs", null, null, RegistryType.BLOCKS, RegistryType.ITEMS),
     LOGS_THAT_BURN("logs_that_burn", "logs_that_burn", null, null, RegistryType.BLOCKS, RegistryType.ITEMS),
     LEAVES("leaves", "leaves", null, null, RegistryType.BLOCKS, RegistryType.ITEMS),
+    GRASS("grass", null, null, null, RegistryType.BLOCKS, RegistryType.ITEMS),
 
     SLABS("slabs", "slabs", null, null, RegistryType.BLOCKS, RegistryType.ITEMS),
     STAIRS("stairs", "stairs", null, null, RegistryType.BLOCKS, RegistryType.ITEMS),
@@ -34,10 +37,13 @@ public enum BYGTags {
     SAND("sand", "sand", "sand", "sand", RegistryType.BLOCKS, RegistryType.ITEMS),
     ICE("ice", "ice", null, null, RegistryType.BLOCKS, RegistryType.ITEMS),
 
+    GLASS("glass", null, "glass", "glass", RegistryType.BLOCKS, RegistryType.ITEMS),
     ORES("ores", null, "ores", "ores", RegistryType.ITEMS, RegistryType.BLOCKS),
     BOOKSHELVES("bookshelves", null, "bookshelves", "bookshelves", RegistryType.ITEMS, RegistryType.BLOCKS),
     STICKS("sticks", null, "rods/wooden", "wooden_rods", RegistryType.ITEMS),
     SHEARS("shears", null, "shears", "shears", RegistryType.ITEMS),
+    HEAVY_METAL("heavy_metal", null, null, null, RegistryType.BLOCKS),
+    EGGS("eggs", null, null, null, RegistryType.BLOCKS, RegistryType.ITEMS),
 
     BOATS("boats", null, "boats", "boats", RegistryType.ENTITY_TYPES);
 

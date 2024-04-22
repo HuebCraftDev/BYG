@@ -8,8 +8,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(TreeDecoratorType.class)
 public interface TreeDecoratorTypeAccess {
-
-
     @Invoker("<init>")
     static <P extends TreeDecorator> TreeDecoratorType<P> byg_create(Codec<P> codec) {
         throw new Error("Mixin did not apply!");

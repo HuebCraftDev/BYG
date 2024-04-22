@@ -51,7 +51,7 @@ public class NetworkUtil {
         return ServerPlayNetworking.createS2CPacket(SPAWN_PACKET_ID, buf);
     }
 
-    
+
     public static void receiveSpawnPacket(Minecraft client, FriendlyByteBuf buf) {
         if (client == null || client.level == null)
             return;

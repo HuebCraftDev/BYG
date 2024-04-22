@@ -13,7 +13,6 @@ import java.util.Map;
 
 @Mixin(AxeItem.class)
 public interface AxeItemAccess {
-
     @Invoker("<init>")
     static AxeItem byg_create(Tier tier, float f, float g, Item.Properties properties) {
         throw new Error("Mixin did not apply");

@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(WeightedRandomList.class)
 public interface WeightedListAccess<E> {
-
     @Accessor("totalWeight")
     int byg_getTotalWeight();
 

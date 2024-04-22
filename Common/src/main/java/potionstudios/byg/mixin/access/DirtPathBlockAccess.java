@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(DirtPathBlock.class)
 public interface DirtPathBlockAccess {
-
     @Invoker("<init>")
     static DirtPathBlock byg_create(BlockBehaviour.Properties properties) {
         throw new Error("Mixin did not apply!");

@@ -12,7 +12,6 @@ import java.util.List;
 
 @Mixin(StructureTemplatePool.class)
 public interface StructureTemplatePoolAccess {
-
     @Accessor("templates")
     ObjectArrayList<StructurePoolElement> byg_getTemplates();
 

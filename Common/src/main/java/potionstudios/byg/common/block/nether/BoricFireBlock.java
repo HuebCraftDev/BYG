@@ -29,7 +29,7 @@ public class BoricFireBlock extends BaseFireBlock {
         return block == BYGBlocks.BRIMSTONE.get();
     }
 
-    protected boolean canBurn(@NotNull BlockState state) {
+    public boolean canBurn(@NotNull BlockState state) {
         return true;
     }
 }

@@ -17,7 +17,6 @@ import java.util.function.Predicate;
 
 @Mixin(HoeItem.class)
 public interface HoeItemAccess {
-
     @Invoker("<init>")
     static HoeItem byg_create(Tier tier, int i, float f, Item.Properties properties) {
         throw new Error("Mixin did not apply");

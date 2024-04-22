@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(StairBlock.class)
 public interface StairBlockAccess {
-
     @Invoker("<init>")
     static StairBlock byg_create(BlockState state, BlockBehaviour.Properties properties) {
         throw new Error("Mixin did not apply!");

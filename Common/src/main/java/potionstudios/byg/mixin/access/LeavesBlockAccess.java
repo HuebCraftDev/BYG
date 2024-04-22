@@ -9,8 +9,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(LeavesBlock.class)
 public interface LeavesBlockAccess {
-
-
     @Invoker("updateDistance")
     static BlockState byg_invokeUpdateDistance(BlockState $$0, LevelAccessor $$1, BlockPos $$2) {
         throw new Error("Mixin did not apply!");

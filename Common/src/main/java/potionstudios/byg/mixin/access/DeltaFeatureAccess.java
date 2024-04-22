@@ -9,8 +9,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(DeltaFeature.class)
 public interface DeltaFeatureAccess {
-
-
     @Accessor("CANNOT_REPLACE")
     static ImmutableList<Block> byg_getCANNOT_REPLACE() {
         throw new Error("Mixin did not apply!");

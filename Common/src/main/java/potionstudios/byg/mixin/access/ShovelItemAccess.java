@@ -11,7 +11,6 @@ import java.util.Map;
 
 @Mixin(ShovelItem.class)
 public interface ShovelItemAccess {
-
     @Accessor("FLATTENABLES")
     static Map<Block, BlockState> byg_getFLATTENABLES() {
         throw new Error("Mixin did not apply");

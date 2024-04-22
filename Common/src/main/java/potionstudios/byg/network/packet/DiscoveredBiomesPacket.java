@@ -34,7 +34,7 @@ public record DiscoveredBiomesPacket(Map<String, Set<ResourceKey<Biome>>> discov
 
     @Override
     public void handle(Level level) {
-        Map<String, Set<ResourceKey<Biome>>> discoveredBiomesByNameSpace = ((BYGPlayerTrackedData.Access) Minecraft.getInstance().player).getPlayerTrackedData().discoveredBiomesByNameSpace();
+        Map<String, Set<ResourceKey<Biome>>> discoveredBiomesByNameSpace = ((BYGPlayerTrackedData.Access) Minecraft.getInstance().player).byg_getPlayerTrackedData().discoveredBiomesByNameSpace();
         discoveredBiomesByNameSpace.clear();
         discoveredBiomesByNameSpace.putAll(this.discoveredBiomes);
     }

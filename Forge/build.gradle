@@ -66,7 +66,7 @@ minecraft {
             taskName 'Client'
             def output = sourceSets.main.output
             def commonOutput = project(":Common").sourceSets.main.output
-            environment("MOD_CLASSES", [output.classesDirs.asPath, output.resourcesDir.path, commonOutput.classesDirs.asPath, commonOutput.resourcesDir.path].join(";"))
+            environment("MOD_CLASSES", [output.classesDirs.asPath, output.resourcesDir.path, commonOutput.classesDirs.asPath, commonOutput.resourcesDir.path].join(File.pathSeparator))
 
             mods {
                 modClientRun {
@@ -84,7 +84,7 @@ minecraft {
             taskName 'Server'
             def output = sourceSets.main.output
             def commonOutput = project(":Common").sourceSets.main.output
-            environment("MOD_CLASSES", [output.classesDirs.asPath, output.resourcesDir.path, commonOutput.classesDirs.asPath, commonOutput.resourcesDir.path].join(";"))
+            environment("MOD_CLASSES", [output.classesDirs.asPath, output.resourcesDir.path, commonOutput.classesDirs.asPath, commonOutput.resourcesDir.path].join(File.pathSeparator))
 
             mods {
                 modServerRun {
@@ -102,7 +102,7 @@ minecraft {
             taskName 'Data'
             def output = sourceSets.main.output
             def commonOutput = project(":Common").sourceSets.main.output
-            environment("MOD_CLASSES", [output.classesDirs.asPath, sourceSets.data.output.asPath, output.resourcesDir.path, commonOutput.classesDirs.asPath, commonOutput.resourcesDir.path].join(";"))
+            environment("MOD_CLASSES", [output.classesDirs.asPath, sourceSets.data.output.asPath, output.resourcesDir.path, commonOutput.classesDirs.asPath, commonOutput.resourcesDir.path].join(File.pathSeparator))
 
             mods {
                 byg {

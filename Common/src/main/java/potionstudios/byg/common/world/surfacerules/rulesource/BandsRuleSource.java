@@ -104,12 +104,12 @@ public final class BandsRuleSource implements SurfaceRules.RuleSource {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (BandsRuleSource) obj;
-        return Objects.equals(this.bandStates, that.bandStates);
+        return Arrays.equals(this.bandStates, that.bandStates);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bandStates);
+        return Arrays.hashCode(bandStates);
     }
 
     @Override

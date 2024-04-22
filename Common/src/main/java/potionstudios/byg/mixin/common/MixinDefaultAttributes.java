@@ -16,13 +16,12 @@ import java.util.IdentityHashMap;
 import java.util.Map;
 
 @Mixin(DefaultAttributes.class)
-public class MixinDefaultAttributes {
-
+public abstract class MixinDefaultAttributes {
     @Mutable
     @Shadow @Final private static Map<EntityType<? extends LivingEntity>, AttributeSupplier> SUPPLIERS;
 
     @Inject(method = "<clinit>", at = @At("RETURN"))
-    private static void byg_AddAttributes(CallbackInfo ci) {
+    private static void addAttributes(CallbackInfo ci) {
         final IdentityHashMap<EntityType<? extends LivingEntity>, AttributeSupplier> suppliers = new IdentityHashMap<>(SUPPLIERS);
         //TODO: Geckolib Mojmap 1.18
 //        suppliers.put(BYGEntities.MAN_O_WAR, ManOWar.createAttributes().build());

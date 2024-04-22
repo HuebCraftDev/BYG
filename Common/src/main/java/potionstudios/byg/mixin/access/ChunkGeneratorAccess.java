@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(ChunkGenerator.class)
 public interface ChunkGeneratorAccess {
-
     @Accessor("biomeSource")
     @Mutable
     void byg_setBiomeSource(BiomeSource biomeSource);

@@ -68,7 +68,7 @@ public class UpdateConfigsCommand {
 
             ConfigVersionTracker configVersionTracker = new ConfigVersionTracker(BYGConstants.CONFIG_VERSION);
             if (ConfigVersionTracker.getConfig().configVersion() == BYGConstants.CONFIG_VERSION) {
-                stack.sendSuccess(Component.translatable("byg.command.updateconfig.configsuptodate"), true);
+                stack.sendSuccess(() -> Component.translatable("byg.command.updateconfig.configsuptodate"), true);
                 return 1;
             }
 
@@ -103,7 +103,7 @@ public class UpdateConfigsCommand {
                             serverPlayer.displayClientMessage(SERVER_KILL_PLAYER_NOTIFICATION.withStyle(ChatFormatting.RED), false);
                         }
 
-                        ((ServerKillCountDown) server).setKillCountdown(COUNTDOWN_LENGTH, isSinglePlayerOwner);
+                        ((ServerKillCountDown) server).byg_setKillCountdown(COUNTDOWN_LENGTH, isSinglePlayerOwner);
                         warnings++;
                     }
                     default -> warnings = 0;

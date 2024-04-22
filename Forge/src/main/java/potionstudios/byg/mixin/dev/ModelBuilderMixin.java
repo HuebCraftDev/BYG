@@ -14,14 +14,14 @@ public class ModelBuilderMixin {
 
     private static final Logger LOG = LogUtils.getLogger();
 
-    private static boolean byg$foundSnowyLeaves;
+    private static boolean byg_foundSnowyLeaves;
 
     @Redirect(method = "texture(Ljava/lang/String;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraftforge/client/model/generators/ModelBuilder;", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/common/data/ExistingFileHelper;exists(Lnet/minecraft/resources/ResourceLocation;Lnet/minecraftforge/common/data/ExistingFileHelper$IResourceType;)Z"), remap = false)
     private boolean shushTextureNotFound(ExistingFileHelper instance, ResourceLocation loc, ExistingFileHelper.IResourceType type) {
         if (loc.getPath().contains("leaves_snowy")) {
-            if (!byg$foundSnowyLeaves)
+            if (!byg_foundSnowyLeaves)
                 LOG.warn("Snowy Leaves textures still seem to be missing...");
-            byg$foundSnowyLeaves = true;
+            byg_foundSnowyLeaves = true;
             return true;
         }
         if (!instance.exists(loc, ModelProviderAccess.getTexture())) {

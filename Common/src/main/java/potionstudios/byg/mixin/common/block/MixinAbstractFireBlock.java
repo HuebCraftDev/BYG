@@ -14,9 +14,8 @@ import potionstudios.byg.common.block.nether.BoricFireBlock;
 
 @Mixin(BaseFireBlock.class)
 public abstract class MixinAbstractFireBlock {
-
     @Inject(at = @At("HEAD"), method = "getState", cancellable = true)
-    private static void addBoricFire(BlockGetter reader, BlockPos pos, CallbackInfoReturnable<BlockState> cir) {
+    private static void byg_addBoricFire(BlockGetter reader, BlockPos pos, CallbackInfoReturnable<BlockState> cir) {
         BlockPos blockpos = pos.below();
         BlockState blockstate = reader.getBlockState(blockpos);
         if (BoricFireBlock.shouldLightBoricFire(blockstate.getBlock())) {

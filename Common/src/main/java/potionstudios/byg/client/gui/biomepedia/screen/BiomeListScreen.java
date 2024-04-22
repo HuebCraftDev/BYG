@@ -1,7 +1,7 @@
 package potionstudios.byg.client.gui.biomepedia.screen;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
@@ -18,6 +18,7 @@ import net.minecraft.world.level.biome.Biome;
 import org.apache.commons.lang3.mutable.Mutable;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.mutable.MutableObject;
+import org.jetbrains.annotations.NotNull;
 import potionstudios.byg.BYG;
 import potionstudios.byg.client.gui.biomepedia.widget.BiomeWidget;
 import potionstudios.byg.mixin.access.client.EditBoxAccess;
@@ -246,9 +247,9 @@ public class BiomeListScreen extends AbstractBiomepediaScreen {
     }
 
     @Override
-    public void render(PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
-        super.render(poseStack, mouseX, mouseY, partialTick);
-        this.forEachWidget(biomeWidget -> biomeWidget.render(poseStack, mouseX, mouseY, partialTick));
+    public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        this.forEachWidget(biomeWidget -> biomeWidget.render(guiGraphics, mouseX, mouseY, partialTick));
     }
 
     private void unload(int page) {

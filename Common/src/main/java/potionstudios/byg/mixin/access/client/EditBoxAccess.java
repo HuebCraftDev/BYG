@@ -6,8 +6,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(EditBox.class)
 public interface EditBoxAccess {
-
-
     @Accessor("textColor")
     int byg_getTextColor();
 }

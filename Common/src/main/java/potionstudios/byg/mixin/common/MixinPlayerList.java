@@ -10,10 +10,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import potionstudios.byg.server.level.BYGPlayerTrackedData;
 
 @Mixin(PlayerList.class)
-public class MixinPlayerList {
-
+public abstract class MixinPlayerList {
     @Inject(method = "sendLevelInfo", at = @At("RETURN"))
     private void onPlayerSpawn(ServerPlayer player, ServerLevel level, CallbackInfo ci) {
-        ((BYGPlayerTrackedData.Access) player).getPlayerTrackedData().playerCreate(player);
+        ((BYGPlayerTrackedData.Access) player).byg_getPlayerTrackedData().playerCreate(player);
     }
 }

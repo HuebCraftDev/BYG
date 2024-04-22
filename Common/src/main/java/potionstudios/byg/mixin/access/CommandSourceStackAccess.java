@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(CommandSourceStack.class)
 public interface CommandSourceStackAccess {
-
     @Accessor("source")
     CommandSource byg_getSource();
 }

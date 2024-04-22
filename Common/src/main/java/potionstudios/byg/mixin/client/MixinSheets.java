@@ -13,8 +13,6 @@ import potionstudios.byg.common.block.BYGWoodTypes;
 
 @Mixin(Sheets.class)
 public abstract class MixinSheets {
-
-
     @Shadow
     private static Material createSignMaterial(WoodType woodType) {
         throw new Error("Mixin did not apply!");

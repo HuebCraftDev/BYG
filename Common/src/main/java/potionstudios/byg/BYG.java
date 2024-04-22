@@ -131,7 +131,7 @@ public class BYG {
                                 final var state = block.defaultBlockState();
                                 if (state.is(CommonBlockTags.PLANT) || state.is(Blocks.BAMBOO) ||
                                         state.is(Blocks.BAMBOO_SAPLING) || state.is(CommonBlockTags.WATER_PLANT) ||
-                                        state.is(BlockTags.LEAVES) || state.is(CommonBlockTags.WOOD)) {
+                                        state.is(BlockTags.LEAVES) || state.is(BYGTags.WOODS.all(BYGTags.RegistryType.BLOCKS))) {
                                     list.add(block);
                                 }
                             }

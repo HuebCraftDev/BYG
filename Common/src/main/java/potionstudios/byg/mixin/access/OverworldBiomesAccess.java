@@ -10,12 +10,10 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(OverworldBiomes.class)
 public interface OverworldBiomesAccess {
-
     @Invoker("globalOverworldGeneration")
     static void byg_invokeGlobalOverworldGeneration(BiomeGenerationSettings.Builder builder) {
         throw new Error("Mixin did not apply!");
     }
-
 
     @Invoker("baseOceanGeneration")
     static BiomeGenerationSettings.Builder byg_invokeBaseOceanGeneration(HolderGetter<PlacedFeature> placedFeatureHolderGetter, HolderGetter<ConfiguredWorldCarver<?>> configuredWorldCarverHolderGetter) {

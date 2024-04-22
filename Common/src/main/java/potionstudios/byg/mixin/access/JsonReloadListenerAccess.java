@@ -6,8 +6,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(SimpleJsonResourceReloadListener.class)
 public interface JsonReloadListenerAccess {
-
     @Accessor("gson")
     Gson byg_getGson();
-
 }

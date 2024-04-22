@@ -9,7 +9,6 @@ import java.util.Set;
 
 @Mixin(BlockEntityType.Builder.class)
 public interface BlockEntityTypeBuilderAccess<T> {
-
     @Accessor("validBlocks")
     Set<Block> byg_getValidBlocks();
 }

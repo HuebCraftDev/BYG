@@ -1,6 +1,5 @@
 package potionstudios.byg.mixin.common.entity;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -11,7 +10,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerData;
@@ -31,9 +29,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import potionstudios.byg.common.entity.BYGEntities;
 import potionstudios.byg.common.entity.pumpkinwarden.PumpkinWarden;
 
-@Mixin(Villager.class)
-public class MixinVillager extends AbstractVillager {
+import java.util.Objects;
 
+@Mixin(Villager.class)
+public abstract class MixinVillager extends AbstractVillager {
     public MixinVillager(EntityType<? extends AbstractVillager> $$0, Level $$1) {
         super($$0, $$1);
     }
@@ -41,23 +40,23 @@ public class MixinVillager extends AbstractVillager {
     @Inject(method = "mobInteract", at = @At("HEAD"))
     public void makeWarden(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
         if (this.hasEffect(MobEffects.WEAKNESS) && player.getItemInHand(hand).is(Items.CARVED_PUMPKIN) && this.isBaby()) {
-            PumpkinWarden warden = BYGEntities.PUMPKIN_WARDEN.get().create(player.level);
-            warden.setPos(this.position());
-            this.level.addFreshEntity(warden);
-            this.level.playSound(null, this.blockPosition(), SoundEvents.ZOMBIE_VILLAGER_CURE, SoundSource.NEUTRAL, 1, 1);
+            PumpkinWarden warden = BYGEntities.PUMPKIN_WARDEN.get().create(player.level());
+            Objects.requireNonNull(warden).setPos(this.position());
+            this.level().addFreshEntity(warden);
+            this.level().playSound(null, this.blockPosition(), SoundEvents.ZOMBIE_VILLAGER_CURE, SoundSource.NEUTRAL, 1, 1);
             this.remove(RemovalReason.DISCARDED);
         }
     }
 
     @Shadow
-    protected void rewardTradeXp(@NotNull MerchantOffer var1) {
-    }
+    protected abstract void rewardTradeXp(@NotNull MerchantOffer var1);
 
     @Shadow
-    protected void updateTrades() {
-    }
+    protected abstract void updateTrades();
 
-    @Shadow @Final private static EntityDataAccessor<VillagerData> DATA_VILLAGER_DATA;
+    @Shadow
+    @Final
+    private static EntityDataAccessor<VillagerData> DATA_VILLAGER_DATA;
 
     @Nullable
     @Override
@@ -69,7 +68,7 @@ public class MixinVillager extends AbstractVillager {
         } else if ($$2 < 0.75D) {
             $$3 = this.entityData.get(DATA_VILLAGER_DATA).getType();
         } else {
-            $$3 = ((Villager)$$1).getVillagerData().getType();
+            $$3 = ((Villager) $$1).getVillagerData().getType();
         }
 
         Villager $$6 = new Villager(EntityType.VILLAGER, $$0, $$3);

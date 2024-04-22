@@ -1,6 +1,7 @@
 package potionstudios.byg.core;
 
 import potionstudios.byg.client.textures.renders.BYGParticleTypes;
+import potionstudios.byg.common.BYGCreativeModeTabs;
 import potionstudios.byg.common.block.BYGBlocks;
 import potionstudios.byg.common.blockentity.BYGBlockEntities;
 import potionstudios.byg.common.container.BYGMenuTypes;
@@ -67,5 +68,6 @@ public class BYGRegistry {
         BYGBiomeSources.loadClass();
         BYGWorldPresets.loadClass();
         BYGDamageTypes.loadClass();
+        BYGCreativeModeTabs.loadClass();
     }
 }

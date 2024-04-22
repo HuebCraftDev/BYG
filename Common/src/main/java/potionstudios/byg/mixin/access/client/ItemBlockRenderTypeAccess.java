@@ -10,8 +10,6 @@ import java.util.Map;
 
 @Mixin(ItemBlockRenderTypes.class)
 public interface ItemBlockRenderTypeAccess {
-
-
     @Accessor("TYPE_BY_BLOCK")
     static Map<Block, RenderType> byg_getTYPE_BY_BLOCK() {
         throw new Error("Mixin did not apply");

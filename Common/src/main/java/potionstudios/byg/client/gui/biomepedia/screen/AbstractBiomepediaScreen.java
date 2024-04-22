@@ -1,7 +1,6 @@
 package potionstudios.byg.client.gui.biomepedia.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
@@ -40,19 +39,18 @@ public class AbstractBiomepediaScreen extends Screen {
 
 
     @Override
-    public void render(@NotNull PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
-        renderBackgroundAndBiomepedia(poseStack);
+    public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        renderBackgroundAndBiomepedia(guiGraphics);
 
-        super.render(poseStack, mouseX, mouseY, partialTick);
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
     }
 
-    private void renderBackgroundAndBiomepedia(PoseStack poseStack) {
-        this.renderBackground(poseStack);
-        renderBiomepedia(poseStack, this.leftPos, this.bottomPos);
+    private void renderBackgroundAndBiomepedia(GuiGraphics guiGraphics) {
+        this.renderBackground(guiGraphics);
+        renderBiomepedia(guiGraphics, this.leftPos, this.bottomPos);
     }
 
-    private static void renderBiomepedia(PoseStack poseStack, int minX, int minY) {
-        RenderSystem.setShaderTexture(0, BiomepediaHomeScreen.BIOMEPEDIA_LOCATION);
-        blit(poseStack, minX, minY, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_WIDTH, IMAGE_HEIGHT);
+    private static void renderBiomepedia(GuiGraphics guiGraphics, int minX, int minY) {
+        guiGraphics.blit(BiomepediaHomeScreen.BIOMEPEDIA_LOCATION, minX, minY, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_WIDTH, IMAGE_HEIGHT);
     }
 }

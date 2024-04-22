@@ -42,7 +42,7 @@ public class BYGPollenBlock extends Block {
     }
 
     @Override
-    public boolean isPossibleToRespawnInThis() {
+    public boolean isPossibleToRespawnInThis(@NotNull BlockState $$0) {
         return true;
     }
 }

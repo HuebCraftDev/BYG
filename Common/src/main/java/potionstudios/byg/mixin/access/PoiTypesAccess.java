@@ -14,7 +14,6 @@ import java.util.Set;
 
 @Mixin(PoiTypes.class)
 public interface PoiTypesAccess {
-
     @Invoker("getBlockStates")
     static Set<BlockState> byg_invokeGetBlockStates(Block block) {
         throw new Error("Mixin did not apply!");

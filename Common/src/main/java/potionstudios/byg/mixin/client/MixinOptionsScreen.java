@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(OptionsScreen.class)
 public abstract class MixinOptionsScreen extends Screen {
-
     protected MixinOptionsScreen(Component $$0) {
         super($$0);
     }

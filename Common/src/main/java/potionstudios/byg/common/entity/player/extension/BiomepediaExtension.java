@@ -1,9 +1,7 @@
 package potionstudios.byg.common.entity.player.extension;
 
 public interface BiomepediaExtension {
+    void byg_setGotBiomepedia(boolean gotBiomepedia);
 
-
-    void setGotBiomepedia(boolean gotBiomepedia);
-
-    boolean gotBiomepedia();
+    boolean byg_gotBiomepedia();
 }

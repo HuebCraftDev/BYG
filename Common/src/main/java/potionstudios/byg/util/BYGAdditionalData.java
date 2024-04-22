@@ -9,17 +9,17 @@ import java.util.Locale;
 public interface BYGAdditionalData {
 
     default void writeBYG(CompoundTag tag) {
-        tag.put(BYG.MOD_ID.toLowerCase(Locale.ROOT), write());
+        tag.put(BYG.MOD_ID.toLowerCase(Locale.ROOT), byg_write());
     }
 
     default void readBYG(CompoundTag tag) {
         String tagLocation = BYG.MOD_ID.toLowerCase(Locale.ROOT);
         if (tag.contains(tagLocation, Tag.TAG_COMPOUND)) {
-            read(tag.getCompound(tagLocation));
+            byg_read(tag.getCompound(tagLocation));
         }
     }
 
-    Tag write();
+    Tag byg_write();
 
-    void read(CompoundTag tag);
+    void byg_read(CompoundTag tag);
 }

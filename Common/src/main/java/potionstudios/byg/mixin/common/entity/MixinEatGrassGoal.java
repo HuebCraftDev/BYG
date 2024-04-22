@@ -20,8 +20,7 @@ import potionstudios.byg.common.block.BYGBlocks;
 import java.util.function.Predicate;
 
 @Mixin(EatBlockGoal.class)
-public class MixinEatGrassGoal {
-
+public abstract class MixinEatGrassGoal {
     @Shadow
     @Final
     private Mob mob;
@@ -57,6 +56,4 @@ public class MixinEatGrassGoal {
             }
         }
     }
-
-
 }

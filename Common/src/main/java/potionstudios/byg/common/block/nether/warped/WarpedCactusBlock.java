@@ -1,5 +1,6 @@
 package potionstudios.byg.common.block.nether.warped;
 
+import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -15,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -82,13 +82,12 @@ public class WarpedCactusBlock extends Block {
     public boolean canSurvive(@NotNull BlockState state, @NotNull LevelReader worldIn, @NotNull BlockPos pos) {
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             BlockState blockstate = worldIn.getBlockState(pos.relative(direction));
-            Material material = blockstate.getMaterial();
-            if (material.isSolid() || worldIn.getFluidState(pos.relative(direction)).is(FluidTags.LAVA)) {
+            if (blockstate.isSolid() || worldIn.getFluidState(pos.relative(direction)).is(FluidTags.LAVA)) {
                 return false;
             }
         }
 
-        return worldIn.getBlockState(pos.below()).getBlock() == BYGBlocks.WARPED_SOUL_SOIL.get() || worldIn.getBlockState(pos.below()).getBlock() == BYGBlocks.WARPED_SOUL_SAND.get() || worldIn.getBlockState(pos.below()).getBlock() == BYGBlocks.WARPED_CACTUS.get() && !worldIn.getBlockState(pos.above()).getMaterial().isLiquid();
+        return worldIn.getBlockState(pos.below()).getBlock() == BYGBlocks.WARPED_SOUL_SOIL.get() || worldIn.getBlockState(pos.below()).getBlock() == BYGBlocks.WARPED_SOUL_SAND.get() || worldIn.getBlockState(pos.below()).getBlock() == BYGBlocks.WARPED_CACTUS.get() && worldIn.getBlockState(pos.above()).getFluidState().isEmpty();
     }
 
     public void entityInside(@NotNull BlockState state, @NotNull Level worldIn, @NotNull BlockPos pos, Entity entityIn) {
@@ -102,8 +101,4 @@ public class WarpedCactusBlock extends Block {
     public boolean isPathfindable(@NotNull BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos pos, @NotNull PathComputationType type) {
         return false;
     }
-
-
 }
-
-

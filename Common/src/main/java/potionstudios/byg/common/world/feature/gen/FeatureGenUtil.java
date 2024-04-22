@@ -7,6 +7,7 @@ import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
+import potionstudios.byg.common.BYGTags;
 import potionstudios.byg.util.BlockHelper;
 import potionstudios.byg.util.CommonBlockTags;
 
@@ -17,7 +18,7 @@ public class FeatureGenUtil {
     }
 
     public static boolean isTerrainOrRock(LevelSimulatedReader world, BlockPos pos) {
-        return world.isStateAtPosition(pos, (state) -> state.is(BlockTags.BASE_STONE_OVERWORLD) || state.is(CommonBlockTags.STONES) || state.is(BlockTags.BASE_STONE_OVERWORLD) || state.is(BlockTags.DIRT) || state.is(BlockTags.SAND) || state.getBlock() == Blocks.GRASS_BLOCK);
+        return world.isStateAtPosition(pos, (state) -> state.is(BlockTags.BASE_STONE_OVERWORLD) || state.is(BYGTags.STONES.all(BYGTags.RegistryType.BLOCKS)) || state.is(BlockTags.BASE_STONE_OVERWORLD) || state.is(BlockTags.DIRT) || state.is(BlockTags.SAND) || state.getBlock() == Blocks.GRASS_BLOCK);
     }
 
     public static boolean isAir(LevelSimulatedReader reader, BlockPos pos) {

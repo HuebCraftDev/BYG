@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(DoorBlock.class)
 public interface DoorBlockAccess {
-
     @Invoker("<init>")
     static DoorBlock byg_create(BlockBehaviour.Properties properties, BlockSetType blockSetType) {
         throw new Error("Mixin did not apply!");

@@ -35,7 +35,7 @@ public final class WeightedRuleSource implements SurfaceRules.RuleSource {
     @Override
     public SurfaceRules.SurfaceRule apply(SurfaceRules.Context context) {
         SurfaceSystem surfaceSystem = ((SurfaceRuleContextAccess) (Object) context).byg_getSystem();
-        PositionalRandomFactory random = ((SeedGetter) surfaceSystem).getRandom();
+        PositionalRandomFactory random = ((SeedGetter) surfaceSystem).byg_getRandom();
         SurfaceRules.SurfaceRule[][] rules = new SurfaceRules.SurfaceRule[16][16];
 
         for (int x = 0; x < rules.length; x++) {

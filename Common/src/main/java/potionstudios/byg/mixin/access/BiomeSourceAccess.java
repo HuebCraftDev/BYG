@@ -13,7 +13,6 @@ import java.util.function.Supplier;
 
 @Mixin(BiomeSource.class)
 public interface BiomeSourceAccess {
-
     @Invoker("codec")
     Codec<? extends BiomeSource> byg_invokeCodec();
 

@@ -7,17 +7,21 @@ import net.minecraft.world.level.levelgen.PositionalRandomFactory;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 
 import javax.annotation.Nullable;
 
 @Mixin(ChunkAccess.class)
-public class MixinChunkAccess {
-
+public abstract class MixinChunkAccess {
     @Shadow
     @Final
     protected ChunkPos chunkPos;
 
-    @Shadow @Final protected LevelHeightAccessor levelHeightAccessor;
+    @Shadow
+    @Final
+    protected LevelHeightAccessor levelHeightAccessor;
+
+    @Unique
     @Nullable
     private PositionalRandomFactory random;
 }

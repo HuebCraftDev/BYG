@@ -9,9 +9,9 @@ import net.minecraft.world.level.biome.Biome;
 
 public interface DuneCache {
 
-    Long2ObjectOpenHashMap<Byte2DoubleOpenHashMap> getDensityAt();
+    Long2ObjectOpenHashMap<Byte2DoubleOpenHashMap> byg_getDensityAt();
 
-    Long2ObjectOpenHashMap<Byte2ObjectOpenHashMap<ResourceKey<Biome>>> getBiomeAt();
+    Long2ObjectOpenHashMap<Byte2ObjectOpenHashMap<ResourceKey<Biome>>> byg_getBiomeAt();
 
 
     static byte getLocalPackedCoord(BlockPos pos) {

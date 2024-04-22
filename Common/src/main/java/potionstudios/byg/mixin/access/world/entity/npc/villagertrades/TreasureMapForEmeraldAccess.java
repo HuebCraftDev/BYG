@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(VillagerTrades.TreasureMapForEmeralds.class)
 public interface TreasureMapForEmeraldAccess {
-
     @Accessor("emeraldCost")
     int byg_getEmeraldCost();
 

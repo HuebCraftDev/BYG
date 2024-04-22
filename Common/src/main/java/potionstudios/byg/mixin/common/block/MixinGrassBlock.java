@@ -20,9 +20,8 @@ import potionstudios.byg.common.world.biome.BYGBiomes;
  */
 @Mixin(GrassBlock.class)
 public abstract class MixinGrassBlock {
-
     @Inject(at = @At("HEAD"), method = "performBonemeal", cancellable = true)
-    public void performBonemeal(ServerLevel level, RandomSource randomSource, BlockPos blockPos, BlockState blockState, CallbackInfo ci) {
+    public void byg_performBonemeal(ServerLevel level, RandomSource randomSource, BlockPos blockPos, BlockState blockState, CallbackInfo ci) {
         if (level.getBiome(blockPos).is(BYGBiomes.PRAIRIE)) {
             level.setBlock(blockPos.above(), BYGBlocks.PRAIRIE_GRASS.defaultBlockState(), 2);
             ci.cancel();

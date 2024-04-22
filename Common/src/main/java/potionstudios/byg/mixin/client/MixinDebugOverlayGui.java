@@ -10,7 +10,6 @@ import java.util.List;
 
 @Mixin(DebugScreenOverlay.class)
 public class MixinDebugOverlayGui {
-
     @Inject(method = "getSystemInformation", at = @At("RETURN"))
     private void modifyTagList(CallbackInfoReturnable<List<String>> cir) {
         cir.getReturnValue().removeIf(s -> s.contains("#byg:ground_"));

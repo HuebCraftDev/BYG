@@ -1,9 +1,9 @@
 package potionstudios.byg.client.gui.biomepedia.screen;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -77,23 +77,23 @@ public class BlockItemAboutScreen extends AbstractBiomepediaScreen {
     }
 
     @Override
-    public void render(PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
-        super.render(poseStack, mouseX, mouseY, partialTick);
-        poseStack.pushPose();
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        guiGraphics.pose().pushPose();
         int scale = 75;
-        poseStack.scale(scale, scale, 30);
+        guiGraphics.pose().scale(scale, scale, 30);
         float scaledX = (float) this.leftPos / scale + ((float) ((IMAGE_WIDTH / 4) + 4) / scale);
         float scaledZ = (float) (this.textStartHeight) / scale;
 
         MultiBufferSource.BufferSource bufferSource = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
 
-        poseStack.translate(scaledX, scaledZ, 30);
-        poseStack.mulPose(Axis.XN.rotationDegrees(180));
-        poseStack.mulPose(Axis.YN.rotationDegrees(45));
-        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(this.currentlyRendered, poseStack, bufferSource, 15728880, OverlayTexture.NO_OVERLAY);
+        guiGraphics.pose().translate(scaledX, scaledZ, 30);
+        guiGraphics.pose().mulPose(Axis.XN.rotationDegrees(180));
+        guiGraphics.pose().mulPose(Axis.YN.rotationDegrees(45));
+        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(this.currentlyRendered, guiGraphics.pose(), bufferSource, 15728880, OverlayTexture.NO_OVERLAY);
         bufferSource.endBatch();
-        poseStack.popPose();
+        guiGraphics.pose().popPose();
         int startX = this.leftPos + ((IMAGE_WIDTH / 4)) - (Minecraft.getInstance().font.width(this.getTitle()) / 2) + 4;
-        Minecraft.getInstance().font.draw(poseStack, this.getTitle(), startX, this.bottomPos + 13, 0);
+        guiGraphics.drawString(Minecraft.getInstance().font, this.getTitle(), startX, this.bottomPos + 13, 0, false);
     }
 }

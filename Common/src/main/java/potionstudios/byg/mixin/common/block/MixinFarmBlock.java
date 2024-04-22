@@ -15,8 +15,7 @@ import potionstudios.byg.common.block.BYGBlocks;
 import static net.minecraft.world.level.block.Block.pushEntitiesUp;
 
 @Mixin(FarmBlock.class)
-public class MixinFarmBlock {
-
+public abstract class MixinFarmBlock {
     // Is there a better way to do this?
     @Inject(method = "turnToDirt", at = @At("RETURN"))
     private static void byg_turnLushToLushDirt(Entity entity, BlockState state, Level level, BlockPos pos, CallbackInfo ci) {

@@ -8,7 +8,6 @@ import java.util.List;
 
 @Mixin(StructureTemplate.class)
 public interface StructureTemplateAccess {
-
     @Accessor("palettes")
     List<StructureTemplate.Palette> byg_getPalettes();
 }

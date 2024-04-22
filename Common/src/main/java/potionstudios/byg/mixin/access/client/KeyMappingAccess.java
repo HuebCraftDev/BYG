@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(KeyMapping.class)
 public interface KeyMappingAccess {
-
     @Accessor("key")
     InputConstants.Key byg_getKey();
 }

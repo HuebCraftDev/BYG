@@ -1077,7 +1077,7 @@
 	"item.byg.alpine_bellflower": "Alpenglockenblume",
 	"item.byg.amaranth": "Amaranth",
 	"item.byg.ametrine_block": "Ametrineblock",
-	"item.byg.ametrine_holzboots": "Ametrinestiefel",
+	"item.byg.ametrine_boots": "Ametrinestiefel",
 	"item.byg.ametrine_chestplate": "Ametrineharnisch",
 	"item.byg.ametrine_gems": "Ametrineedelsteine",
 	"item.byg.ametrine_helmet": "Ametrinehelm",
@@ -2011,5 +2011,14 @@
 	"item.byg.zelkova_stairs": "Zelkoventreppe",
 	"item.byg.zelkova_trapdoor": "Zelkovenholzfalltür",
 	"item.byg.zelkova_wood": "Zelkovenholz",
-	"itemGroup.byg": "Biomes You Go"
+	"upgrade.byg.ametrine_upgrade": "Ametrine Upgrade",
+	"upgrade.byg.pendorite_upgrade": "Pendorite Upgrade",
+	"item.byg.smithing_template.ametrine_upgrade.applies_to": "Netheritrüstung",
+	"item.byg.smithing_template.ametrine_upgrade.ingredients": "Ametrineblock",
+	"item.byg.smithing_template.ametrine_upgrade.base_slot_description": "Netheritrüstungsteil",
+	"item.byg.smithing_template.ametrine_upgrade.upgrade_slot_description": "Ametrineblock",
+	"item.byg.smithing_template.pendorite_upgrade.applies_to": "Netheritwerkzeuge und -waffen",
+	"item.byg.smithing_template.pendorite_upgrade.ingredients": "Pendoritebarren",
+	"item.byg.smithing_template.pendorite_upgrade.base_slot_description": "Netheritwerkzeug/-waffe",
+	"item.byg.smithing_template.pendorite_upgrade.upgrade_slot_description": "Pendoritebarren"
 }

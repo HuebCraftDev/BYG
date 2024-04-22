@@ -11,12 +11,12 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Material;
 import potionstudios.byg.common.block.BYGBlocks;
 import potionstudios.byg.common.world.feature.config.LargeLakeFeatureConfig;
 import potionstudios.byg.common.world.feature.gen.FeatureGenUtil;
 import potionstudios.byg.common.world.math.OpenSimplexNoiseEnd;
 import potionstudios.byg.util.BlockHelper;
+import potionstudios.byg.util.CommonBlockTags;
 import potionstudios.byg.util.MLBlockTags;
 import potionstudios.byg.util.ModMathHelper;
 
@@ -208,7 +208,7 @@ public class LargeLakeFeatureOld extends Feature<LargeLakeFeatureConfig> {
     }
 
     private boolean canReplace(BlockState state) {
-        return state.getMaterial().isReplaceable()
+        return state.canBeReplaced()
                 || state.is(BlockTags.BASE_STONE_OVERWORLD)
                 || state.is(BlockTags.FLOWERS)
                 || state.is(MLBlockTags.ORES) // Handles floating ores
@@ -219,8 +219,7 @@ public class LargeLakeFeatureOld extends Feature<LargeLakeFeatureConfig> {
                 || state.is(Blocks.GRASS)
                 || state.is(Blocks.GRASS_BLOCK)
                 || state.is(BYGBlocks.OVERGROWN_STONE.get())
-                || state.getMaterial().equals(Material.PLANT)
-                || state.getMaterial().equals(Material.WATER_PLANT)
-                || state.getMaterial().equals(Material.REPLACEABLE_WATER_PLANT);
+                || state.is(CommonBlockTags.PLANT)
+                || state.is(CommonBlockTags.WATER_PLANT);
     }
 }

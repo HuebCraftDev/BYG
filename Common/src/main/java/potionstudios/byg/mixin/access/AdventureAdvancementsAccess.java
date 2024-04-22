@@ -11,7 +11,6 @@ import java.util.List;
 
 @Mixin(VanillaAdventureAdvancements.class)
 public interface AdventureAdvancementsAccess {
-
     @Invoker("addBiomes")
     static Advancement.Builder byg_invokeAddBiomes(Advancement.Builder $$0, List<ResourceKey<Biome>> $$1) {
         throw new Error("Mixin did not apply!");

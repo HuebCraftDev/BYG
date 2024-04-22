@@ -5,6 +5,7 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -15,11 +16,12 @@ import potionstudios.byg.util.BYGAdditionalData;
 import java.util.HashMap;
 
 @Mixin(Player.class)
-public class MixinPlayer implements BYGAdditionalData, BYGPlayerTrackedData.Access, BiomepediaExtension {
+public abstract class MixinPlayer implements BYGAdditionalData, BYGPlayerTrackedData.Access, BiomepediaExtension {
+    @Unique
+    private BYGPlayerTrackedData byg_PlayerTrackedData = new BYGPlayerTrackedData(new HashMap<>());
 
-    private BYGPlayerTrackedData bygPlayerTrackedData = new BYGPlayerTrackedData(new HashMap<>());
-
-    private boolean gotBiomepedia = false;
+    @Unique
+    private boolean byg_gotBiomepedia = false;
 
     @Inject(method = "addAdditionalSaveData", at = @At("RETURN"))
     private void writeBYGData(CompoundTag tag, CallbackInfo ci) {
@@ -32,36 +34,36 @@ public class MixinPlayer implements BYGAdditionalData, BYGPlayerTrackedData.Acce
     }
 
     @Override
-    public Tag write() {
-        CompoundTag tag = (CompoundTag) BYGPlayerTrackedData.CODEC.encodeStart(NbtOps.INSTANCE, this.bygPlayerTrackedData).result().orElseThrow();
-        tag.putBoolean("biomepedia", gotBiomepedia);
+    public Tag byg_write() {
+        CompoundTag tag = (CompoundTag) BYGPlayerTrackedData.CODEC.encodeStart(NbtOps.INSTANCE, this.byg_PlayerTrackedData).result().orElseThrow();
+        tag.putBoolean("biomepedia", byg_gotBiomepedia);
         return tag;
     }
 
     @Override
-    public void read(CompoundTag tag) {
-        this.bygPlayerTrackedData = BYGPlayerTrackedData.CODEC.decode(NbtOps.INSTANCE, tag).result().orElseThrow().getFirst();
-        this.gotBiomepedia = tag.contains("biomepedia") && tag.getBoolean("biomepedia");
+    public void byg_read(CompoundTag tag) {
+        this.byg_PlayerTrackedData = BYGPlayerTrackedData.CODEC.decode(NbtOps.INSTANCE, tag).result().orElseThrow().getFirst();
+        this.byg_gotBiomepedia = tag.contains("biomepedia") && tag.getBoolean("biomepedia");
     }
 
     @Override
-    public BYGPlayerTrackedData getPlayerTrackedData() {
-        return this.bygPlayerTrackedData;
+    public BYGPlayerTrackedData byg_getPlayerTrackedData() {
+        return this.byg_PlayerTrackedData;
     }
 
     @Override
-    public BYGPlayerTrackedData setPlayerTrackedData(BYGPlayerTrackedData newVal) {
-        this.bygPlayerTrackedData = newVal;
-        return this.bygPlayerTrackedData;
+    public BYGPlayerTrackedData byg_setPlayerTrackedData(BYGPlayerTrackedData newVal) {
+        this.byg_PlayerTrackedData = newVal;
+        return this.byg_PlayerTrackedData;
     }
 
     @Override
-    public void setGotBiomepedia(boolean gotBiomepedia) {
-        this.gotBiomepedia = gotBiomepedia;
+    public void byg_setGotBiomepedia(boolean gotBiomepedia) {
+        this.byg_gotBiomepedia = gotBiomepedia;
     }
 
     @Override
-    public boolean gotBiomepedia() {
-        return this.gotBiomepedia;
+    public boolean byg_gotBiomepedia() {
+        return this.byg_gotBiomepedia;
     }
 }

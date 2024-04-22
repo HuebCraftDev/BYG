@@ -23,9 +23,9 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraft.world.level.storage.LevelStorageSource;
-import net.minecraft.world.level.storage.WorldData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -51,20 +51,18 @@ import static potionstudios.byg.util.AddSurfaceRulesUtil.appendSurfaceRule;
 
 @Mixin(MinecraftServer.class)
 public abstract class MixinMinecraftServer implements ServerKillCountDown {
-
-
-    @Shadow
-    public abstract WorldData getWorldData();
-
     @Shadow
     public abstract PlayerList getPlayerList();
 
     @Shadow public abstract RegistryAccess.Frozen registryAccess();
 
-    private long byg$killTime = -1;
-    private boolean byg$killClient = false;
+    @Unique
+    private long byg_killTime = -1;
+    @Unique
+    private boolean byg_killClient = false;
 
-    private int byg$notifyErrorFrequency = 0;
+    @Unique
+    private int byg_notifyErrorFrequency = 0;
 
 
     @Inject(at = @At("RETURN"), method = "<init>")
@@ -106,30 +104,30 @@ public abstract class MixinMinecraftServer implements ServerKillCountDown {
     @SuppressWarnings("all")
     @Inject(method = "tickServer", at = @At("RETURN"))
     private void displayDisconnectWarning(BooleanSupplier $$0, CallbackInfo ci) {
-        if (byg$killTime > 0) {
-            if (byg$killTime % 100 == 0) {
+        if (byg_killTime > 0) {
+            if (byg_killTime % 100 == 0) {
                 for (ServerPlayer player : getPlayerList().getPlayers()) {
-                    long killTimeInSeconds = byg$killTime / 20;
-                    player.displayClientMessage(Component.translatable("byg.serverkill.countdown", killTimeInSeconds).withStyle(byg$killTime < 300 ? ChatFormatting.RED : ChatFormatting.YELLOW), false);
+                    long killTimeInSeconds = byg_killTime / 20;
+                    player.displayClientMessage(Component.translatable("byg.serverkill.countdown", killTimeInSeconds).withStyle(byg_killTime < 300 ? ChatFormatting.RED : ChatFormatting.YELLOW), false);
                 }
             }
-            byg$killTime--;
+            byg_killTime--;
 
-            if (byg$killTime == 0) {
-                UpdateConfigsCommand.backupAndKillGameInstance((MinecraftServer) (Object) this, new ConfigVersionTracker(BYGConstants.CONFIG_VERSION), this.byg$killClient);
+            if (byg_killTime == 0) {
+                UpdateConfigsCommand.backupAndKillGameInstance((MinecraftServer) (Object) this, new ConfigVersionTracker(BYGConstants.CONFIG_VERSION), this.byg_killClient);
             }
         }
 
-        if (byg$notifyErrorFrequency >= 36000) {
+        if (byg_notifyErrorFrequency >= 36000) {
             BYG.logConfigErrors();
-            byg$notifyErrorFrequency = 0;
+            byg_notifyErrorFrequency = 0;
         }
-        byg$notifyErrorFrequency++;
+        byg_notifyErrorFrequency++;
     }
 
     @Override
-    public void setKillCountdown(long killCountdownInTicks, boolean isClient) {
-        this.byg$killTime = killCountdownInTicks;
-        this.byg$killClient = isClient;
+    public void byg_setKillCountdown(long killCountdownInTicks, boolean isClient) {
+        this.byg_killTime = killCountdownInTicks;
+        this.byg_killClient = isClient;
     }
 }

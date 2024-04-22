@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(WoodType.class)
 public interface WoodTypeAccess {
-
     @Invoker("<init>")
     static WoodType byg_create(String name, BlockSetType blockSetType) {
         throw new Error("Mixin did not apply!");

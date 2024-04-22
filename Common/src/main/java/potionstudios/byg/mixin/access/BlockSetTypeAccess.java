@@ -6,7 +6,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(BlockSetType.class)
 public interface BlockSetTypeAccess {
-
     @Invoker("register")
     static BlockSetType byg_invokeRegister(BlockSetType blockSetType) {
         throw new Error("Mixin did not apply!");

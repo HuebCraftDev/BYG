@@ -15,10 +15,8 @@ import java.util.Map;
 
 @Mixin(Structures.class)
 public interface StructuresAccess {
-
     @Invoker("structure")
     static Structure.StructureSettings structure(HolderSet<Biome> p_236546_, Map<MobCategory, StructureSpawnOverride> p_236547_, GenerationStep.Decoration p_236548_, TerrainAdjustment p_236549_) {
         throw new Error("Mixin did not apply!");
     }
-
 }

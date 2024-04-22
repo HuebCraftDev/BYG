@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(SpawnPlacements.class)
 public interface SpawnPlacementsAccess {
-
     @Invoker("register")
     static <T extends Mob> void byg_register(EntityType<T> entityType, SpawnPlacements.Type decoratorType, Heightmap.Types heightMapType, SpawnPlacements.SpawnPredicate<T> decoratorPredicate) {
         throw new Error("Mixin did not apply");

@@ -3,6 +3,7 @@ package potionstudios.byg.common.world.feature.gen.overworld;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
+import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -10,6 +11,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
@@ -18,16 +20,29 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
+import potionstudios.byg.common.BYGTags;
 import potionstudios.byg.common.block.BYGBlocks;
 import potionstudios.byg.common.world.feature.config.SimpleBlockProviderConfig;
+import potionstudios.byg.util.CommonBlockTags;
 
 import java.util.Set;
+import java.util.function.Predicate;
 
 
 public class WideLake extends Feature<SimpleBlockProviderConfig> {
 
-    protected static final Set<Material> unacceptableSolidMaterials = ImmutableSet.of(Material.BAMBOO, Material.BAMBOO_SAPLING, Material.LEAVES, Material.WEB, Material.CACTUS, Material.HEAVY_METAL, Material.VEGETABLE, Material.CAKE, Material.EGG, Material.BARRIER, Material.CAKE);
+    protected static final Set<Predicate<BlockState>> unacceptableSolidMaterials = ImmutableSet.of(
+            (BlockState s) -> s.is(Blocks.BAMBOO),
+            (BlockState s) -> s.is(Blocks.BAMBOO_SAPLING),
+            (BlockState s) -> s.is(BlockTags.LEAVES),
+            (BlockState s) -> s.is(Blocks.COBWEB),
+            (BlockState s) -> s.is(Blocks.CACTUS),
+            (BlockState s) -> s.is(BYGTags.HEAVY_METAL.byg(BYGTags.RegistryType.BLOCKS)),
+            (BlockState s) -> s.is(BlockTags.CROPS),
+            (BlockState s) -> s.getBlock() instanceof CakeBlock || s.is(BlockTags.CANDLE_CAKES),
+            (BlockState s) -> s.is(BYGTags.EGGS.byg(BYGTags.RegistryType.BLOCKS)),
+            (BlockState s) -> s.is(Blocks.BARRIER)
+    );
 
     protected long noiseSeed;
     protected PerlinSimplexNoise noiseGen;
@@ -95,9 +110,8 @@ public class WideLake extends Feature<SimpleBlockProviderConfig> {
                             // remove floating plants so they aren't hovering.
                             // check above while moving up one.
                             blockState = world.getBlockState(mutable.move(Direction.UP));
-                            material = blockState.getMaterial();
 
-                            if (material == Material.PLANT && blockState.getBlock() != Blocks.LILY_PAD && blockState.getBlock() != BYGBlocks.ENDER_LILY.get() && blockState.getBlock() != BYGBlocks.TINY_LILYPADS.get()) {
+                            if (blockState.is(CommonBlockTags.PLANT) && blockState.getBlock() != Blocks.LILY_PAD && blockState.getBlock() != BYGBlocks.ENDER_LILY.get() && blockState.getBlock() != BYGBlocks.TINY_LILYPADS.get()) {
                                 world.setBlock(mutable, Blocks.AIR.defaultBlockState(), 2);
 
                                 // recursively moves up and breaks floating sugar cane
@@ -105,7 +119,7 @@ public class WideLake extends Feature<SimpleBlockProviderConfig> {
                                     world.setBlock(mutable, Blocks.AIR.defaultBlockState(), 2);
                                 }
                             }
-                            if (material == Material.REPLACEABLE_PLANT && blockState.getBlock() != Blocks.VINE) {
+                            if (blockState.canBeReplaced() && blockState.is(CommonBlockTags.PLANT) && blockState.getBlock() != Blocks.VINE) {
                                 world.setBlock(mutable, Blocks.AIR.defaultBlockState(), 2);
                                 world.setBlock(mutable.above(), Blocks.AIR.defaultBlockState(), 2);
                             }
@@ -127,26 +141,24 @@ public class WideLake extends Feature<SimpleBlockProviderConfig> {
      */
     private boolean checkIfValidSpot(LevelAccessor world, BlockPos.MutableBlockPos blockpos$Mutable, double noise) {
         Material material;
-        BlockState blockState;
 
         //cannot be under ledge
         BlockPos.MutableBlockPos temp = new BlockPos.MutableBlockPos().set(blockpos$Mutable);
-        blockState = world.getBlockState(temp.above());
-        while (!blockState.getFluidState().isEmpty() && temp.getY() < world.getMaxBuildHeight()) {
+        final var blockStateAbove = world.getBlockState(temp.above());
+        while (!blockStateAbove.getFluidState().isEmpty() && temp.getY() < world.getMaxBuildHeight()) {
             temp.move(Direction.UP);
         }
-        if (!blockState.isAir() && blockState.getFluidState().isEmpty())
+        if (!blockStateAbove.isAir() && blockStateAbove.getFluidState().isEmpty())
             return false;
 
 
         // must be solid below
         // Will also return false if an unacceptable solid material is found.
-        blockState = world.getBlockState(blockpos$Mutable.below());
-        material = blockState.getMaterial();
-        if ((!material.isSolid() || unacceptableSolidMaterials.contains(material) ||
-                blockState.is(BlockTags.PLANKS)) &&
-                blockState.getFluidState().isEmpty() &&
-                blockState.getFluidState() != Fluids.WATER.getSource(false)) {
+        final var blockStateBelow = world.getBlockState(blockpos$Mutable.below());
+        if ((!blockStateBelow.isSolid() || unacceptableSolidMaterials.stream().anyMatch(it -> it.test(blockStateBelow)) ||
+                blockStateBelow.is(BlockTags.PLANKS)) &&
+                blockStateBelow.getFluidState().isEmpty() &&
+                blockStateBelow.getFluidState() != Fluids.WATER.getSource(false)) {
             return false;
         }
 
@@ -155,8 +167,8 @@ public class WideLake extends Feature<SimpleBlockProviderConfig> {
         if ((noise < 2D && world.getBlockState(blockpos$Mutable.above()).isAir())) {
             int open = 0;
             for (Direction direction : Direction.Plane.HORIZONTAL) {
-                Material material2 = world.getBlockState(blockpos$Mutable.relative(direction)).getMaterial();
-                if (unacceptableSolidMaterials.contains(material2)) return false;
+                final var blockStateNext = world.getBlockState(blockpos$Mutable.relative(direction));
+                if (unacceptableSolidMaterials.stream().anyMatch(it -> it.test(blockStateNext))) return false;
                 if (world.getBlockState(blockpos$Mutable.relative(direction)).isAir()) open++;
             }
             if (open == 1) return true;
@@ -166,10 +178,9 @@ public class WideLake extends Feature<SimpleBlockProviderConfig> {
         // Will also return false if an unacceptable solid material is found.
         for (int x2 = -1; x2 < 2; x2++) {
             for (int z2 = -1; z2 < 2; z2++) {
-                blockState = world.getBlockState(blockpos$Mutable.offset(x2, 0, z2));
-                material = blockState.getMaterial();
+                final var blockState = world.getBlockState(blockpos$Mutable.offset(x2, 0, z2));
 
-                if ((!material.isSolid() || unacceptableSolidMaterials.contains(material) || blockState.is(BlockTags.PLANKS)) && blockState.getFluidState().isEmpty() && blockState.getFluidState() != Fluids.WATER.getSource(false)) {
+                if ((!blockState.isSolid() || unacceptableSolidMaterials.stream().anyMatch(it -> it.test(blockState)) || blockStateBelow.is(BlockTags.PLANKS)) && blockStateBelow.getFluidState().isEmpty() && blockStateBelow.getFluidState() != Fluids.WATER.getSource(false)) {
                     return false;
                 }
             }

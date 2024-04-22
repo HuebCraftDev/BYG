@@ -28,6 +28,8 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
+import potionstudios.byg.mixin.access.LeavesBlockAccess;
+import potionstudios.byg.mixin.access.StructureTemplateAccess;
 
 import java.util.*;
 
@@ -61,8 +63,8 @@ public class TreeFromStructureNBTFeature extends Feature<TreeFromStructureNBTCon
         }
         StructureTemplate baseTemplate = baseTemplateOptional.get();
         StructureTemplate canopyTemplate = canopyTemplateOptional.get();
-        List<StructureTemplate.Palette> basePalettes = baseTemplate.palettes;
-        List<StructureTemplate.Palette> canopyPalettes = canopyTemplate.palettes;
+        List<StructureTemplate.Palette> basePalettes = ((StructureTemplateAccess) baseTemplate).byg_getPalettes();
+        List<StructureTemplate.Palette> canopyPalettes = ((StructureTemplateAccess) canopyTemplate).byg_getPalettes();;
         BlockPos origin = featurePlaceContext.origin();
         if (DEBUG) {
             level.setBlock(origin, Blocks.DIAMOND_BLOCK.defaultBlockState(), 2);
@@ -199,7 +201,7 @@ public class TreeFromStructureNBTFeature extends Feature<TreeFromStructureNBTCon
                 BlockState finalState = state;
                 if (state.hasProperty(LeavesBlock.DISTANCE)) {
                     Runnable postProcess = () -> {
-                        BlockState blockState = LeavesBlock.updateDistance(finalState, level, modifiedPos);
+                        BlockState blockState = LeavesBlockAccess.byg_invokeUpdateDistance(finalState, level, modifiedPos);
                         if (blockState.getValue(LeavesBlock.DISTANCE) < LeavesBlock.DECAY_DISTANCE) {
                             leavePositions.add(modifiedPos);
                             level.setBlock(modifiedPos, blockState, 2);

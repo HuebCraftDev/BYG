@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(VillagerTrades.SuspiciousStewForEmerald.class)
 public interface SuspiciousStewForEmeraldAccess {
-
     @Accessor("effect")
     MobEffect byg_getEffect();
 

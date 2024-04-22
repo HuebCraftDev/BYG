@@ -7,10 +7,8 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(ResourceKey.class)
 public interface ResourceKeyAccess {
-
     @Invoker("create")
     static <T> ResourceKey<T> create(ResourceLocation registryName, ResourceLocation location) {
         throw new Error("Mixin not applied!");
     }
-
 }

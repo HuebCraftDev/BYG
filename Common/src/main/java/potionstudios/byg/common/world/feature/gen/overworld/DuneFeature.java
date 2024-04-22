@@ -49,11 +49,11 @@ public class DuneFeature extends Feature<NoneFeatureConfiguration> {
         ServerLevel serverLevel = level.getLevel();
 
         DuneCache duneCache = (DuneCache) serverLevel;
-        Long2ObjectOpenHashMap<Byte2ObjectOpenHashMap<ResourceKey<Biome>>> biomeAt = duneCache.getBiomeAt();
+        Long2ObjectOpenHashMap<Byte2ObjectOpenHashMap<ResourceKey<Biome>>> biomeAt = duneCache.byg_getBiomeAt();
         if (biomeAt.size() > 4096) {
             biomeAt.clear();
         }
-        Long2ObjectOpenHashMap<Byte2DoubleOpenHashMap> densityAt = duneCache.getDensityAt();
+        Long2ObjectOpenHashMap<Byte2DoubleOpenHashMap> densityAt = duneCache.byg_getDensityAt();
 
         for (int xMove = 0; xMove < 16; xMove++) {
             for (int zMove = 0; zMove < 16; zMove++) {

@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -86,13 +85,12 @@ public class OddityCactusBlock extends Block {
     public boolean canSurvive(@NotNull BlockState state, @NotNull LevelReader worldIn, @NotNull BlockPos pos) {
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             BlockState blockstate = worldIn.getBlockState(pos.relative(direction));
-            Material material = blockstate.getMaterial();
-            if (material.isSolid() || worldIn.getFluidState(pos.relative(direction)).is(FluidTags.LAVA)) {
+            if (blockstate.isSolid() || worldIn.getFluidState(pos.relative(direction)).is(FluidTags.LAVA)) {
                 return false;
             }
         }
 
-        return worldIn.getBlockState(pos.below()).getBlock() == Blocks.END_STONE || worldIn.getBlockState(pos.below()).getBlock() == Blocks.END_STONE_BRICKS || worldIn.getBlockState(pos.below()).getBlock() == BYGBlocks.END_SAND.get() || worldIn.getBlockState(pos.below()).getBlock() == BYGBlocks.ODDITY_CACTUS.get() && !worldIn.getBlockState(pos.above()).getMaterial().isLiquid();
+        return worldIn.getBlockState(pos.below()).getBlock() == Blocks.END_STONE || worldIn.getBlockState(pos.below()).getBlock() == Blocks.END_STONE_BRICKS || worldIn.getBlockState(pos.below()).getBlock() == BYGBlocks.END_SAND.get() || worldIn.getBlockState(pos.below()).getBlock() == BYGBlocks.ODDITY_CACTUS.get() && worldIn.getBlockState(pos.above()).getFluidState().isEmpty();
     }
 
     public void entityInside(@NotNull BlockState state, @NotNull Level worldIn, @NotNull BlockPos pos, @NotNull Entity entityIn) {
@@ -111,5 +109,3 @@ public class OddityCactusBlock extends Block {
 
 
 }
-
-

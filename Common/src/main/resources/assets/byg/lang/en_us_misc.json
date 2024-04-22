@@ -134,5 +134,15 @@
   "dimension.minecraft.the_nether": "The Nether",
   "entity.minecraft.villager.forager": "Forager",
   "filled_map.ancient_sequoia": "Ancient Sequoia Map",
-  "itemGroup.byg.byg": "Oh The Biomes You'll Go"
+  "itemGroup.byg.byg": "Oh The Biomes You'll Go",
+  "upgrade.byg.ametrine_upgrade": "Ametrine Upgrade",
+  "upgrade.byg.pendorite_upgrade": "Pendorite Upgrade",
+  "item.byg.smithing_template.ametrine_upgrade.applies_to": "Netherite Armor",
+  "item.byg.smithing_template.ametrine_upgrade.ingredients": "Ametrine Block",
+  "item.byg.smithing_template.ametrine_upgrade.base_slot_description": "Netherite Armor Piece",
+  "item.byg.smithing_template.ametrine_upgrade.upgrade_slot_description": "Ametrine Block",
+  "item.byg.smithing_template.pendorite_upgrade.applies_to": "Netherite Tools/Weapons",
+  "item.byg.smithing_template.pendorite_upgrade.ingredients": "Pendorite Ingot",
+  "item.byg.smithing_template.pendorite_upgrade.base_slot_description": "Netherite Tool/Weapon",
+  "item.byg.smithing_template.pendorite_upgrade.upgrade_slot_description": "Pendorite Ingot"
 }

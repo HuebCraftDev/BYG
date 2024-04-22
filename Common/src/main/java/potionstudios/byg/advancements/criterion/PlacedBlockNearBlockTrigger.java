@@ -2,6 +2,7 @@ package potionstudios.byg.advancements.criterion;
 
 import com.google.gson.JsonObject;
 import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.SerializationContext;
 import net.minecraft.resources.ResourceLocation;
@@ -14,7 +15,7 @@ public class PlacedBlockNearBlockTrigger {
 
     public static class TriggerInstance extends AbstractCriterionTriggerInstance {
 
-        public TriggerInstance(ResourceLocation $$0, EntityPredicate.Composite $$1) {
+        public TriggerInstance(ResourceLocation $$0, ContextAwarePredicate $$1) {
             super($$0, $$1);
         }
 

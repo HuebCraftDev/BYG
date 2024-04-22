@@ -28,7 +28,7 @@ public record ConstructBYGPlayerTrackedDataPacket(BYGPlayerTrackedData playerTra
     @Override
     public void handle(Level level) {
         if (Minecraft.getInstance().player != null) {
-            ((BYGPlayerTrackedData.Access) Minecraft.getInstance().player).setPlayerTrackedData(this.playerTrackedData);
+            ((BYGPlayerTrackedData.Access) Minecraft.getInstance().player).byg_setPlayerTrackedData(this.playerTrackedData);
         }
     }
 }

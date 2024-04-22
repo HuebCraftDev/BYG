@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(VillagerTrades.EmeraldForItems.class)
 public interface EmeraldForItemsAccess {
-
     @Accessor("item")
     Item byg_getItem();
 

@@ -14,7 +14,6 @@ import java.util.function.Consumer;
 
 @Mixin(OverworldBiomeBuilder.class)
 public interface OverworldBiomeBuilderAccess {
-
     @Accessor("OCEANS") @Mutable
     void byg_setOCEANS(ResourceKey<Biome>[][] oceans);
 

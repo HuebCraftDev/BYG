@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(SurfaceSystem.class)
 public interface SurfaceSystemAccess {
-
     @Accessor("clayBandsOffsetNoise")
     NormalNoise byg_getClayBandsOffsetNoise();
 

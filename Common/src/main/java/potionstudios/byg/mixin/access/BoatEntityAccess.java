@@ -6,7 +6,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(Boat.class)
 public interface BoatEntityAccess {
-
     @Accessor("lastYd")
     void byg_setLastYd(double lastYd);
 

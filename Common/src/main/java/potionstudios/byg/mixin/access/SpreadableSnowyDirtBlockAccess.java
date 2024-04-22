@@ -9,12 +9,10 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(SpreadingSnowyDirtBlock.class)
 public interface SpreadableSnowyDirtBlockAccess {
-
     @Invoker("canBeGrass")
     static boolean byg_invokeCanBeGrass(BlockState state, LevelReader reader, BlockPos pos) {
         throw new Error("Mixin did not apply");
     }
-
 
     @Invoker("canPropagate")
     static boolean byg_invokeCanPropagate(BlockState state, LevelReader reader, BlockPos pos) {

@@ -15,11 +15,9 @@ import potionstudios.byg.common.block.BYGBlockTags;
 import java.util.Iterator;
 
 @Mixin(NetherrackBlock.class)
-public class MixinNetherrackBlock {
-
-
+public abstract class MixinNetherrackBlock {
     @Inject(method = "performBonemeal", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z", shift = At.Shift.BEFORE), locals = LocalCapture.CAPTURE_FAILHARD)
-    private void handleBYGGrowables(ServerLevel world, RandomSource random, BlockPos pos, BlockState state, CallbackInfo ci, boolean flag, boolean flag1, Iterator<BlockPos> var7, BlockPos blockpos, BlockState state2) {
+    private void byg_handleGrowables(ServerLevel world, RandomSource random, BlockPos pos, BlockState state, CallbackInfo ci, boolean flag, boolean flag1, Iterator<BlockPos> var7, BlockPos blockpos, BlockState state2) {
         if (state2.is(BYGBlockTags.SPREADS_TO_NETHERRACK)) {
             if (world.getBlockState(pos).getBlock() != state2.getBlock()) {
                 world.setBlock(pos, state2.getBlock().defaultBlockState(), 2);

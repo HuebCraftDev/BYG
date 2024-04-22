@@ -22,7 +22,6 @@ import potionstudios.byg.util.SeedGetter;
 
 @Mixin(SurfaceSystem.class)
 public abstract class MixinSurfaceSystem implements SeedGetter {
-
     @Shadow
     protected abstract void erodedBadlandsExtension(BlockColumn blockColumn, int i, int j, int k, LevelHeightAccessor levelHeightAccessor);
 
@@ -38,7 +37,7 @@ public abstract class MixinSurfaceSystem implements SeedGetter {
     }
 
     @Override
-    public PositionalRandomFactory getRandom() {
+    public PositionalRandomFactory byg_getRandom() {
         return this.noiseRandom;
     }
 }

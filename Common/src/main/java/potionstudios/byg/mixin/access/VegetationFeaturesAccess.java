@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(VegetationFeatures.class)
 public interface VegetationFeaturesAccess {
-
     @Invoker("grassPatch")
     static RandomPatchConfiguration byg_invokeGrassPatch(BlockStateProvider stateProvider, int tries) {
         throw new Error("Mixin did not apply!");

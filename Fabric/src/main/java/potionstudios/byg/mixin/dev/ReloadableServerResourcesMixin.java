@@ -12,7 +12,7 @@ import potionstudios.byg.util.FabricModPlatform;
 public class ReloadableServerResourcesMixin {
 
     @Inject(at = @At("TAIL"), method = "updateRegistryTags(Lnet/minecraft/core/RegistryAccess;)V")
-    private void byg$updateRegistryTags(RegistryAccess registryAccess, CallbackInfo ci) {
+    private void byg_updateRegistryTags(RegistryAccess registryAccess, CallbackInfo ci) {
         FabricModPlatform.TAGS_UPDATED_EVENT.invoker().onTagsUpdated(registryAccess);
     }
 

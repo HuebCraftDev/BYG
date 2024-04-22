@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(NoiseGeneratorSettings.class)
 public interface NoiseGeneratorSettingsAccess {
-
     @Accessor("surfaceRule") @Mutable
     void byg_setSurfaceRule(SurfaceRules.RuleSource ruleSource);
 }

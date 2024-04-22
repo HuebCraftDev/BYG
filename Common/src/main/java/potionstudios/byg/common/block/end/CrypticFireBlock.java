@@ -30,7 +30,7 @@ public class CrypticFireBlock extends BaseFireBlock {
         return block == BYGBlocks.CRYPTIC_STONE.get() || block == BYGBlocks.CRYPTIC_MAGMA_BLOCK.get();
     }
 
-    protected boolean canBurn(@NotNull BlockState state) {
+    public boolean canBurn(@NotNull BlockState state) {
         return true;
     }
 
