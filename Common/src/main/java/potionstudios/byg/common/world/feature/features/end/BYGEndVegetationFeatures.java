@@ -1,7 +1,7 @@
 package potionstudios.byg.common.world.feature.features.end;
 
 import com.google.common.collect.ImmutableList;
-import corgitaco.corgilib.world.level.feature.CorgiLibFeatures;
+import corgitaco.corgilib.world.level.feature.gen.AdditionalCorgiLibFeatures;
 import corgitaco.corgilib.world.level.feature.gen.configurations.TreeFromStructureNBTConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -105,7 +105,7 @@ public class BYGEndVegetationFeatures {
 
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ETHER_BUSH1 = createConfiguredFeature("ether_bush1",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/aspen-shrub/aspen_shrub_trunk1"),
                     BYG.createLocation("features/trees/aspen-shrub/aspen_shrub_canopy1"),
@@ -119,7 +119,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ETHER_TREE1 = createConfiguredFeature("ether_tree1",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/generic_trunk"),
                     BYG.createLocation("features/trees/ether/ether_canopy1"),
@@ -133,7 +133,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ETHER_TREE2 = createConfiguredFeature("ether_tree2",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/generic_trunk"),
                     BYG.createLocation("features/trees/ether/ether_canopy2"),
@@ -147,7 +147,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ETHER_TREE3 = createConfiguredFeature("ether_tree3",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/generic_trunk"),
                     BYG.createLocation("features/trees/ether/ether_canopy3"),
@@ -161,7 +161,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ETHER_TREE4 = createConfiguredFeature("ether_tree4",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/ether/ether_trunk4"),
                     BYG.createLocation("features/trees/ether/ether_canopy4"),
@@ -175,7 +175,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ETHER_TREE5 = createConfiguredFeature("ether_tree5",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/ether/ether_trunk4"),
                     BYG.createLocation("features/trees/ether/ether_canopy4"),
@@ -189,7 +189,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ETHER_TREE_DEAD1 = createConfiguredFeature("ether_tree_dead1",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/generic_trunk"),
                     BYG.createLocation("features/trees/ether/ether_canopy1"),
@@ -203,7 +203,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ETHER_TREE_DEAD2 = createConfiguredFeature("ether_tree_dead2",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/generic_trunk"),
                     BYG.createLocation("features/trees/ether/ether_canopy2"),
@@ -217,7 +217,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> ETHER_TREE_DEAD3 = createConfiguredFeature("ether_tree_dead3",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/generic_trunk"),
                     BYG.createLocation("features/trees/ether/ether_canopy3"),
@@ -231,7 +231,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> NIGHTSHADE_SHRUB1 = createConfiguredFeature("nightshade_shrub1",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/generic_trunk"),
                     BYG.createLocation("features/trees/nightshade/nightshade_shrub_canopy1"),
@@ -249,7 +249,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> NIGHTSHADE_SHRUB2 = createConfiguredFeature("nightshade_shrub2",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/generic_trunk"),
                     BYG.createLocation("features/trees/nightshade/nightshade_shrub_canopy2"),
@@ -267,7 +267,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> NIGHTSHADE_TREE1 = createConfiguredFeature("nightshade_tree1",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/nightshade/nightshade_trunk1"),
                     BYG.createLocation("features/trees/nightshade/nightshade_canopy1"),
@@ -285,7 +285,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> NIGHTSHADE_TREE2 = createConfiguredFeature("nightshade_tree2",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/generic_trunk"),
                     BYG.createLocation("features/trees/nightshade/nightshade_canopy2"),
@@ -303,7 +303,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> NIGHTSHADE_TREE3 = createConfiguredFeature("nightshade_tree3",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/nightshade/nightshade_trunk3"),
                     BYG.createLocation("features/trees/nightshade/nightshade_canopy3"),
@@ -321,7 +321,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> NIGHTSHADE_TREE4 = createConfiguredFeature("nightshade_tree4",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/nightshade/nightshade_trunk4"),
                     BYG.createLocation("features/trees/nightshade/nightshade_canopy4"),
@@ -344,7 +344,7 @@ public class BYGEndVegetationFeatures {
 
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHULKREN_TREE1 = createConfiguredFeature("shulkren_tree1",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/generic_trunk"),
                     BYG.createLocation("features/fungi/shulkren/shulkren_canopy1"),
@@ -358,7 +358,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHULKREN_TREE2 = createConfiguredFeature("shulkren_tree2",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/generic_trunk"),
                     BYG.createLocation("features/fungi/shulkren/shulkren_canopy2"),
@@ -376,7 +376,7 @@ public class BYGEndVegetationFeatures {
     public static final Supplier<AttachedToLeavesDecorator> IMPARIUS_VINE = () -> new AttachedToLeavesDecorator(0.15F, 2, 0, new RandomizedIntStateProvider(BlockStateProvider.simple(BYGBlocks.IMPARIUS_VINE.defaultBlockState()), ImpariusVineBlock.AGE, UniformInt.of(0, 3)), 2, List.of(Direction.DOWN));
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> IMPARIUS_MUSHROOM1 = createConfiguredFeature("imparius_mushroom1",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/mushrooms/imparius/imparius_mushroom_trunk1"),
                     BYG.createLocation("features/mushrooms/imparius/imparius_mushroom_canopy1"),
@@ -391,7 +391,7 @@ public class BYGEndVegetationFeatures {
 
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> IMPARIUS_MUSHROOM2 = createConfiguredFeature("imparius_mushroom2",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/mushrooms/imparius/imparius_mushroom_trunk2"),
                     BYG.createLocation("features/mushrooms/imparius/imparius_mushroom_canopy2"),
@@ -405,7 +405,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> IMPARIUS_MUSHROOM3 = createConfiguredFeature("imparius_mushroom3",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/mushrooms/imparius/imparius_mushroom_trunk3"),
                     BYG.createLocation("features/mushrooms/imparius/imparius_mushroom_canopy3"),
@@ -419,7 +419,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> IMPARIUS_MUSHROOM4 = createConfiguredFeature("imparius_mushroom4",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/mushrooms/imparius/imparius_mushroom_trunk4"),
                     BYG.createLocation("features/mushrooms/imparius/imparius_mushroom_canopy4"),
@@ -433,7 +433,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> IMPARIUS_MUSHROOM5 = createConfiguredFeature("imparius_mushroom5",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/mushrooms/imparius/imparius_mushroom_trunk5"),
                     BYG.createLocation("features/mushrooms/imparius/imparius_mushroom_canopy5"),
@@ -447,7 +447,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> IMPARIUS_MUSHROOM6 = createConfiguredFeature("imparius_mushroom6",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/mushrooms/imparius/imparius_mushroom_trunk6"),
                     BYG.createLocation("features/mushrooms/imparius/imparius_mushroom_canopy6"),
@@ -461,7 +461,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> FUNGAL_IMPARIUS1 = createConfiguredFeature("fungal_imparius1",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/fungi/imparius/imparius_trunk1"),
                     BYG.createLocation("features/fungi/imparius/imparius_canopy1"),
@@ -480,7 +480,7 @@ public class BYGEndVegetationFeatures {
 
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> FUNGAL_IMPARIUS2 = createConfiguredFeature("fungal_imparius2",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/fungi/imparius/imparius_trunk2"),
                     BYG.createLocation("features/fungi/imparius/imparius_canopy2"),
@@ -497,7 +497,7 @@ public class BYGEndVegetationFeatures {
             )
     );
     public static final ResourceKey<ConfiguredFeature<?, ?>> FUNGAL_IMPARIUS3 = createConfiguredFeature("fungal_imparius3",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/fungi/imparius/imparius_trunk3"),
                     BYG.createLocation("features/fungi/imparius/imparius_canopy3"),
@@ -515,7 +515,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> FUNGAL_IMPARIUS4 = createConfiguredFeature("fungal_imparius4",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/fungi/imparius/imparius_trunk4"),
                     BYG.createLocation("features/fungi/imparius/imparius_canopy4"),
@@ -533,7 +533,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> FUNGAL_IMPARIUS5 = createConfiguredFeature("fungal_imparius5",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/fungi/imparius/imparius_trunk5"),
                     BYG.createLocation("features/fungi/imparius/imparius_canopy5"),
@@ -554,7 +554,7 @@ public class BYGEndVegetationFeatures {
     public static final Supplier<AttachedToLeavesDecorator> PURPLE_SHROOMLIGHT_DOWN = () -> new AttachedToLeavesDecorator(0.2F, 2, 0, new WeightedStateProvider(new SimpleWeightedRandomList.Builder<BlockState>().add(BYGBlocks.PURPLE_SHROOMLIGHT.defaultBlockState(), 1).build()), 2, List.of(Direction.DOWN));
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> BULBIS_BUSH1 = createConfiguredFeature("bulbis_bush1",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/generic_trunk"),
                     BYG.createLocation("features/trees/bulbis/bulbis_bush_canopy1"),
@@ -568,7 +568,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> BULBIS_TREE1 = createConfiguredFeature("bulbis_tree1",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/bulbis/bulbis_trunk1"),
                     BYG.createLocation("features/trees/bulbis/bulbis_canopy1"),
@@ -582,7 +582,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> BULBIS_TREE2 = createConfiguredFeature("bulbis_tree2",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/bulbis/bulbis_trunk2"),
                     BYG.createLocation("features/trees/bulbis/bulbis_canopy2"),
@@ -596,7 +596,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> BULBIS_TREE3 = createConfiguredFeature("bulbis_tree3",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/bulbis/bulbis_trunk2"),
                     BYG.createLocation("features/trees/bulbis/bulbis_canopy3"),
@@ -610,7 +610,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> BULBIS_TREE4 = createConfiguredFeature("bulbis_tree4",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/bulbis/bulbis_trunk4"),
                     BYG.createLocation("features/trees/bulbis/bulbis_canopy4"),
@@ -625,7 +625,7 @@ public class BYGEndVegetationFeatures {
 
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> BULBIS_TREE5 = createConfiguredFeature("bulbis_tree5",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/bulbis/bulbis_trunk5"),
                     BYG.createLocation("features/trees/bulbis/bulbis_canopy5"),
@@ -639,7 +639,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> BULBIS_TREE6 = createConfiguredFeature("bulbis_tree6",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/bulbis/bulbis_trunk6"),
                     BYG.createLocation("features/trees/bulbis/bulbis_canopy6"),
@@ -653,7 +653,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> BULBIS_TREE7 = createConfiguredFeature("bulbis_tree7",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/bulbis/bulbis_trunk7"),
                     BYG.createLocation("features/trees/bulbis/bulbis_canopy7"),
@@ -667,7 +667,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_BULBIS_BUSH1 = createConfiguredFeature("purple_bulbis_bush1",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/generic_trunk"),
                     BYG.createLocation("features/trees/bulbis/bulbis_bush_canopy1"),
@@ -680,7 +680,7 @@ public class BYGEndVegetationFeatures {
             )
     );
     public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_BULBIS_TREE1 = createConfiguredFeature("purple_bulbis_tree1",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/bulbis/bulbis_trunk1"),
                     BYG.createLocation("features/trees/bulbis/bulbis_canopy1"),
@@ -694,7 +694,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_BULBIS_TREE2 = createConfiguredFeature("purple_bulbis_tree2",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/bulbis/bulbis_trunk2"),
                     BYG.createLocation("features/trees/bulbis/bulbis_canopy2"),
@@ -708,7 +708,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_BULBIS_TREE3 = createConfiguredFeature("purple_bulbis_tree3",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/bulbis/bulbis_trunk2"),
                     BYG.createLocation("features/trees/bulbis/bulbis_canopy3"),
@@ -722,7 +722,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_BULBIS_TREE4 = createConfiguredFeature("purple_bulbis_tree4",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/bulbis/bulbis_trunk4"),
                     BYG.createLocation("features/trees/bulbis/bulbis_canopy4"),
@@ -737,7 +737,7 @@ public class BYGEndVegetationFeatures {
 
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_BULBIS_TREE5 = createConfiguredFeature("purple_bulbis_tree5",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/bulbis/bulbis_trunk5"),
                     BYG.createLocation("features/trees/bulbis/bulbis_canopy5"),
@@ -751,7 +751,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_BULBIS_TREE6 = createConfiguredFeature("purple_bulbis_tree6",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/bulbis/bulbis_trunk6"),
                     BYG.createLocation("features/trees/bulbis/bulbis_canopy6"),
@@ -765,7 +765,7 @@ public class BYGEndVegetationFeatures {
     );
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> PURPLE_BULBIS_TREE7 = createConfiguredFeature("purple_bulbis_tree7",
-            CorgiLibFeatures.TREE_FROM_NBT,
+            AdditionalCorgiLibFeatures.TREE_FROM_NBT,
             () -> new TreeFromStructureNBTConfig(
                     BYG.createLocation("features/trees/bulbis/bulbis_trunk7"),
                     BYG.createLocation("features/trees/bulbis/bulbis_canopy7"),

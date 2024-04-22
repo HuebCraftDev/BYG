@@ -14,7 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +25,6 @@ import potionstudios.byg.common.block.BYGWoodTypes;
 import potionstudios.byg.common.item.BYGItems;
 import potionstudios.byg.datagen.util.DatagenUtils;
 import potionstudios.byg.datagen.util.PredicatedTagProvider;
-import potionstudios.byg.mixin.dev.BlockBehaviorAccess;
 import potionstudios.byg.reg.RegistryObject;
 
 import java.util.Arrays;
@@ -80,7 +79,7 @@ public class BYGItemTagsProvider extends ItemTagsProvider {
         copy(BYGBlockTags.MUSHROOMS, bygTag("mushrooms"));
 
         new PredicatedTagProvider<>(BYGItems.PROVIDER)
-                .add(isBlockMaterial(Material.LEAVES), LEAVES.byg(RegistryType.ITEMS)) // Can't copy this one due to slight differences
+                .add(isBlockMaterial(LeavesBlock.class, BlockTags.LEAVES), LEAVES.byg(RegistryType.ITEMS)) // Can't copy this one due to slight differences
                 .run(this::tag);
 
         tag(STICKS.byg(RegistryType.ITEMS)).add(Items.STICK);
@@ -101,12 +100,11 @@ public class BYGItemTagsProvider extends ItemTagsProvider {
         return create(createLocation(path));
     }
 
-    private static Predicate<ResourceKey<Item>> isBlockMaterial(Material material) {
+    private static Predicate<ResourceKey<Item>> isBlockMaterial(Class<? extends Block> material, TagKey<Block> tagKey) {
         return itemKey -> {
             Item item = BuiltInRegistries.ITEM.get(itemKey);
 
-
-            return item instanceof BlockItem bi && ((BlockBehaviorAccess) bi.getBlock()).getMaterial() == material;
+            return item instanceof BlockItem bi && (material.isInstance(bi.getBlock()) || bi.getBlock().defaultBlockState().is(tagKey));
         };
     }
 

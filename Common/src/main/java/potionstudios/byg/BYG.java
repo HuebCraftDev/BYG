@@ -3,6 +3,7 @@ package potionstudios.byg;
 import com.google.common.collect.ImmutableList;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import corgitaco.corgilib.world.level.feature.gen.AdditionalCorgiLibFeatures;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.Util;
 import net.minecraft.commands.CommandSourceStack;
@@ -11,11 +12,11 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import potionstudios.byg.common.*;
@@ -35,6 +36,7 @@ import potionstudios.byg.server.command.ReloadConfigsCommand;
 import potionstudios.byg.server.command.ResetConfigsCommand;
 import potionstudios.byg.server.command.UpdateConfigsCommand;
 import potionstudios.byg.server.command.ValidateConfigsCommand;
+import potionstudios.byg.util.CommonBlockTags;
 import potionstudios.byg.util.FileUtils;
 import potionstudios.byg.util.MLBlockTags;
 import potionstudios.byg.util.ModPlatform;
@@ -55,6 +57,7 @@ public class BYG {
     private static final Map<Block, Predicate<BlockBehaviour.BlockStateBase>> BLOCKSTATE_IS_REPLACEMENTS = new HashMap<>();
 
     public static void commonLoad() {
+        AdditionalCorgiLibFeatures.register();
         registerBlockTagReplacements();
 
         PoiTypesAccess.byg_invokeRegisterBlockStates(BYGPoiTypes.FORAGER.asHolder(), BYGPoiTypes.FORAGER.asHolder().value().matchingStates());
@@ -125,11 +128,10 @@ public class BYG {
                         .add(BYGBlocks.EMBUR_GEL_VINES.get())
                         .addAll(Util.make(new ArrayList<>(), list -> {
                             for (Block block : BuiltInRegistries.BLOCK) {
-                                Material material = block.defaultBlockState().getMaterial();
-                                if (material == Material.PLANT || material == Material.BAMBOO ||
-                                        material == Material.BAMBOO_SAPLING || material == Material.REPLACEABLE_PLANT ||
-                                        material == Material.REPLACEABLE_FIREPROOF_PLANT || material == Material.REPLACEABLE_WATER_PLANT ||
-                                        material == Material.LEAVES || material == Material.WOOD) {
+                                final var state = block.defaultBlockState();
+                                if (state.is(CommonBlockTags.PLANT) || state.is(Blocks.BAMBOO) ||
+                                        state.is(Blocks.BAMBOO_SAPLING) || state.is(CommonBlockTags.WATER_PLANT) ||
+                                        state.is(BlockTags.LEAVES) || state.is(CommonBlockTags.WOOD)) {
                                     list.add(block);
                                 }
                             }

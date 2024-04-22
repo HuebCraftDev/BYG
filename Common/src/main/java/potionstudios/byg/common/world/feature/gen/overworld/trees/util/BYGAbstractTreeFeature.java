@@ -3,12 +3,18 @@ package potionstudios.byg.common.world.feature.gen.overworld.trees.util;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
+import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -26,12 +32,14 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.BitSetDiscreteVoxelShape;
 import net.minecraft.world.phys.shapes.DiscreteVoxelShape;
 import org.jetbrains.annotations.NotNull;
 import potionstudios.byg.BYGConstants;
-import potionstudios.byg.common.block.*;
+import potionstudios.byg.common.block.BYGBlocks;
+import potionstudios.byg.common.block.BYGWoodTypes;
+import potionstudios.byg.common.block.EtherBulbsBlock;
+import potionstudios.byg.common.block.FruitBlock;
 import potionstudios.byg.common.world.feature.config.BYGTreeConfig;
 import potionstudios.byg.common.world.feature.gen.FeatureGenUtil;
 import potionstudios.byg.common.world.math.noise.fastnoise.FastNoise;
@@ -55,11 +63,11 @@ public abstract class BYGAbstractTreeFeature<TFC extends BYGTreeConfig> extends 
     }
 
     public static boolean canLogPlaceHere(LevelSimulatedReader worldReader, BlockPos blockPos) {
-        return worldReader.isStateAtPosition(blockPos, (state) -> state.getMaterial() == Material.AIR || state.getMaterial() == Material.WATER) || FeatureGenUtil.isPlant(worldReader, blockPos);
+        return worldReader.isStateAtPosition(blockPos, (state) -> state.isAir() || state.getFluidState().is(FluidTags.WATER) || FeatureGenUtil.isPlant(worldReader, blockPos));
     }
 
     public boolean canLogPlaceHereNether(LevelSimulatedReader worldReader, BlockPos blockPos) {
-        return worldReader.isStateAtPosition(blockPos, (state) -> state.getMaterial() == Material.AIR || state.getMaterial() == Material.WATER || state.getMaterial() == Material.LAVA) || FeatureGenUtil.isPlant(worldReader, blockPos);
+        return worldReader.isStateAtPosition(blockPos, (state) -> state.isAir() || state.getFluidState().is(FluidTags.WATER) || state.getFluidState().is(FluidTags.LAVA)) || FeatureGenUtil.isPlant(worldReader, blockPos);
     }
 
     public boolean isAnotherTreeHere(LevelSimulatedReader worldReader, BlockPos blockPos) {
@@ -154,7 +162,7 @@ public abstract class BYGAbstractTreeFeature<TFC extends BYGTreeConfig> extends 
      * @return Determine whether or not the pos can support a sapling's tree.
      */
     public boolean canSaplingGrowHere(LevelSimulatedReader reader, BlockPos pos) {
-        return reader.isStateAtPosition(pos, (state) -> state.is(BlockTags.LOGS) || state.is(BlockTags.LEAVES) || state.isAir() || state.getMaterial() == Material.PLANT || state.getMaterial() == Material.REPLACEABLE_PLANT || state.getMaterial() == Material.WATER_PLANT || state.getMaterial() == Material.LEAVES || state.getMaterial() == Material.DIRT);
+        return reader.isStateAtPosition(pos, (state) -> state.is(BlockTags.LOGS) || state.is(BlockTags.LEAVES) || state.isAir() || state.is(BlockTags.FLOWERS) || state.is(TagKey.create(Registries.BLOCK, new ResourceLocation("c:grass"))) || state.is(BlockTags.UNDERWATER_BONEMEALS) || state.is(BlockTags.LEAVES) || state.is(BlockTags.DIRT));
     }
 
     /**

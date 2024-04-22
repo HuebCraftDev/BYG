@@ -3,6 +3,9 @@ package potionstudios.byg.common.world.feature.gen.nether;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
@@ -10,8 +13,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.material.Material;
 import potionstudios.byg.common.world.feature.config.ChainConfig;
+import potionstudios.byg.util.CommonBlockTags;
 
 public class Chain extends Feature<ChainConfig> {
     public Chain(Codec<ChainConfig> config) {
@@ -80,6 +83,7 @@ public class Chain extends Feature<ChainConfig> {
     }
 
     public boolean canReplaceBlock(LevelAccessor world, BlockPos pos) {
-        return world.getBlockState(pos).getMaterial() != Material.STONE || world.getBlockState(pos).getBlock() != Blocks.BEDROCK;
+        // Commented out, because useless, as Bedrock is already a stone
+        return /*!world.getBlockState(pos).is(CommonBlockTags.STONES) ||*/ world.getBlockState(pos).getBlock() != Blocks.BEDROCK;
     }
 }
