@@ -12,7 +12,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -22,6 +21,8 @@ import org.apache.logging.log4j.Logger;
 import potionstudios.byg.common.*;
 import potionstudios.byg.common.block.BYGBlockTags;
 import potionstudios.byg.common.block.BYGBlocks;
+import potionstudios.byg.common.block.HasMaterial;
+import potionstudios.byg.common.block.Material;
 import potionstudios.byg.common.entity.BYGEntities;
 import potionstudios.byg.common.entity.ai.village.poi.BYGPoiTypes;
 import potionstudios.byg.common.entity.villager.BYGVillagerType;
@@ -36,7 +37,6 @@ import potionstudios.byg.server.command.ReloadConfigsCommand;
 import potionstudios.byg.server.command.ResetConfigsCommand;
 import potionstudios.byg.server.command.UpdateConfigsCommand;
 import potionstudios.byg.server.command.ValidateConfigsCommand;
-import potionstudios.byg.util.CommonBlockTags;
 import potionstudios.byg.util.FileUtils;
 import potionstudios.byg.util.MLBlockTags;
 import potionstudios.byg.util.ModPlatform;
@@ -128,10 +128,11 @@ public class BYG {
                         .add(BYGBlocks.EMBUR_GEL_VINES.get())
                         .addAll(Util.make(new ArrayList<>(), list -> {
                             for (Block block : BuiltInRegistries.BLOCK) {
-                                final var state = block.defaultBlockState();
-                                if (state.is(CommonBlockTags.PLANT) || state.is(Blocks.BAMBOO) ||
-                                        state.is(Blocks.BAMBOO_SAPLING) || state.is(CommonBlockTags.WATER_PLANT) ||
-                                        state.is(BlockTags.LEAVES) || state.is(BYGTags.WOODS.all(BYGTags.RegistryType.BLOCKS))) {
+                                final var material = ((HasMaterial) block.defaultBlockState()).byg$getMaterial();
+                                if (material == Material.PLANT || material == Material.BAMBOO ||
+                                        material == Material.BAMBOO_SAPLING || material == Material.REPLACEABLE_PLANT ||
+                                        material == Material.REPLACEABLE_FIREPROOF_PLANT || material == Material.REPLACEABLE_WATER_PLANT ||
+                                        material == Material.LEAVES || material == Material.WOOD) {
                                     list.add(block);
                                 }
                             }

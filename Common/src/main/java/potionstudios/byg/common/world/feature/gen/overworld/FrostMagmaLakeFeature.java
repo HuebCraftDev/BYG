@@ -13,10 +13,9 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
-import potionstudios.byg.common.BYGTags;
-import potionstudios.byg.common.block.BYGBlockTags;
 import potionstudios.byg.common.block.BYGBlocks;
-import potionstudios.byg.util.CommonBlockTags;
+import potionstudios.byg.common.block.HasMaterial;
+import potionstudios.byg.common.block.Material;
 
 public class FrostMagmaLakeFeature extends Feature<BlockStateConfiguration> {
     private static final BlockState AIR;
@@ -119,7 +118,7 @@ public class FrostMagmaLakeFeature extends Feature<BlockStateConfiguration> {
                 }
             }
 
-            if (blockStateFeatureConfig.state.is(BYGTags.STONES.all(BYGTags.RegistryType.BLOCKS)) || blockStateFeatureConfig.state.is(Blocks.BEDROCK)) {
+            if (((HasMaterial) blockStateFeatureConfig.state).is(Material.STONE) || blockStateFeatureConfig.state.is(Blocks.BEDROCK)) {
                 for (lvt_9_5_ = 0; lvt_9_5_ < 16; ++lvt_9_5_) {
                     for (lvt_10_5_ = 0; lvt_10_5_ < 16; ++lvt_10_5_) {
                         for (lvt_11_4_ = 0; lvt_11_4_ < 8; ++lvt_11_4_) {

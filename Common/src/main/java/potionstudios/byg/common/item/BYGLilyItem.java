@@ -25,6 +25,8 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
+import potionstudios.byg.common.block.HasMaterial;
+import potionstudios.byg.common.block.Material;
 
 public class BYGLilyItem extends BlockItem {
     Block block;
@@ -53,8 +55,9 @@ public class BYGLilyItem extends BlockItem {
 
                 BlockPos blockpos1 = blockpos.above();
                 BlockState blockstate = worldIn.getBlockState(blockpos);
+                Material material = ((HasMaterial)blockstate).byg$getMaterial();
                 FluidState FluidState = worldIn.getFluidState(blockpos);
-                if ((FluidState.getType() == Fluids.WATER || blockstate.is(BlockTags.ICE)) && worldIn.isEmptyBlock(blockpos1)) {
+                if ((FluidState.getType() == Fluids.WATER || material == Material.ICE) && worldIn.isEmptyBlock(blockpos1)) {
 
                     // Maddie's probably janky fix
                     Block lilypadblock = Block.byItem(itemstack.getItem());

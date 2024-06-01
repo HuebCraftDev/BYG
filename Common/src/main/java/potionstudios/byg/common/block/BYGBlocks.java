@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -56,7 +57,9 @@ import potionstudios.byg.reg.BlockRegistryObject;
 import potionstudios.byg.reg.RegistrationProvider;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
@@ -66,6 +69,7 @@ public class BYGBlocks {
 
     public static final List<BlockRegistryObject<Block>> FLOWER_POT_BLOCKS = new ArrayList<>();
     public static final List<BlockRegistryObject<Block>> SIGN_BLOCKS = new ArrayList<>();
+    public static final Map<BYGMaterials, List<BlockRegistryObject<Block>>> materialBlocks = new HashMap<>();
 
     public static final BlockRegistryObject<Block> FORAGERS_TABLE = createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.FLETCHING_TABLE)), "foragers_table");
 
@@ -182,9 +186,9 @@ public class BYGBlocks {
     public static final BlockRegistryObject<Block> WEEPING_ROOTS_PLANT = createBlock(BYGBlockProperties.BYGHangingVinePlant::new, "weeping_roots_plant");
     public static final BlockRegistryObject<Block> BEACH_GRASS = createBlock(() -> new BYGBonemealActionBlock(BlockBehaviour.Properties.copy(Blocks.GRASS), BYGBlockTags.GROUND_BEACH_GRASS, BYGBonemealActionBlock.BonemealAction.growDoublePlant(() -> BYGBlocks.TALL_BEACH_GRASS.get())), "beach_grass");
     public static final BlockRegistryObject<BYGDoublePlantBlock> TALL_BEACH_GRASS = createBlock(() -> new BYGDoublePlantBlock(BlockBehaviour.Properties.copy(Blocks.TALL_GRASS), BYGBlockTags.GROUND_TALL_BEACH_GRASS), "tall_beach_grass");
-    public static final BlockRegistryObject<Block> LEAF_PILE = createBlock(() -> new FlatVegetationBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).noCollission().instabreak().sound(SoundType.GRASS)), "leaf_pile");
-    public static final BlockRegistryObject<Block> CLOVER_PATCH = createBlock(() -> new FlatVegetationBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).noCollission().instabreak().sound(SoundType.GRASS), BYGBlockTags.GROUND_CLOVER_PATCH), "clover_patch");
-    public static final BlockRegistryObject<Block> FLOWER_PATCH = createBlock(() -> new FlatVegetationBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).noCollission().instabreak().sound(SoundType.GRASS), BYGBlockTags.GROUND_FLOWER_PATCH), "flower_patch");
+    public static final BlockRegistryObject<Block> LEAF_PILE = createBlock(() -> new FlatVegetationBlock(Material.REPLACEABLE_PLANT.toProperties().noCollission().instabreak().sound(SoundType.GRASS)), "leaf_pile");
+    public static final BlockRegistryObject<Block> CLOVER_PATCH = createBlock(() -> new FlatVegetationBlock(Material.REPLACEABLE_PLANT.toProperties().noCollission().instabreak().sound(SoundType.GRASS), BYGBlockTags.GROUND_CLOVER_PATCH), "clover_patch");
+    public static final BlockRegistryObject<Block> FLOWER_PATCH = createBlock(() -> new FlatVegetationBlock(Material.REPLACEABLE_PLANT.toProperties().noCollission().instabreak().sound(SoundType.GRASS), BYGBlockTags.GROUND_FLOWER_PATCH), "flower_patch");
     public static final BlockRegistryObject<Block> BAOBAB_FRUIT_BLOCK = createFruitBlock("baobab_fruit_block", FruitBlock.FruitType.BAOBAB);
     public static final BlockRegistryObject<Block> APPLE_FRUIT_BLOCK = createFruitBlock("apple_fruit_block", FruitBlock.FruitType.APPLE);
     public static final BlockRegistryObject<Block> GREEN_APPLE_FRUIT_BLOCK = createFruitBlock("green_apple_fruit_block", FruitBlock.FruitType.GREEN_APPLE);
@@ -248,7 +252,7 @@ public class BYGBlocks {
     public static final BlockRegistryObject<Block> EMBUR_GEL_VINES_PLANT = createEmburGelVinePlant("embur_gel_vines_plant");
     public static final BlockRegistryObject<Block> EMBUR_GEL_BRANCH = createEmburGelBranch("embur_gel_branch");
 
-    public static final BlockRegistryObject<Block> EMBUR_SPROUTS = createBlock(() -> new NetherSproutsBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS).mapColor(MapColor.COLOR_CYAN).noCollission().instabreak().sound(SoundType.NETHER_SPROUTS)), "embur_sprouts");
+    public static final BlockRegistryObject<Block> EMBUR_SPROUTS = createBlock(() -> new NetherSproutsBlock(Material.REPLACEABLE_FIREPROOF_PLANT.toProperties().mapColor(MapColor.COLOR_CYAN).noCollission().instabreak().sound(SoundType.NETHER_SPROUTS)), "embur_sprouts");
     public static final BlockRegistryObject<Block> EMBUR_ROOTS = createBlock(BYGBlockProperties.BYGEmburPlant::new, "embur_roots");
     public static final BlockRegistryObject<DoublePlantBlock> TALL_EMBUR_ROOTS = createBlock(BYGBlockProperties.BYGDoubleNetherPlant::new, "tall_embur_roots");
 
@@ -263,7 +267,7 @@ public class BYGBlocks {
     public static final BlockRegistryObject<Block> IVIS_SPROUT = createIvisBulbisPlant("ivis_sprout");
     public static final BlockRegistryObject<Block> ENDER_LILY = createBlock(BYGBlockProperties.BYGEnderLily::new, "ender_lily");
 
-    public static final BlockRegistryObject<Block> ETHER_FOLIAGE = createBlock(() -> new FlatVegetationBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).noCollission().instabreak().sound(SoundType.GRASS)), "ether_foliage");
+    public static final BlockRegistryObject<Block> ETHER_FOLIAGE = createBlock(() -> new FlatVegetationBlock(Material.REPLACEABLE_PLANT.toProperties().noCollission().instabreak().sound(SoundType.GRASS)), "ether_foliage");
     public static final BlockRegistryObject<DoublePlantBlock> TALL_ETHER_GRASS = createTallEtherPlant("tall_ether_grass");
     public static final BlockRegistryObject<Block> ETHER_GRASS = createEtherPlant("ether_grass");
     public static final BlockRegistryObject<Block> ETHER_BUSH = createEtherPlant("ether_bush");
@@ -330,7 +334,7 @@ public class BYGBlocks {
     public static final BlockRegistryObject<Block> CRYPTIC_STONE_WALL = createStoneWall("cryptic_stone_wall");
     public static final BlockRegistryObject<Block> CRYPTIC_VENT = createVent("cryptic_vent");
     public static final BlockRegistryObject<Block> TALL_CRYPTIC_VENT = createTallVent("tall_cryptic_vent");
-    public static final BlockRegistryObject<Block> CRYPTIC_REDSTONE_ORE = createBlock(() -> new RedStoneOreBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.NETHER_GOLD_ORE).strength(0.4F, 0.4F).lightLevel(litBlockEmission(13)).requiresCorrectToolForDrops()), "cryptic_redstone_ore");
+    public static final BlockRegistryObject<Block> CRYPTIC_REDSTONE_ORE = createBlock(() -> new RedStoneOreBlock(Material.STONE.toProperties().sound(SoundType.NETHER_GOLD_ORE).strength(0.4F, 0.4F).lightLevel(litBlockEmission(13)).requiresCorrectToolForDrops()), "cryptic_redstone_ore");
     public static final BlockRegistryObject<Block> CRYPTIC_BRAMBLE = createStoneEndPlant("cryptic_bramble");
 
     public static final BlockRegistryObject<Block> IMPARIUS_MUSHROOM_BLOCK = createImpariusMushroom("imparius_mushroom_block");
@@ -370,8 +374,8 @@ public class BYGBlocks {
     public static final BlockRegistryObject<Block> LAMENT_VINE = createBlock(BYGBlockProperties.BYGLamentVine::new, "lament_vine");
     public static final BlockRegistryObject<Block> LAMENT_VINE_PLANT = createBlock(BYGBlockProperties.BYGLamentVinePlant::new, "lament_vine_plant");
 
-    public static final BlockRegistryObject<Block> PINK_CHERRY_FOLIAGE = createBlock(() -> new FlatVegetationBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).noCollission().instabreak().sound(SoundType.GRASS)), "pink_cherry_foliage");
-    public static final BlockRegistryObject<Block> WHITE_CHERRY_FOLIAGE = createBlock(() -> new FlatVegetationBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).noCollission().instabreak().sound(SoundType.GRASS)), "white_cherry_foliage");
+    public static final BlockRegistryObject<Block> PINK_CHERRY_FOLIAGE = createBlock(() -> new FlatVegetationBlock(Material.REPLACEABLE_PLANT.toProperties().noCollission().instabreak().sound(SoundType.GRASS)), "pink_cherry_foliage");
+    public static final BlockRegistryObject<Block> WHITE_CHERRY_FOLIAGE = createBlock(() -> new FlatVegetationBlock(Material.REPLACEABLE_PLANT.toProperties().noCollission().instabreak().sound(SoundType.GRASS)), "white_cherry_foliage");
 
     public static final BlockRegistryObject<Block> POLLEN_BLOCK = createBlock(BYGBlockProperties.BYGPollen::new, "pollen_block");
 
@@ -594,7 +598,7 @@ public class BYGBlocks {
     public static final BlockRegistryObject<Block> CYAN_TULIP = createFlower("cyan_tulip", BYGBlockTags.GROUND_ALPINE_BELLFLOWER);
     public static final BlockRegistryObject<Block> DAFFODIL = createFlower("daffodil", BYGBlockTags.GROUND_ALPINE_BELLFLOWER);
     public static final BlockRegistryObject<Block> DELPHINIUM = createTallFlower(MapColor.TERRACOTTA_BLUE, "delphinium", BYGBlockTags.GROUND_DELPHINIUM);
-    public static final BlockRegistryObject<Block> FAIRY_SLIPPER = createBlock(() -> new BYGFlowerBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.GRASS).strength(0.0f).noCollission().noOcclusion().lightLevel((state) -> 8), BYGBlockTags.GROUND_FAIRY_SLIPPER), "fairy_slipper");
+    public static final BlockRegistryObject<Block> FAIRY_SLIPPER = createBlock(() -> new BYGFlowerBlock(Material.PLANT.toProperties().sound(SoundType.GRASS).strength(0.0f).noCollission().noOcclusion().lightLevel((state) -> 8), BYGBlockTags.GROUND_FAIRY_SLIPPER), "fairy_slipper");
     public static final BlockRegistryObject<Block> FIRECRACKER_FLOWER_BUSH = createShrub(TreeSpawners.FIRECRACKER, "firecracker_flower_bush");
     public static final BlockRegistryObject<Block> FOXGLOVE = createTallFlower(MapColor.COLOR_ORANGE, "foxglove", BYGBlockTags.GROUND_FOXGLOVE);
     public static final BlockRegistryObject<Block> GOLDEN_SPINED_CACTUS = createDesertPlant("golden_spined_cactus", BYGBlockTags.GROUND_GOLDEN_SPINED_CACTUS);
@@ -651,7 +655,7 @@ public class BYGBlocks {
     public static final BlockRegistryObject<Block> ETHER_PHYLIUM = createEndDirtSpreadable(BYGBlocks.ETHER_SOIL, MapColor.COLOR_MAGENTA, () -> BYGEndVegetationFeatures.ETHER_PLANTS, "ether_phylium");
     public static final BlockRegistryObject<Block> VERMILION_SCULK = createEndStoneSpreadable(BYGBlocks.ETHER_STONE, MapColor.COLOR_RED, () -> BYGEndFeatures.GROWABLE_SCULK, "vermilion_sculk");
     public static final BlockRegistryObject<Block> SHULKREN_PHYLIUM = createEndStoneSpreadable(() -> Blocks.END_STONE, MapColor.COLOR_LIGHT_GREEN, () -> BYGEndVegetationFeatures.SHULKREN_PLANTS, "shulkren_phylium");
-    public static final BlockRegistryObject<DirtPathBlock> LUSH_GRASS_PATH = createBlock(() -> DirtPathBlockAccess.byg_create(BlockBehaviour.Properties.copy(Blocks.DIRT).strength(0.65F).sound(SoundType.GRASS).isViewBlocking((state, reader, pos) -> true).isSuffocating((state, reader, pos) -> true)), "lush_grass_path");
+    public static final BlockRegistryObject<DirtPathBlock> LUSH_GRASS_PATH = createBlock(() -> DirtPathBlockAccess.byg_create(Material.DIRT.toProperties().strength(0.65F).sound(SoundType.GRASS).isViewBlocking((state, reader, pos) -> true).isSuffocating((state, reader, pos) -> true)), "lush_grass_path");
     public static final BlockRegistryObject<Block> BULBIS_PHYCELIUM = createEndStoneSpreadable(() -> Blocks.END_STONE, MapColor.TERRACOTTA_WHITE, () -> BYGEndVegetationFeatures.BULBIS_ANOMALIES, "bulbis_phycelium");
     public static final BlockRegistryObject<Block> IMPARIUS_PHYLIUM = createEndStoneSpreadable(() -> Blocks.END_STONE, MapColor.COLOR_CYAN, () -> BYGEndVegetationFeatures.IMPARIUS_PLANTS, "imparius_phylium");
 
@@ -671,107 +675,107 @@ public class BYGBlocks {
     }
 
     private static BlockRegistryObject<Block> createChiseledFungalImpariusSlab(String id) {
-        return createBlock(() -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.WARPED_WART_BLOCK).sound(SoundType.HONEY_BLOCK).strength(2.0f)), id);
+        return createBlock(() -> new SlabBlock(Material.GRASS.toProperties().mapColor(MapColor.WARPED_WART_BLOCK).sound(SoundType.HONEY_BLOCK).strength(2.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createChiseledFungalImpariusStairs(String id) {
-        return createBlock(() -> StairBlockAccess.byg_create(Blocks.COBBLESTONE.defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.WARPED_WART_BLOCK).sound(SoundType.HONEY_BLOCK).strength(2.0f)), id);
+        return createBlock(() -> StairBlockAccess.byg_create(Blocks.COBBLESTONE.defaultBlockState(), Material.GRASS.toProperties().mapColor(MapColor.WARPED_WART_BLOCK).sound(SoundType.HONEY_BLOCK).strength(2.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createChiseledFungalImpariusWall(String id) {
-        return createBlock(() -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.WARPED_WART_BLOCK).sound(SoundType.HONEY_BLOCK).dynamicShape().strength(2.0f)), id);
+        return createBlock(() -> new WallBlock(Material.GRASS.toProperties().mapColor(MapColor.WARPED_WART_BLOCK).sound(SoundType.HONEY_BLOCK).strength(2.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createCrystalClusterBlock(int light, int i, int j, MapColor mapColor, String id) {
-        return createBlock(() -> new AmethystClusterBlock(i, j, BYGMaterials.SUBZERO_CRYSTAL.get().sound(SoundType.GLASS).mapColor(mapColor).strength(1.5f).requiresCorrectToolForDrops().noOcclusion().lightLevel((state) -> light)), id);
+        return createBlock(() -> new AmethystClusterBlock(i, j, BYGMaterials.SUBZERO_CRYSTAL.toProperties().sound(SoundType.GLASS).mapColor(mapColor).strength(1.5f).requiresCorrectToolForDrops().noOcclusion().lightLevel((state) -> light)), id);
     }
 
     private static BlockRegistryObject<Block> createHypogealBlock(String id) {
-        return createBlock(() -> new HypogealImperiumBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.GLASS).strength(1.5f).requiresCorrectToolForDrops().lightLevel(litBlockEmission(13))), id);
+        return createBlock(() -> new HypogealImperiumBlock(Material.STONE.toProperties().sound(SoundType.GLASS).strength(1.5f).requiresCorrectToolForDrops().lightLevel(litBlockEmission(13))), id);
     }
 
     private static BlockRegistryObject<Block> createSubzeroBuddingCrystalBlock(MapColor mapColor, String id) {
-        return createBlock(() -> new BuddingSubzeroCrystalBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(mapColor).sound(SoundType.GLASS).lightLevel((state) -> 8).noLootTable().randomTicks().requiresCorrectToolForDrops().strength(1.5f, 1.5f)), id);
+        return createBlock(() -> new BuddingSubzeroCrystalBlock(Material.STONE.toProperties().mapColor(mapColor).sound(SoundType.GLASS).lightLevel((state) -> 8).noLootTable().randomTicks().requiresCorrectToolForDrops().strength(1.5f, 1.5f)), id);
     }
 
     private static BlockRegistryObject<Block> createTheriumBuddingCrystalBlock(MapColor mapColor, String id) {
-        return createBlock(() -> new BuddingTheriumCrystalBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(mapColor).sound(SoundType.GLASS).lightLevel((state) -> 8).noLootTable().randomTicks().requiresCorrectToolForDrops().strength(1.5f, 1.5f)), id);
+        return createBlock(() -> new BuddingTheriumCrystalBlock(Material.STONE.toProperties().mapColor(mapColor).sound(SoundType.GLASS).lightLevel((state) -> 8).noLootTable().randomTicks().requiresCorrectToolForDrops().strength(1.5f, 1.5f)), id);
     }
 
     private static BlockRegistryObject<Block> createCrystalBlock(MapColor mapColor, String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(mapColor).sound(SoundType.GLASS).lightLevel((state) -> 8).strength(1.5f, 1.5f).requiresCorrectToolForDrops()), id);
+        return createBlock(() -> new Block(Material.STONE.toProperties().mapColor(mapColor).sound(SoundType.GLASS).lightLevel((state) -> 8).strength(1.5f, 1.5f).requiresCorrectToolForDrops()), id);
     }
 
     private static BlockRegistryObject<Block> createTravertineSlab(String id) {
-        return createBlock(() -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.SNOW).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
+        return createBlock(() -> new SlabBlock(Material.STONE.toProperties().mapColor(MapColor.SNOW).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
     }
 
     private static BlockRegistryObject<Block> createTravertineStairs(String id) {
-        return createBlock(() -> StairBlockAccess.byg_create(Blocks.COBBLESTONE.defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.SNOW).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
+        return createBlock(() -> StairBlockAccess.byg_create(Blocks.COBBLESTONE.defaultBlockState(), Material.STONE.toProperties().mapColor(MapColor.SNOW).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
     }
 
     private static BlockRegistryObject<Block> createTravertineWall(String id) {
-        return createBlock(() -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.SNOW).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
+        return createBlock(() -> new WallBlock(Material.STONE.toProperties().mapColor(MapColor.SNOW).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
     }
 
     private static BlockRegistryObject<Block> createScoriaStoneSlab(String id) {
-        return createBlock(() -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_RED).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
+        return createBlock(() -> new SlabBlock(Material.STONE.toProperties().mapColor(MapColor.TERRACOTTA_RED).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
     }
 
     private static BlockRegistryObject<Block> createScoriaStoneStairs(String id) {
-        return createBlock(() -> StairBlockAccess.byg_create(Blocks.COBBLESTONE.defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_RED).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
+        return createBlock(() -> StairBlockAccess.byg_create(Blocks.COBBLESTONE.defaultBlockState(), Material.STONE.toProperties().mapColor(MapColor.TERRACOTTA_RED).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
     }
 
     private static BlockRegistryObject<Block> createScoriaStoneWall(String id) {
-        return createBlock(() -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_RED).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
+        return createBlock(() -> new WallBlock(Material.STONE.toProperties().mapColor(MapColor.TERRACOTTA_RED).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
     }
 
     private static BlockRegistryObject<Block> createScoriaStonePillar(String id) {
-        return createBlock(() -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_RED).sound(SoundType.STONE).strength(1.5f, 6.0f).requiresCorrectToolForDrops()), id);
+        return createBlock(() -> new RotatedPillarBlock(Material.STONE.toProperties().mapColor(MapColor.TERRACOTTA_RED).sound(SoundType.STONE).strength(1.5f, 6.0f).requiresCorrectToolForDrops()), id);
     }
 
     private static BlockRegistryObject<Block> createWailingBellBlossom(String id) {
-        return createBlock(() -> new WailingBulbBlossomBlock(BlockBehaviour.Properties.copy(Blocks.CLAY).mapColor(MapColor.COLOR_PURPLE).sound(SoundType.SHROOMLIGHT).noOcclusion().lightLevel((state) -> 14)), id);
+        return createBlock(() -> new WailingBulbBlossomBlock(Material.CLAY.toProperties().mapColor(MapColor.COLOR_PURPLE).sound(SoundType.SHROOMLIGHT).noOcclusion().lightLevel((state) -> 14)), id);
     }
 
     private static BlockRegistryObject<Block> createWailingVine(String id) {
-        return createBlock(() -> new VineBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.COLOR_PURPLE).sound(SoundType.TWISTING_VINES).instabreak().randomTicks().noCollission()), id);
+        return createBlock(() -> new VineBlock(Material.PLANT.toProperties().mapColor(MapColor.COLOR_PURPLE).sound(SoundType.TWISTING_VINES).instabreak().randomTicks().noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createWailingPlant(String id) {
-        return createBlock(() -> new WailingPlantBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.COLOR_PURPLE).sound(SoundType.ROOTS).instabreak().noCollission()), id);
+        return createBlock(() -> new WailingPlantBlock(Material.PLANT.toProperties().mapColor(MapColor.COLOR_PURPLE).sound(SoundType.ROOTS).instabreak().noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createEmburGelBlock(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.CLAY).mapColor(MapColor.TERRACOTTA_YELLOW).sound(SoundType.HONEY_BLOCK).noOcclusion().speedFactor(1.3f)), id);
+        return createBlock(() -> new Block(Material.CLAY.toProperties().mapColor(MapColor.TERRACOTTA_YELLOW).sound(SoundType.HONEY_BLOCK).noOcclusion().speedFactor(1.3f)), id);
     }
 
     private static BlockRegistryObject<Block> createEmburGelVine(String id) {
-        return createBlock(() -> new EmburVineBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).mapColor(MapColor.TERRACOTTA_YELLOW).instabreak().randomTicks().sound(SoundType.HONEY_BLOCK).noCollission()), id);
+        return createBlock(() -> new EmburVineBlock(Material.LEAVES.toProperties().mapColor(MapColor.TERRACOTTA_YELLOW).instabreak().randomTicks().sound(SoundType.HONEY_BLOCK).noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createEmburGelVinePlant(String id) {
-        return createBlock(() -> new EmburVinePlantBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).mapColor(MapColor.TERRACOTTA_YELLOW).instabreak().randomTicks().sound(SoundType.HONEY_BLOCK).noCollission()), id);
+        return createBlock(() -> new EmburVinePlantBlock(Material.LEAVES.toProperties().mapColor(MapColor.TERRACOTTA_YELLOW).instabreak().randomTicks().sound(SoundType.HONEY_BLOCK).noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createEmburGelBranch(String id) {
-        return createBlock(() -> new TreeBranchBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.TERRACOTTA_YELLOW).instabreak().sound(SoundType.HONEY_BLOCK).noOcclusion().noCollission().lightLevel((state) -> 10)), id);
+        return createBlock(() -> new TreeBranchBlock(Material.REPLACEABLE_PLANT.toProperties().mapColor(MapColor.TERRACOTTA_YELLOW).instabreak().sound(SoundType.HONEY_BLOCK).noOcclusion().noCollission().lightLevel((state) -> 10)), id);
     }
 
     private static BlockRegistryObject<Block> createArisianBloomBranch(String id) {
-        return createBlock(() -> new TreeBranchBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.COLOR_PURPLE).instabreak().sound(SoundType.GRASS).noOcclusion().noCollission().lightLevel((state) -> 10)), id);
+        return createBlock(() -> new TreeBranchBlock(Material.REPLACEABLE_PLANT.toProperties().mapColor(MapColor.COLOR_PURPLE).instabreak().sound(SoundType.GRASS).noOcclusion().noCollission().lightLevel((state) -> 10)), id);
     }
 
     private static BlockRegistryObject<Block> createTheriumGlass(String id) {
-        return createBlock(() -> new GlassBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.COLOR_CYAN).sound(SoundType.GLASS).lightLevel((state) -> 12).noOcclusion().isValidSpawn(BYGBlocks::neverAllowSpawn).isRedstoneConductor(BYGBlocks::isntSolid).isSuffocating(BYGBlocks::isntSolid).isViewBlocking(BYGBlocks::isntSolid).strength(0.4f, 8.0f)), id);
+        return createBlock(() -> new GlassBlock(Material.GLASS.toProperties().mapColor(MapColor.COLOR_CYAN).sound(SoundType.GLASS).lightLevel((state) -> 12).noOcclusion().isValidSpawn(BYGBlocks::neverAllowSpawn).isRedstoneConductor(BYGBlocks::isntSolid).isSuffocating(BYGBlocks::isntSolid).isViewBlocking(BYGBlocks::isntSolid).strength(0.4f, 8.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createTheriumGlassPane(String id) {
-        return createBlock(() -> IronBarsBlockAccess.byg_create(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.COLOR_CYAN).sound(SoundType.GLASS).lightLevel((state) -> 12).noOcclusion().strength(0.4f, 8.0f)), id);
+        return createBlock(() -> IronBarsBlockAccess.byg_create(Material.GLASS.toProperties().mapColor(MapColor.COLOR_CYAN).sound(SoundType.GLASS).lightLevel((state) -> 12).noOcclusion().strength(0.4f, 8.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createChiseledTherium(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().sound(SoundType.GLASS).strength(1.5f, 9.0f)), id);
+        return createBlock(() -> new Block(Material.STONE.toProperties().mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().sound(SoundType.GLASS).strength(1.5f, 9.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createChiseledTheriumStairs(String id) {
@@ -779,15 +783,15 @@ public class BYGBlocks {
     }
 
     private static BlockRegistryObject<Block> createChiseledTheriumSlab(String id) {
-        return createBlock(() -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().sound(SoundType.GLASS).strength(1.5f, 9.0f)), id);
+        return createBlock(() -> new SlabBlock(Material.STONE.toProperties().mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().sound(SoundType.GLASS).strength(1.5f, 9.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createChiseledTheriumWall(String id) {
-        return createBlock(() -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().sound(SoundType.GLASS).strength(1.5f, 9.0f)), id);
+        return createBlock(() -> new WallBlock(Material.STONE.toProperties().mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().sound(SoundType.GLASS).strength(1.5f, 9.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createShinyChiseledTherium(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().sound(SoundType.GLASS).lightLevel((state) -> 12).strength(1.5f, 9.0f)), id);
+        return createBlock(() -> new Block(Material.STONE.toProperties().mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().sound(SoundType.GLASS).lightLevel((state) -> 12).strength(1.5f, 9.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createShinyChiseledTheriumStairs(String id) {
@@ -795,59 +799,59 @@ public class BYGBlocks {
     }
 
     private static BlockRegistryObject<Block> createShinyChiseledTheriumSlab(String id) {
-        return createBlock(() -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().sound(SoundType.GLASS).lightLevel((state) -> 12).strength(1.5f, 9.0f)), id);
+        return createBlock(() -> new SlabBlock(Material.STONE.toProperties().mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().sound(SoundType.GLASS).lightLevel((state) -> 12).strength(1.5f, 9.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createShinyChiseledTheriumWall(String id) {
-        return createBlock(() -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().sound(SoundType.GLASS).lightLevel((state) -> 12).strength(1.5f, 9.0f)), id);
+        return createBlock(() -> new WallBlock(Material.STONE.toProperties().mapColor(MapColor.COLOR_CYAN).requiresCorrectToolForDrops().sound(SoundType.GLASS).lightLevel((state) -> 12).strength(1.5f, 9.0f)), id);
     }
 
     static BlockRegistryObject<Block> createFence(String id) {
-        return createBlock(() -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f)), id);
+        return createBlock(() -> new FenceBlock(Material.WOOD.toProperties().sound(SoundType.WOOD).strength(2.0f, 3.0f)), id);
     }
 
     static BlockRegistryObject<Block> createFenceGate(String id, WoodType woodType) {
-        return createBlock(() -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f), woodType), id);
+        return createBlock(() -> new FenceGateBlock(Material.WOOD.toProperties().sound(SoundType.WOOD).strength(2.0f, 3.0f), woodType), id);
     }
 
     private static BlockRegistryObject<Block> createSand(MapColor color, int dustColor, String id) {
-        return createBlock(() -> new SandBlock(dustColor, BlockBehaviour.Properties.copy(Blocks.SAND).mapColor(color).sound(SoundType.SAND).strength(0.2f)), id);
+        return createBlock(() -> new SandBlock(dustColor, Material.SAND.toProperties().mapColor(color).sound(SoundType.SAND).strength(0.2f)), id);
     }
 
     private static BlockRegistryObject<Block> createSandstone(MapColor color, String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(color).requiresCorrectToolForDrops().strength(0.8F).sound(SoundType.STONE)), id);
+        return createBlock(() -> new Block(Material.STONE.toProperties().mapColor(color).requiresCorrectToolForDrops().strength(0.8F).sound(SoundType.STONE)), id);
     }
 
     private static BlockRegistryObject<Block> createSandstoneSlab(MapColor color, String id) {
-        return createBlock(() -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(color).requiresCorrectToolForDrops().strength(0.8F).sound(SoundType.STONE)), id);
+        return createBlock(() -> new SlabBlock(Material.STONE.toProperties().mapColor(color).requiresCorrectToolForDrops().strength(0.8F).sound(SoundType.STONE)), id);
     }
 
     private static BlockRegistryObject<Block> createSandstoneWall(MapColor color, String id) {
-        return createBlock(() -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(color).requiresCorrectToolForDrops().strength(0.8F).sound(SoundType.STONE)), id);
+        return createBlock(() -> new WallBlock(Material.STONE.toProperties().mapColor(color).requiresCorrectToolForDrops().strength(0.8F).sound(SoundType.STONE)), id);
     }
 
     private static BlockRegistryObject<Block> createSandstoneStairs(MapColor color, String id) {
-        return createBlock(() -> StairBlockAccess.byg_create(BYGBlocks.WINDSWEPT_SANDSTONE.defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(color).requiresCorrectToolForDrops().strength(0.8F).sound(SoundType.STONE)), id);
+        return createBlock(() -> StairBlockAccess.byg_create(BYGBlocks.WINDSWEPT_SANDSTONE.defaultBlockState(), Material.STONE.toProperties().mapColor(color).requiresCorrectToolForDrops().strength(0.8F).sound(SoundType.STONE)), id);
     }
 
     private static BlockRegistryObject<Block> createSandstonePillar(MapColor color, String id) {
-        return createBlock(() -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(color).requiresCorrectToolForDrops().strength(0.8F).sound(SoundType.STONE)), id);
+        return createBlock(() -> new RotatedPillarBlock(Material.STONE.toProperties().mapColor(color).requiresCorrectToolForDrops().strength(0.8F).sound(SoundType.STONE)), id);
     }
 
     static BlockRegistryObject<Block> createWoodSlab(String id) {
-        return createBlock(() -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f)), id);
+        return createBlock(() -> new SlabBlock(Material.WOOD.toProperties().sound(SoundType.WOOD).strength(2.0f, 3.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createStoneSlab(String id) {
-        return createBlock(() -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
+        return createBlock(() -> new SlabBlock(Material.STONE.toProperties().sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
     }
 
     private static BlockRegistryObject<Block> createStoneWall(String id) {
-        return createBlock(() -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
+        return createBlock(() -> new WallBlock(Material.STONE.toProperties().sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
     }
 
     static BlockRegistryObject<Block> createWoodPressurePlate(String id, BlockSetType blockSetType) {
-        return createBlock(() -> PressurePlateBlockAccess.byg_create(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).sound(SoundType.WOOD).noCollission().strength(0.5F), blockSetType), id);
+        return createBlock(() -> PressurePlateBlockAccess.byg_create(PressurePlateBlock.Sensitivity.EVERYTHING, Material.WOOD.toProperties().sound(SoundType.WOOD).noCollission().strength(0.5F), blockSetType), id);
     }
 
     static BlockRegistryObject<Block> createWoodStairs(String id) {
@@ -855,7 +859,7 @@ public class BYGBlocks {
     }
 
     static BlockRegistryObject<Block> createTrapDoor(String id, BlockSetType blockSetType) {
-        return createBlock(() -> TrapDoorBlockAccess.byg_create(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).mapColor(MapColor.COLOR_BROWN).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion(), blockSetType), id);
+        return createBlock(() -> TrapDoorBlockAccess.byg_create(Material.WOOD.toProperties().mapColor(MapColor.COLOR_BROWN).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion(), blockSetType), id);
     }
 
     static BlockRegistryObject<Block> createCraftingTable(String id) {
@@ -867,55 +871,55 @@ public class BYGBlocks {
     }
 
     static BlockRegistryObject<Block> createBookshelf(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).mapColor(MapColor.COLOR_BROWN).sound(SoundType.WOOD).strength(2.0f, 3.0f)), id);
+        return createBlock(() -> new Block(Material.WOOD.toProperties().mapColor(MapColor.COLOR_BROWN).sound(SoundType.WOOD).strength(2.0f, 3.0f)), id);
     }
 
     static BlockRegistryObject<Block> createDoor(String id, BlockSetType blockSetType) {
-        return createBlock(() -> DoorBlockAccess.byg_create(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).mapColor(MapColor.COLOR_BROWN).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion(), blockSetType), id);
+        return createBlock(() -> DoorBlockAccess.byg_create(Material.WOOD.toProperties().mapColor(MapColor.COLOR_BROWN).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion(), blockSetType), id);
     }
 
     static BlockRegistryObject<Block> createPlanks(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).mapColor(MapColor.COLOR_BROWN).sound(SoundType.WOOD).strength(2.0f, 3.0f)), id);
+        return createBlock(() -> new Block(Material.WOOD.toProperties().mapColor(MapColor.COLOR_BROWN).sound(SoundType.WOOD).strength(2.0f, 3.0f)), id);
     }
 
     static BlockRegistryObject<Block> createWood(String id) {
-        return createBlock(() -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).sound(SoundType.WOOD).strength(2.0f)), id);
+        return createBlock(() -> new RotatedPillarBlock(Material.WOOD.toProperties().sound(SoundType.WOOD).strength(2.0f)), id);
     }
 
     static BlockRegistryObject<Block> createStrippedLog(String id) {
-        return createBlock(() -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f)), id);
+        return createBlock(() -> new RotatedPillarBlock(Material.WOOD.toProperties().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f)), id);
     }
 
     static BlockRegistryObject<Block> createLog(String id) {
-        return createBlock(() -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).sound(SoundType.WOOD).strength(2.0f)), id);
+        return createBlock(() -> new RotatedPillarBlock(Material.WOOD.toProperties().sound(SoundType.WOOD).strength(2.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createSoapstone(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_BLACK).sound(SoundType.STONE).requiresCorrectToolForDrops().strength(1.5f, 6.0f)), id);
+        return createBlock(() -> new Block(Material.STONE.toProperties().mapColor(MapColor.TERRACOTTA_BLACK).sound(SoundType.STONE).requiresCorrectToolForDrops().strength(1.5f, 6.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createTravertine(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.SNOW).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
+        return createBlock(() -> new Block(Material.STONE.toProperties().mapColor(MapColor.SNOW).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createNetherStone(MapColor color, String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(color).requiresCorrectToolForDrops().sound(SoundType.NETHERRACK).strength(0.4f, 0.4f)), id);
+        return createBlock(() -> new Block(Material.STONE.toProperties().mapColor(color).requiresCorrectToolForDrops().sound(SoundType.NETHERRACK).strength(0.4f, 0.4f)), id);
     }
 
     private static BlockRegistryObject<Block> createDoubleDamagePlantBlock(String id, TagKey<Block> groundTag) {
-        return createBlock(() -> new DoubleDamagePlantBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.TWISTING_VINES).strength(0.0f).noCollission().noOcclusion(), groundTag), id);
+        return createBlock(() -> new DoubleDamagePlantBlock(Material.PLANT.toProperties().sound(SoundType.TWISTING_VINES).strength(0.0f).noCollission().noOcclusion(), groundTag), id);
     }
 
     private static BlockRegistryObject<Block> createBoricFireBlock(MapColor color, String id) {
-        return createBlock(() -> new BoricFireBlock(BlockBehaviour.Properties.copy(Blocks.FIRE).mapColor(color).sound(SoundType.WOOL).noCollission().instabreak().lightLevel((state) -> 14)), id);
+        return createBlock(() -> new BoricFireBlock(Material.FIRE.toProperties().mapColor(color).sound(SoundType.WOOL).noCollission().instabreak().lightLevel((state) -> 14)), id);
     }
 
     private static BlockRegistryObject<Block> createDesertPlant(String id, TagKey<Block> groundTag) {
-        return createPottedBlock(() -> new DesertPlant(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.GRASS).strength(0.0f).noCollission().noOcclusion(), groundTag), id);
+        return createPottedBlock(() -> new DesertPlant(Material.PLANT.toProperties().sound(SoundType.GRASS).strength(0.0f).noCollission().noOcclusion(), groundTag), id);
     }
 
     private static BlockRegistryObject<Block> createCrypticFireBlock(MapColor color, String id) {
-        return createBlock(() -> new CrypticFireBlock(BlockBehaviour.Properties.copy(Blocks.FIRE).mapColor(color).sound(SoundType.WOOL).noCollission().instabreak().lightLevel((state) -> 14)), id);
+        return createBlock(() -> new CrypticFireBlock(Material.FIRE.toProperties().mapColor(color).sound(SoundType.WOOL).noCollission().instabreak().lightLevel((state) -> 14)), id);
     }
 
     private static BlockRegistryObject<Block> createDustedPolishedBlackstoneBricks(String id) {
@@ -923,31 +927,31 @@ public class BYGBlocks {
     }
 
     private static BlockRegistryObject<Block> createScoria(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_RED).sound(SoundType.STONE).strength(1.5f, 6.0f).requiresCorrectToolForDrops()), id);
+        return createBlock(() -> new Block(Material.STONE.toProperties().mapColor(MapColor.TERRACOTTA_RED).sound(SoundType.STONE).strength(1.5f, 6.0f).requiresCorrectToolForDrops()), id);
     }
 
     private static BlockRegistryObject<Block> createDacite(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_WHITE).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
+        return createBlock(() -> new Block(Material.STONE.toProperties().mapColor(MapColor.TERRACOTTA_WHITE).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createEtherStone(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_CYAN).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
+        return createBlock(() -> new Block(Material.STONE.toProperties().mapColor(MapColor.TERRACOTTA_CYAN).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createRockyStone(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.STONE).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
+        return createBlock(() -> new Block(Material.STONE.toProperties().mapColor(MapColor.STONE).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createMossyStone(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_GREEN).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
+        return createBlock(() -> new Block(Material.STONE.toProperties().mapColor(MapColor.TERRACOTTA_GREEN).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createRedRock(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_ORANGE).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
+        return createBlock(() -> new Block(Material.STONE.toProperties().mapColor(MapColor.TERRACOTTA_ORANGE).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createAmetrineOre(String id) {
-        return createBlock(() -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_PINK).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f), UniformInt.of(3, 9)), id);
+        return createBlock(() -> new DropExperienceBlock(Material.STONE.toProperties().mapColor(MapColor.TERRACOTTA_PINK).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f), UniformInt.of(3, 9)), id);
     }
 
     private static BlockRegistryObject<Block> createBuddingAmetrineOre(String id) {
@@ -955,80 +959,80 @@ public class BYGBlocks {
     }
 
     private static BlockRegistryObject<Block> createAmetrineBlock(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_PINK).isSuffocating(BYGBlocks::isntSolid).isViewBlocking(BYGBlocks::isntSolid).noOcclusion().requiresCorrectToolForDrops().sound(SoundType.GLASS).strength(1.5f, 6.0f)), id);
+        return createBlock(() -> new Block(Material.STONE.toProperties().mapColor(MapColor.TERRACOTTA_PINK).isSuffocating(BYGBlocks::isntSolid).isViewBlocking(BYGBlocks::isntSolid).noOcclusion().requiresCorrectToolForDrops().sound(SoundType.GLASS).strength(1.5f, 6.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createCampfireBlock(int type, String id) {
-        return createBlock(() -> new CampfireBlock(true, type, BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).mapColor(MapColor.PODZOL).strength(2.0F).sound(SoundType.WOOD).noOcclusion().lightLevel(litBlockEmission(14))), id);
+        return createBlock(() -> new CampfireBlock(true, type, Material.WOOD.toProperties().mapColor(MapColor.PODZOL).strength(2.0F).sound(SoundType.WOOD).noOcclusion().lightLevel(litBlockEmission(14))), id);
     }
 
 
     private static BlockRegistryObject<Block> createPendoriteOre(String id) {
-        return createBlock(() -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_PURPLE).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
+        return createBlock(() -> new DropExperienceBlock(Material.STONE.toProperties().mapColor(MapColor.TERRACOTTA_PURPLE).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createPendoriteBlock(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.ANVIL).mapColor(MapColor.TERRACOTTA_PURPLE).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
+        return createBlock(() -> new Block(Material.HEAVY_METAL.toProperties().mapColor(MapColor.TERRACOTTA_PURPLE).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createRawPendoriteBlock(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.ANVIL).mapColor(MapColor.TERRACOTTA_PURPLE).requiresCorrectToolForDrops().sound(SoundType.ANCIENT_DEBRIS).strength(1.5f, 6.0f)), id);
+        return createBlock(() -> new Block(Material.HEAVY_METAL.toProperties().mapColor(MapColor.TERRACOTTA_PURPLE).requiresCorrectToolForDrops().sound(SoundType.ANCIENT_DEBRIS).strength(1.5f, 6.0f)), id);
     }
 
     private static BlockRegistryObject<Block> createEmeralditeOre(String id) {
-        return createBlock(() -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.COLOR_GREEN).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f), UniformInt.of(4, 7)), id);
+        return createBlock(() -> new DropExperienceBlock(Material.STONE.toProperties().mapColor(MapColor.COLOR_GREEN).requiresCorrectToolForDrops().sound(SoundType.STONE).strength(1.5f, 6.0f), UniformInt.of(4, 7)), id);
     }
 
     private static BlockRegistryObject<Block> createNetherOre(SoundType sound, MapColor color, String id, UniformInt xpRange) {
-        return createBlock(() -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(color).requiresCorrectToolForDrops().sound(sound).strength(3.0f, 3.0f), xpRange), id);
+        return createBlock(() -> new DropExperienceBlock(Material.STONE.toProperties().mapColor(color).requiresCorrectToolForDrops().sound(sound).strength(3.0f, 3.0f), xpRange), id);
     }
 
     private static BlockRegistryObject<Block> createBarrelCactus(String id) {
-        return createBlock(() -> new AbstractBarrelCactusBlock(BlockBehaviour.Properties.copy(Blocks.CACTUS).mapColor(MapColor.COLOR_GREEN).sound(SoundType.WOOL).strength(0.4f).noOcclusion()), id);
+        return createBlock(() -> new AbstractBarrelCactusBlock(Material.CACTUS.toProperties().mapColor(MapColor.COLOR_GREEN).sound(SoundType.WOOL).strength(0.4f).noOcclusion()), id);
     }
 
     private static BlockRegistryObject<Block> createCarvedBarrelCactus(String id) {
-        return createBlock(() -> new CarvedBarrelCactusBlock(BlockBehaviour.Properties.copy(Blocks.CACTUS).mapColor(MapColor.COLOR_GREEN).sound(SoundType.WOOL).strength(0.4f).noOcclusion()), id);
+        return createBlock(() -> new CarvedBarrelCactusBlock(Material.CACTUS.toProperties().mapColor(MapColor.COLOR_GREEN).sound(SoundType.WOOL).strength(0.4f).noOcclusion()), id);
     }
 
     private static BlockRegistryObject<Block> createWaterBarrelCactus(String id) {
-        return createBlock(() -> new WaterBarrelCactusBlock(BlockBehaviour.Properties.copy(Blocks.CACTUS).mapColor(MapColor.COLOR_GREEN).sound(SoundType.WOOL).strength(0.4f)), id);
+        return createBlock(() -> new WaterBarrelCactusBlock(Material.CACTUS.toProperties().mapColor(MapColor.COLOR_GREEN).sound(SoundType.WOOL).strength(0.4f)), id);
     }
 
     private static BlockRegistryObject<Block> createHoneyBarrelCactus(String id) {
-        return createBlock(() -> new HoneyBarrelCactusBlock(BlockBehaviour.Properties.copy(Blocks.CACTUS).mapColor(MapColor.COLOR_GREEN).sound(SoundType.WOOL).strength(0.4f)), id);
+        return createBlock(() -> new HoneyBarrelCactusBlock(Material.CACTUS.toProperties().mapColor(MapColor.COLOR_GREEN).sound(SoundType.WOOL).strength(0.4f)), id);
     }
 
     private static BlockRegistryObject<Block> createLanternBlock(MapColor color, String id) {
-        return createBlock(() -> new LanternBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).mapColor(color).noOcclusion().requiresCorrectToolForDrops().sound(SoundType.LANTERN).strength(3.5f).lightLevel((state) -> 15)), id);
+        return createBlock(() -> new LanternBlock(Material.METAL.toProperties().mapColor(color).noOcclusion().requiresCorrectToolForDrops().sound(SoundType.LANTERN).strength(3.5f).lightLevel((state) -> 15)), id);
     }
 
     private static BlockRegistryObject<Block> createCrypticLanternBlock(MapColor color, String id) {
-        return createBlock(() -> new CrypticLanternBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).mapColor(color).noOcclusion().requiresCorrectToolForDrops().sound(SoundType.LANTERN).strength(3.5f).lightLevel((state) -> 15)), id);
+        return createBlock(() -> new CrypticLanternBlock(Material.METAL.toProperties().mapColor(color).noOcclusion().requiresCorrectToolForDrops().sound(SoundType.LANTERN).strength(3.5f).lightLevel((state) -> 15)), id);
     }
 
     private static BlockRegistryObject<Block> createEndRodBlock(MapColor color, String id) {
-        return createBlock(() -> new CrypticEndRodBlock(BlockBehaviour.Properties.copy(Blocks.END_ROD).mapColor(color).sound(SoundType.CANDLE).instabreak().noOcclusion().lightLevel((state) -> 14)), id);
+        return createBlock(() -> new CrypticEndRodBlock(Material.DECORATION.toProperties().mapColor(color).sound(SoundType.CANDLE).instabreak().noOcclusion().lightLevel((state) -> 14)), id);
     }
 
     private static BlockRegistryObject<Block> createCattailSproutBlock(String id) {
-        return createBlock(() -> new CattailSproutBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.TERRACOTTA_GREEN).sound(SoundType.WET_GRASS).strength(0.0f).randomTicks().noCollission().noOcclusion()), id);
+        return createBlock(() -> new CattailSproutBlock(Material.PLANT.toProperties().mapColor(MapColor.TERRACOTTA_GREEN).sound(SoundType.WET_GRASS).strength(0.0f).randomTicks().noCollission().noOcclusion()), id);
     }
 
     private static BlockRegistryObject<Block> createCattailPlantBlock(String id) {
-        return createBlock(() -> new CattailPlantBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.TERRACOTTA_GREEN).sound(SoundType.WET_GRASS).strength(0.0f).noCollission().noOcclusion()), id);
+        return createBlock(() -> new CattailPlantBlock(Material.PLANT.toProperties().mapColor(MapColor.TERRACOTTA_GREEN).sound(SoundType.WET_GRASS).strength(0.0f).noCollission().noOcclusion()), id);
     }
 
     private static BlockRegistryObject<Block> createAloeVeraPlantBlock(String id) {
-        return createBlock(() -> new AloeVeraBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.TERRACOTTA_GREEN).sound(SoundType.WET_GRASS).strength(0.0f).randomTicks().noCollission().noOcclusion()), id);
+        return createBlock(() -> new AloeVeraBlock(Material.PLANT.toProperties().mapColor(MapColor.TERRACOTTA_GREEN).sound(SoundType.WET_GRASS).strength(0.0f).randomTicks().noCollission().noOcclusion()), id);
     }
 
     private static BlockRegistryObject<Block> createBloomingAloeVeraPlantBlock(String id) {
-        return createBlock(() -> new BloomingAloeVeraBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.TERRACOTTA_GREEN).sound(SoundType.WET_GRASS).strength(0.0f).noCollission().noOcclusion()), id);
+        return createBlock(() -> new BloomingAloeVeraBlock(Material.PLANT.toProperties().mapColor(MapColor.TERRACOTTA_GREEN).sound(SoundType.WET_GRASS).strength(0.0f).noCollission().noOcclusion()), id);
     }
 
     private static BlockRegistryObject<Block> createWhitePuffBlock(SoundType sound, MapColor color, String id) {
-        return createPottedBlock(() -> new WhitePuffballBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(color).sound(sound).noOcclusion().noCollission().strength(0.0f).randomTicks()), id);
+        return createPottedBlock(() -> new WhitePuffballBlock(Material.PLANT.toProperties().mapColor(color).sound(sound).noOcclusion().noCollission().strength(0.0f).randomTicks()), id);
     }
 
     static BlockRegistryObject<Block> createMushroom(TagKey<Block> blockTagKey, String id) {
@@ -1040,11 +1044,11 @@ public class BYGBlocks {
     }
 
     private static BlockRegistryObject<Block> createHydrangeaBush(String id, TagKey<Block> groundTag) {
-        return createPottedBlock(() -> new HydrangeaBushBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.SWEET_BERRY_BUSH).strength(0.0f).noCollission().noOcclusion(), groundTag), id);
+        return createPottedBlock(() -> new HydrangeaBushBlock(Material.PLANT.toProperties().sound(SoundType.SWEET_BERRY_BUSH).strength(0.0f).noCollission().noOcclusion(), groundTag), id);
     }
 
     private static BlockRegistryObject<Block> createHydrangeaHedge(String id, TagKey<Block> groundTag) {
-        return createBlock(() -> new HydrangeaHedgeBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.AZALEA).instabreak().noOcclusion(), groundTag), id);
+        return createBlock(() -> new HydrangeaHedgeBlock(Material.PLANT.toProperties().sound(SoundType.AZALEA).instabreak().noOcclusion(), groundTag), id);
     }
 
     private static BlockRegistryObject<Block> createFlower(String id, TagKey<Block> groundTag) {
@@ -1052,7 +1056,7 @@ public class BYGBlocks {
     }
 
     private static BlockRegistryObject<Block> createFlower(String id, TagKey<Block> groundTag, boolean potted) {
-        Supplier<Block> block = () -> new BYGFlowerBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.GRASS).strength(0.0f).noCollission().noOcclusion(), groundTag);
+        Supplier<Block> block = () -> new BYGFlowerBlock(Material.PLANT.toProperties().sound(SoundType.GRASS).strength(0.0f).noCollission().noOcclusion(), groundTag);
 
         if (potted) {
             return createPottedBlock(block, id);
@@ -1062,91 +1066,91 @@ public class BYGBlocks {
     }
 
     private static BlockRegistryObject<Block> createTallFlower(MapColor color, String id, TagKey<Block> groundTag) {
-        return createBlock(() -> new BYGTallFlowerBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(color).sound(SoundType.GRASS).strength(0.0f).noCollission().noOcclusion(), groundTag), id);
+        return createBlock(() -> new BYGTallFlowerBlock(Material.REPLACEABLE_PLANT.toProperties().mapColor(color).sound(SoundType.GRASS).strength(0.0f).noCollission().noOcclusion(), groundTag), id);
     }
 
     private static BlockRegistryObject<Block> createStoneEndPlant(String id) {
-        return createBlock(() -> new StoneEndPlantBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.GRASS).strength(0.0f).noCollission().randomTicks().noOcclusion()), id);
+        return createBlock(() -> new StoneEndPlantBlock(Material.PLANT.toProperties().sound(SoundType.GRASS).strength(0.0f).noCollission().randomTicks().noOcclusion()), id);
     }
 
     private static BlockRegistryObject<Block> createTallBulbis(String id) {
-        return createBlock(() -> new TallBulbisBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.SHROOMLIGHT).strength(0.0f).noCollission().noOcclusion()), id);
+        return createBlock(() -> new TallBulbisBlock(Material.REPLACEABLE_PLANT.toProperties().sound(SoundType.SHROOMLIGHT).strength(0.0f).noCollission().noOcclusion()), id);
     }
 
     private static BlockRegistryObject<Block> createVent(String id) {
-        return createBlock(() -> new VentBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
+        return createBlock(() -> new VentBlock(Material.STONE.toProperties().sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
     }
 
     private static BlockRegistryObject<Block> createTallVent(String id) {
-        return createBlock(() -> new TallVentBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
+        return createBlock(() -> new TallVentBlock(Material.STONE.toProperties().sound(SoundType.STONE).strength(2.0f, 6.0f).requiresCorrectToolForDrops()), id);
     }
 
     private static BlockRegistryObject<Block> createAmetrineCluster(String id) {
-        return createBlock(() -> new AmethystClusterBlock(7, 3, BYGMaterials.AMETRINE.get().sound(SoundType.GLASS).strength(1.5f).randomTicks().requiresCorrectToolForDrops().noCollission().lightLevel((state) -> 6)), id);
+        return createBlock(() -> new AmethystClusterBlock(7, 3, BYGMaterials.AMETRINE.toProperties().sound(SoundType.GLASS).strength(1.5f).randomTicks().requiresCorrectToolForDrops().noCollission().lightLevel((state) -> 6)), id);
     }
 
     private static BlockRegistryObject<Block> createDullCrystal(String id, TagKey<EntityType<?>> noInjury) {
-        return createBlock(() -> new CrystalBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.STONE).strength(0.1f).noOcclusion().noCollission().requiresCorrectToolForDrops(), noInjury), id);
+        return createBlock(() -> new CrystalBlock(Material.STONE.toProperties().sound(SoundType.STONE).strength(0.1f).noOcclusion().noCollission().requiresCorrectToolForDrops(), noInjury), id);
     }
 
     private static BlockRegistryObject<Block> createSculkGrowth(String id) {
-        return createBlock(() -> new SculkGrowthBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS).sound(SoundType.TWISTING_VINES).instabreak().randomTicks().noOcclusion().noCollission()), id);
+        return createBlock(() -> new SculkGrowthBlock(Material.REPLACEABLE_FIREPROOF_PLANT.toProperties().sound(SoundType.TWISTING_VINES).instabreak().randomTicks().noOcclusion().noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createIvisBulbisPlant(String id) {
-        return createBlock(() -> new IvisPlantBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS).sound(SoundType.TWISTING_VINES).instabreak().noOcclusion().noCollission()), id);
+        return createBlock(() -> new IvisPlantBlock(Material.REPLACEABLE_FIREPROOF_PLANT.toProperties().sound(SoundType.TWISTING_VINES).instabreak().noOcclusion().noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createEtherPlant(String id) {
-        return createBlock(() -> new EtherPlantBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS).sound(SoundType.GRASS).instabreak().noOcclusion().noCollission()), id);
+        return createBlock(() -> new EtherPlantBlock(Material.REPLACEABLE_FIREPROOF_PLANT.toProperties().sound(SoundType.GRASS).instabreak().noOcclusion().noCollission()), id);
     }
 
     private static BlockRegistryObject<DoublePlantBlock> createTallEtherPlant(String id) {
-        return createBlock(() -> new TallEtherGrassBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.GRASS).instabreak().noOcclusion().noCollission()), id);
+        return createBlock(() -> new TallEtherGrassBlock(Material.REPLACEABLE_PLANT.toProperties().sound(SoundType.GRASS).instabreak().noOcclusion().noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createNightshadePlant(String id) {
-        return createBlock(() -> new NightshadePlantBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS).sound(SoundType.TWISTING_VINES).instabreak().noOcclusion().noCollission()), id);
+        return createBlock(() -> new NightshadePlantBlock(Material.REPLACEABLE_FIREPROOF_PLANT.toProperties().sound(SoundType.TWISTING_VINES).instabreak().noOcclusion().noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createTallNightshadePlant(String id) {
-        return createBlock(() -> new TallNightshadePlantBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.ROOTS).instabreak().noOcclusion().noCollission()), id);
+        return createBlock(() -> new TallNightshadePlantBlock(Material.REPLACEABLE_PLANT.toProperties().sound(SoundType.ROOTS).instabreak().noOcclusion().noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createSculkPlant(String id) {
-        return createBlock(() -> new SculkPlantBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS).sound(SoundType.TWISTING_VINES).instabreak().noOcclusion().noCollission()), id);
+        return createBlock(() -> new SculkPlantBlock(Material.REPLACEABLE_FIREPROOF_PLANT.toProperties().sound(SoundType.TWISTING_VINES).instabreak().noOcclusion().noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createImpariusPlant(String id) {
-        return createBlock(() -> new ImpariusPlantBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS).sound(SoundType.TWISTING_VINES).instabreak().noOcclusion().noCollission()), id);
+        return createBlock(() -> new ImpariusPlantBlock(Material.REPLACEABLE_FIREPROOF_PLANT.toProperties().sound(SoundType.TWISTING_VINES).instabreak().noOcclusion().noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createOddityDesertPlant(String id) {
-        return createBlock(() -> new DesertOddityPlantBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS).sound(SoundType.TWISTING_VINES).instabreak().noOcclusion().noCollission()), id);
+        return createBlock(() -> new DesertOddityPlantBlock(Material.REPLACEABLE_FIREPROOF_PLANT.toProperties().sound(SoundType.TWISTING_VINES).instabreak().noOcclusion().noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createWarpedCactus(String id) {
-        return createBlock(() -> new WarpedCactusBlock(BlockBehaviour.Properties.copy(Blocks.CACTUS).sound(SoundType.WOOL).strength(0.2f).randomTicks().noOcclusion().lightLevel((state) -> 8)), id);
+        return createBlock(() -> new WarpedCactusBlock(Material.CACTUS.toProperties().sound(SoundType.WOOL).strength(0.2f).randomTicks().noOcclusion().lightLevel((state) -> 8)), id);
     }
 
     private static BlockRegistryObject<Block> createOddityCactus(String id) {
-        return createBlock(() -> new OddityCactusBlock(BlockBehaviour.Properties.copy(Blocks.CACTUS).sound(SoundType.WOOL).strength(0.2f).randomTicks().noOcclusion().lightLevel((state) -> 8)), id);
+        return createBlock(() -> new OddityCactusBlock(Material.CACTUS.toProperties().sound(SoundType.WOOL).strength(0.2f).randomTicks().noOcclusion().lightLevel((state) -> 8)), id);
     }
 
     private static BlockRegistryObject<Block> createCrimsonBerryBush(String id) {
-        return createBlock(() -> new CrimsonBerryBushBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.SWEET_BERRY_BUSH).randomTicks().instabreak().noCollission()), id);
+        return createBlock(() -> new CrimsonBerryBushBlock(Material.PLANT.toProperties().sound(SoundType.SWEET_BERRY_BUSH).randomTicks().instabreak().noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createBlueBerryBush(String id) {
-        return createBlock(() -> new BlueBerryBush(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.SWEET_BERRY_BUSH).randomTicks().instabreak().noCollission()), id);
+        return createBlock(() -> new BlueBerryBush(Material.PLANT.toProperties().sound(SoundType.SWEET_BERRY_BUSH).randomTicks().instabreak().noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createFruitBlock(String id, FruitBlock.FruitType fruitType) {
-        return createBlock(() -> new FruitBlock(fruitType, BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.SWEET_BERRY_BUSH).randomTicks().instabreak().noCollission()), id);
+        return createBlock(() -> new FruitBlock(fruitType, Material.PLANT.toProperties().sound(SoundType.SWEET_BERRY_BUSH).randomTicks().instabreak().noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createEtherBulbBlock(String id) {
-        return createBlock(() -> new EtherBulbsBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.SWEET_BERRY_BUSH).randomTicks().instabreak().lightLevel((state) -> state.getValue(EtherBulbsBlock.AGE) >= 2 ? 15 : 4).noCollission()), id);
+        return createBlock(() -> new EtherBulbsBlock(Material.PLANT.toProperties().sound(SoundType.SWEET_BERRY_BUSH).randomTicks().instabreak().lightLevel((state) -> state.getValue(EtherBulbsBlock.AGE) >= 2 ? 15 : 4).noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createNightshadeBerryBush(String id) {
@@ -1154,88 +1158,88 @@ public class BYGBlocks {
     }
 
     private static BlockRegistryObject<Block> createNightshadeBerryBush(int lightLevel, String id) {
-        return createBlock(() -> new NightshadeBerryBushBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.SWEET_BERRY_BUSH).lightLevel((state) -> lightLevel).randomTicks().instabreak().noCollission()), id);
+        return createBlock(() -> new NightshadeBerryBushBlock(Material.PLANT.toProperties().sound(SoundType.SWEET_BERRY_BUSH).lightLevel((state) -> lightLevel).randomTicks().instabreak().noCollission()), id);
     }
 
     static BlockRegistryObject<Block> createSapling(TagKey<Block> groundTag, String id) {
-        final Supplier<Block> createBlock = () -> new BYGSaplingBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.GRASS).strength(0.0f).noCollission().randomTicks(), groundTag);
+        final Supplier<Block> createBlock = () -> new BYGSaplingBlock(Material.PLANT.toProperties().sound(SoundType.GRASS).strength(0.0f).noCollission().randomTicks(), groundTag);
         final var blockRo = createPottedBlock(createBlock, id);
         return blockRo;
     }
 
     private static BlockRegistryObject<Block> createShrub(TreeSpawner tree, String id) {
-        return createPottedBlock(() -> new ShrubBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.COLOR_GREEN).sound(SoundType.SWEET_BERRY_BUSH).noOcclusion().noCollission(), tree), id);
+        return createPottedBlock(() -> new ShrubBlock(Material.PLANT.toProperties().mapColor(MapColor.COLOR_GREEN).sound(SoundType.SWEET_BERRY_BUSH).noOcclusion().noCollission(), tree), id);
     }
 
     private static BlockRegistryObject<Block> createJacarandaBush(String id) {
-        return createPottedBlock(() -> new JacarandaBushBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.COLOR_PURPLE).sound(SoundType.SWEET_BERRY_BUSH).noOcclusion()), id);
+        return createPottedBlock(() -> new JacarandaBushBlock(Material.PLANT.toProperties().mapColor(MapColor.COLOR_PURPLE).sound(SoundType.SWEET_BERRY_BUSH).noOcclusion()), id);
     }
 
     private static BlockRegistryObject<Block> createFloweringJacarandaBush(int taskRange, TreeSpawner tree, String id) {
-        return createPottedBlock(() -> new FloweringJacarandaBushBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.COLOR_PURPLE).sound(SoundType.SWEET_BERRY_BUSH).noOcclusion(), tree, taskRange), id);
+        return createPottedBlock(() -> new FloweringJacarandaBushBlock(Material.PLANT.toProperties().mapColor(MapColor.COLOR_PURPLE).sound(SoundType.SWEET_BERRY_BUSH).noOcclusion(), tree, taskRange), id);
     }
 
     private static BlockRegistryObject<Block> createIndigoJacarandaBush(String id) {
-        return createPottedBlock(() -> new IndigoJacarandaBushBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.COLOR_BLUE).sound(SoundType.SWEET_BERRY_BUSH).noOcclusion()), id);
+        return createPottedBlock(() -> new IndigoJacarandaBushBlock(Material.PLANT.toProperties().mapColor(MapColor.COLOR_BLUE).sound(SoundType.SWEET_BERRY_BUSH).noOcclusion()), id);
     }
 
     private static BlockRegistryObject<Block> createFloweringIndigoJacarandaBush(int taskRange, TreeSpawner tree, String id) {
-        return createPottedBlock(() -> new FloweringJacarandaBushBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.COLOR_BLUE).sound(SoundType.SWEET_BERRY_BUSH).noOcclusion(), tree, taskRange), id);
+        return createPottedBlock(() -> new FloweringJacarandaBushBlock(Material.PLANT.toProperties().mapColor(MapColor.COLOR_BLUE).sound(SoundType.SWEET_BERRY_BUSH).noOcclusion(), tree, taskRange), id);
     }
 
     public static BlockRegistryObject<Block> createPottedBlock(Supplier<Block> blockForPot, String id) {
         final var b = createBlock(blockForPot, id);
-        final BlockRegistryObject<Block> potted = createBlock(() -> BYGBlockFactory.INSTANCE.createPottedBlock(b, BlockBehaviour.Properties.copy(Blocks.POTTED_BLUE_ORCHID).instabreak().noOcclusion()), "potted_" + id);
+        final BlockRegistryObject<Block> potted = createBlock(() -> BYGBlockFactory.INSTANCE.createPottedBlock(b, Material.DECORATION.toProperties().instabreak().noOcclusion()), "potted_" + id);
         FLOWER_POT_BLOCKS.add(potted);
         return b;
     }
 
     private static BlockRegistryObject<Block> createShroomlight(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.COLOR_PURPLE).strength(1.0F).sound(SoundType.SHROOMLIGHT).lightLevel((state) -> 14)), id);
+        return createBlock(() -> new Block(Material.GRASS.toProperties().mapColor(MapColor.COLOR_PURPLE).strength(1.0F).sound(SoundType.SHROOMLIGHT).lightLevel((state) -> 14)), id);
     }
 
     private static BlockRegistryObject<Block> createImpariusVine(String id) {
-        return createBlock(() -> new ImpariusVineBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).instabreak().randomTicks().sound(SoundType.WEEPING_VINES).noCollission()), id);
+        return createBlock(() -> new ImpariusVineBlock(Material.LEAVES.toProperties().instabreak().randomTicks().sound(SoundType.WEEPING_VINES).noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createImpariusVinePlant(String id) {
-        return createBlock(() -> new ImpariusVinePlantBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).instabreak().randomTicks().sound(SoundType.WEEPING_VINES).noCollission()), id);
+        return createBlock(() -> new ImpariusVinePlantBlock(Material.LEAVES.toProperties().instabreak().randomTicks().sound(SoundType.WEEPING_VINES).noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createImpariusMushroom(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.COLOR_CYAN).strength(0.2F).sound(SoundType.TWISTING_VINES).speedFactor(0.5F).jumpFactor(0.5F)), id);
+        return createBlock(() -> new Block(Material.GRASS.toProperties().mapColor(MapColor.COLOR_CYAN).strength(0.2F).sound(SoundType.TWISTING_VINES).speedFactor(0.5F).jumpFactor(0.5F)), id);
     }
 
     private static BlockRegistryObject<Block> createTreeBranchBlock(MapColor color, String id) {
-        return createBlock(() -> new TreeBranchBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(color).instabreak().sound(SoundType.WOOD).noOcclusion().noCollission()), id);
+        return createBlock(() -> new TreeBranchBlock(Material.REPLACEABLE_PLANT.toProperties().mapColor(color).instabreak().sound(SoundType.WOOD).noOcclusion().noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createGlowingTreeBranchBlock(MapColor color, String id) {
-        return createBlock(() -> new TreeBranchBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(color).instabreak().sound(SoundType.TWISTING_VINES).noOcclusion().noCollission().lightLevel((state) -> 10)), id);
+        return createBlock(() -> new TreeBranchBlock(Material.REPLACEABLE_PLANT.toProperties().mapColor(color).instabreak().sound(SoundType.TWISTING_VINES).noOcclusion().noCollission().lightLevel((state) -> 10)), id);
     }
 
     private static BlockRegistryObject<Block> createWitchHazelBlossomBlock(MapColor color, String id) {
-        return createBlock(() -> new WitchHazelBlossomBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(color).instabreak().sound(SoundType.TWISTING_VINES).noOcclusion().noCollission().lightLevel((state) -> 10)), id);
+        return createBlock(() -> new WitchHazelBlossomBlock(Material.REPLACEABLE_PLANT.toProperties().mapColor(color).instabreak().sound(SoundType.TWISTING_VINES).noOcclusion().noCollission().lightLevel((state) -> 10)), id);
     }
 
     private static BlockRegistryObject<Block> createFungalImpariusFilamentBlock(String id) {
-        return createBlock(() -> new SlimeBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.COLOR_LIGHT_BLUE).strength(0.2F).sound(SoundType.HONEY_BLOCK).speedFactor(0.5F).jumpFactor(2.5F).lightLevel((state) -> 15)), id);
+        return createBlock(() -> new SlimeBlock(Material.GRASS.toProperties().mapColor(MapColor.COLOR_LIGHT_BLUE).strength(0.2F).sound(SoundType.HONEY_BLOCK).speedFactor(0.5F).jumpFactor(2.5F).lightLevel((state) -> 15)), id);
     }
 
     private static BlockRegistryObject<Block> createFungalImpariusFilament(String id) {
-        return createBlock(() -> new FungalImpariusFilamentBlock(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.COLOR_LIGHT_BLUE).instabreak().sound(SoundType.HONEY_BLOCK).noOcclusion().noCollission().lightLevel((state) -> 10)), id);
+        return createBlock(() -> new FungalImpariusFilamentBlock(Material.GRASS.toProperties().mapColor(MapColor.COLOR_LIGHT_BLUE).instabreak().sound(SoundType.HONEY_BLOCK).noOcclusion().noCollission().lightLevel((state) -> 10)), id);
     }
 
     private static BlockRegistryObject<Block> createFungalImparius(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.GRASS).mapColor(MapColor.WARPED_WART_BLOCK).strength(0.2F).sound(SoundType.HONEY_BLOCK)), id);
+        return createBlock(() -> new Block(Material.GRASS.toProperties().mapColor(MapColor.WARPED_WART_BLOCK).strength(0.2F).sound(SoundType.HONEY_BLOCK)), id);
     }
 
     private static BlockRegistryObject<Block> createShulkrenVine(String id) {
-        return createBlock(() -> new ShulkrenVineBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).instabreak().randomTicks().sound(SoundType.WEEPING_VINES).noCollission()), id);
+        return createBlock(() -> new ShulkrenVineBlock(Material.LEAVES.toProperties().instabreak().randomTicks().sound(SoundType.WEEPING_VINES).noCollission()), id);
     }
 
     private static BlockRegistryObject<Block> createShulkrenVinePlant(String id) {
-        return createBlock(() -> new ShulkrenVinePlantBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).instabreak().randomTicks().sound(SoundType.WEEPING_VINES).noCollission()), id);
+        return createBlock(() -> new ShulkrenVinePlantBlock(Material.LEAVES.toProperties().instabreak().randomTicks().sound(SoundType.WEEPING_VINES).noCollission()), id);
     }
 
     static BlockRegistryObject<Block> createLeaves(MapColor color, String id) {
@@ -1243,7 +1247,7 @@ public class BYGBlocks {
     }
 
     static BlockRegistryObject<Block> createLeaves(MapColor color, Supplier<ParticleOptions> particleOptions, String id) {
-        return createBlock(() -> new BYGLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).mapColor(color).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false), particleOptions), id);
+        return createBlock(() -> new BYGLeavesBlock(Material.LEAVES.toProperties().mapColor(color).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false), particleOptions), id);
     }
 
     static BlockRegistryObject<Block> createChangingLeaves(MapColor color, Supplier<LeavesBlock> next, float chance, String id) {
@@ -1251,11 +1255,11 @@ public class BYGBlocks {
     }
 
     static BlockRegistryObject<Block> createChangingLeaves(MapColor color, Supplier<LeavesBlock> next, float chance, Supplier<ParticleOptions> particleOptions, String id) {
-        return createBlock(() -> new ChangingLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).mapColor(color).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false), next, chance, particleOptions), id);
+        return createBlock(() -> new ChangingLeavesBlock(Material.LEAVES.toProperties().mapColor(color).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false), next, chance, particleOptions), id);
     }
 
     static BlockRegistryObject<Block> createGlowingLeaves(MapColor color, int lightLevel, String id) {
-        return createBlock(() -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).mapColor(color).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false).lightLevel((state) -> lightLevel)), id);
+        return createBlock(() -> new LeavesBlock(Material.LEAVES.toProperties().mapColor(color).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false).lightLevel((state) -> lightLevel)), id);
     }
 
     static BlockRegistryObject<Block> createFruitLeaves(MapColor color, Supplier<BlockState> fruit, String id, float tickSpawnChance) {
@@ -1263,23 +1267,23 @@ public class BYGBlocks {
     }
 
     static BlockRegistryObject<Block> createFruitLeaves(MapColor color, Supplier<BlockState> fruit, Supplier<ParticleOptions> particleOptions, String id, float tickSpawnChance) {
-        return createBlock(() -> new HangingFruitLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).mapColor(color).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false), fruit, particleOptions, tickSpawnChance), id);
+        return createBlock(() -> new HangingFruitLeavesBlock(Material.LEAVES.toProperties().mapColor(color).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false), fruit, particleOptions, tickSpawnChance), id);
     }
 
     private static BlockRegistryObject<Block> createFirecrackerLeavesBlock(MapColor color, String id) {
-        return createBlock(() -> new FirecrackerLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).mapColor(color).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false)), id);
+        return createBlock(() -> new FirecrackerLeavesBlock(Material.LEAVES.toProperties().mapColor(color).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false)), id);
     }
 
     private static BlockRegistryObject<Block> createFloweringPaloVerdeLeaves(MapColor color, String id) {
-        return createBlock(() -> new FloweringPaloVerdeLeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).mapColor(color).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false)), id);
+        return createBlock(() -> new FloweringPaloVerdeLeavesBlock(Material.LEAVES.toProperties().mapColor(color).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isViewBlocking((state, world, pos) -> false).isSuffocating((state, world, pos) -> false)), id);
     }
 
     private static BlockRegistryObject<Block> createPetal(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.GRASS).sound(SoundType.GRASS).strength(0.2f).noOcclusion()), id);
+        return createBlock(() -> new Block(Material.GRASS.toProperties().sound(SoundType.GRASS).strength(0.2f).noOcclusion()), id);
     }
 
     private static BlockRegistryObject<Block> createDirt(String id) {
-        return createBlock(() -> new Block(BlockBehaviour.Properties.copy(Blocks.DIRT).sound(SoundType.GRAVEL).strength(0.2f).randomTicks()), id);
+        return createBlock(() -> new Block(Material.DIRT.toProperties().sound(SoundType.GRAVEL).strength(0.2f).randomTicks()), id);
     }
 
     private static BlockRegistryObject<Block> createLushFarmland(String id) {
@@ -1287,27 +1291,27 @@ public class BYGBlocks {
     }
 
     private static BlockRegistryObject<Block> createDirtSpreadable(Supplier<? extends Block> blockToSpreadToo, MapColor color, String id) {
-        return createBlock(() -> new BYGGrassBlock(BlockBehaviour.Properties.copy(Blocks.DIRT).mapColor(color).sound(SoundType.GRASS).strength(0.4f).randomTicks(), blockToSpreadToo.get()), id);
+        return createBlock(() -> new BYGGrassBlock(Material.DIRT.toProperties().mapColor(color).sound(SoundType.GRASS).strength(0.4f).randomTicks(), blockToSpreadToo.get()), id);
     }
 
     private static BlockRegistryObject<Block> createStoneSpreadable(Supplier<? extends Block> blockToSpreadToo, MapColor color, String id) {
-        return createBlock(() -> new BYGGrassBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(color).sound(SoundType.STONE).strength(1.5f, 6.0f).randomTicks().requiresCorrectToolForDrops(), blockToSpreadToo.get()), id);
+        return createBlock(() -> new BYGGrassBlock(Material.STONE.toProperties().mapColor(color).sound(SoundType.STONE).strength(1.5f, 6.0f).randomTicks().requiresCorrectToolForDrops(), blockToSpreadToo.get()), id);
     }
 
     private static BlockRegistryObject<Block> createEndStoneSpreadable(Supplier<? extends Block> blockToSpreadToo, MapColor color, Supplier<ResourceKey<ConfiguredFeature<?, ?>>> feature, String id) {
-        return createBlock(() -> new BYGNylium(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(color).sound(SoundType.STONE).strength(0.4f).randomTicks().requiresCorrectToolForDrops(), feature, blockToSpreadToo.get()), id);
+        return createBlock(() -> new BYGNylium(Material.STONE.toProperties().mapColor(color).sound(SoundType.STONE).strength(0.4f).randomTicks().requiresCorrectToolForDrops(), feature, blockToSpreadToo.get()), id);
     }
 
     private static BlockRegistryObject<Block> createEndDirtSpreadable(Supplier<? extends Block> blockToSpreadToo, MapColor color, Supplier<ResourceKey<ConfiguredFeature<?, ?>>> feature, String id) {
-        return createBlock(() -> new BYGNylium(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(color).sound(SoundType.NYLIUM).strength(0.4f).randomTicks().requiresCorrectToolForDrops(), feature, blockToSpreadToo.get()), id);
+        return createBlock(() -> new BYGNylium(Material.STONE.toProperties().mapColor(color).sound(SoundType.NYLIUM).strength(0.4f).randomTicks().requiresCorrectToolForDrops(), feature, blockToSpreadToo.get()), id);
     }
 
     private static BlockRegistryObject<Block> createNetherSpreadable(Supplier<? extends Block> blockToSpreadToo, MapColor color, Supplier<ResourceKey<ConfiguredFeature<?, ?>>> feature, String id) {
-        return createBlock(() -> new BYGNylium(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(color).sound(SoundType.NYLIUM).strength(0.4F).randomTicks().requiresCorrectToolForDrops(), feature, blockToSpreadToo.get()), id);
+        return createBlock(() -> new BYGNylium(Material.STONE.toProperties().mapColor(color).sound(SoundType.NYLIUM).strength(0.4F).randomTicks().requiresCorrectToolForDrops(), feature, blockToSpreadToo.get()), id);
     }
 
     private static BlockRegistryObject<Block> createNetherStoneSpreadable(Block blockToSpreadToo, MapColor color, Supplier<ResourceKey<ConfiguredFeature<?, ?>>> feature, String id) {
-        return createBlock(() -> new BYGNylium(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(color).sound(SoundType.NYLIUM).strength(0.4f).randomTicks().requiresCorrectToolForDrops(), feature, blockToSpreadToo), id);
+        return createBlock(() -> new BYGNylium(Material.STONE.toProperties().mapColor(color).sound(SoundType.NYLIUM).strength(0.4f).randomTicks().requiresCorrectToolForDrops(), feature, blockToSpreadToo), id);
     }
 
     static BlockRegistryObject<Block> createSign(String id, WoodType type, BlockRegistryObject<Block> color) {
@@ -1327,7 +1331,8 @@ public class BYGBlocks {
     }
 
     private static BlockRegistryObject<Block> createWallSign(String id, WoodType type, Supplier<? extends MapColor> color, BlockRegistryObject<Block> sign) {
-        BlockRegistryObject<Block> signBlock = BYGConstants.SIGNS ? createBlock(() -> new WallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN).mapColor(color.get()).dropsLike(sign.get()), type), id) : null;
+        final var props = BlockBehaviour.Properties.copy(Blocks.OAK_SIGN);
+        BlockRegistryObject<Block> signBlock = BYGConstants.SIGNS ? createBlock(() -> new WallSignBlock(props.mapColor(color.get()).dropsLike(sign.get()), type), id) : null;
         if (signBlock != null) {
             SIGN_BLOCKS.add(signBlock);
         }

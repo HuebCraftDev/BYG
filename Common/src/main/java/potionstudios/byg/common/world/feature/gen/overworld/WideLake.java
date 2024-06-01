@@ -3,7 +3,6 @@ package potionstudios.byg.common.world.feature.gen.overworld;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.serialization.Codec;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -11,7 +10,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CakeBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
@@ -20,29 +18,17 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 import net.minecraft.world.level.material.Fluids;
-import potionstudios.byg.common.BYGTags;
 import potionstudios.byg.common.block.BYGBlocks;
+import potionstudios.byg.common.block.HasMaterial;
+import potionstudios.byg.common.block.Material;
 import potionstudios.byg.common.world.feature.config.SimpleBlockProviderConfig;
 import potionstudios.byg.util.CommonBlockTags;
 
 import java.util.Set;
-import java.util.function.Predicate;
 
 
 public class WideLake extends Feature<SimpleBlockProviderConfig> {
-
-    protected static final Set<Predicate<BlockState>> unacceptableSolidMaterials = ImmutableSet.of(
-            (BlockState s) -> s.is(Blocks.BAMBOO),
-            (BlockState s) -> s.is(Blocks.BAMBOO_SAPLING),
-            (BlockState s) -> s.is(BlockTags.LEAVES),
-            (BlockState s) -> s.is(Blocks.COBWEB),
-            (BlockState s) -> s.is(Blocks.CACTUS),
-            (BlockState s) -> s.is(BYGTags.HEAVY_METAL.byg(BYGTags.RegistryType.BLOCKS)),
-            (BlockState s) -> s.is(BlockTags.CROPS),
-            (BlockState s) -> s.getBlock() instanceof CakeBlock || s.is(BlockTags.CANDLE_CAKES),
-            (BlockState s) -> s.is(BYGTags.EGGS.byg(BYGTags.RegistryType.BLOCKS)),
-            (BlockState s) -> s.is(Blocks.BARRIER)
-    );
+    protected static final Set<Material> unacceptableSolidMaterials = ImmutableSet.of(Material.BAMBOO, Material.BAMBOO_SAPLING, Material.LEAVES, Material.WEB, Material.CACTUS, Material.HEAVY_METAL, Material.VEGETABLE, Material.CAKE, Material.EGG, Material.BARRIER, Material.CAKE);
 
     protected long noiseSeed;
     protected PerlinSimplexNoise noiseGen;
@@ -155,7 +141,8 @@ public class WideLake extends Feature<SimpleBlockProviderConfig> {
         // must be solid below
         // Will also return false if an unacceptable solid material is found.
         final var blockStateBelow = world.getBlockState(blockpos$Mutable.below());
-        if ((!blockStateBelow.isSolid() || unacceptableSolidMaterials.stream().anyMatch(it -> it.test(blockStateBelow)) ||
+        if ((!blockStateBelow.isSolid() ||
+                unacceptableSolidMaterials.contains(((HasMaterial) blockStateBelow).byg$getMaterial()) ||
                 blockStateBelow.is(BlockTags.PLANKS)) &&
                 blockStateBelow.getFluidState().isEmpty() &&
                 blockStateBelow.getFluidState() != Fluids.WATER.getSource(false)) {
@@ -168,7 +155,7 @@ public class WideLake extends Feature<SimpleBlockProviderConfig> {
             int open = 0;
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 final var blockStateNext = world.getBlockState(blockpos$Mutable.relative(direction));
-                if (unacceptableSolidMaterials.stream().anyMatch(it -> it.test(blockStateNext))) return false;
+                if (unacceptableSolidMaterials.contains(((HasMaterial) blockStateNext).byg$getMaterial())) return false;
                 if (world.getBlockState(blockpos$Mutable.relative(direction)).isAir()) open++;
             }
             if (open == 1) return true;
@@ -180,7 +167,7 @@ public class WideLake extends Feature<SimpleBlockProviderConfig> {
             for (int z2 = -1; z2 < 2; z2++) {
                 final var blockState = world.getBlockState(blockpos$Mutable.offset(x2, 0, z2));
 
-                if ((!blockState.isSolid() || unacceptableSolidMaterials.stream().anyMatch(it -> it.test(blockState)) || blockStateBelow.is(BlockTags.PLANKS)) && blockStateBelow.getFluidState().isEmpty() && blockStateBelow.getFluidState() != Fluids.WATER.getSource(false)) {
+                if ((!blockState.isSolid() || unacceptableSolidMaterials.contains(((HasMaterial) blockState).byg$getMaterial()) || blockStateBelow.is(BlockTags.PLANKS)) && blockStateBelow.getFluidState().isEmpty() && blockStateBelow.getFluidState() != Fluids.WATER.getSource(false)) {
                     return false;
                 }
             }

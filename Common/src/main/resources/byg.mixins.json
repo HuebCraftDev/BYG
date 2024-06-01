@@ -72,7 +72,9 @@
     "common.MixinPlayerList",
     "common.MixinWalkNodeProcessor",
     "common.block.MixinAbstractFireBlock",
+    "common.block.MixinBlockBehaviour",
     "common.block.MixinBlockBehaviourBlockStateBase",
+    "common.block.MixinBlockBehaviourProperties",
     "common.block.MixinFarmBlock",
     "common.block.MixinGrassBlock",
     "common.block.MixinNetherrackBlock",
@@ -87,7 +89,6 @@
     "common.world.MixinServerLevel",
     "common.world.MixinSimpleBlockFeature",
     "common.world.feature.MixinBasaltColumnFeature",
-//    "common.world.level.storage.loot.MixinLootTableManager",
     "common.world.surface.MixinSurfaceSystem",
     "dev.MixinMinecraftServer",
     "server.MixinMinecraftServer"

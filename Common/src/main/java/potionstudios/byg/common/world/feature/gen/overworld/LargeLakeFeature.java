@@ -18,6 +18,8 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.material.Fluids;
+import potionstudios.byg.common.block.HasMaterial;
+import potionstudios.byg.common.block.Material;
 import potionstudios.byg.common.world.feature.config.LargeLakeFeatureConfig;
 import potionstudios.byg.common.world.math.noise.fastnoise.FastNoise;
 import potionstudios.byg.util.CommonBlockTags;
@@ -181,6 +183,7 @@ public class LargeLakeFeature extends Feature<LargeLakeFeatureConfig> {
     }
 
     private static boolean canReplace(BlockState state) {
+        final var material = ((HasMaterial) state).byg$getMaterial();
         return (!state.isAir() && state.canBeReplaced())
                 || state.is(BlockTags.BASE_STONE_OVERWORLD)
                 || state.is(MLBlockTags.END_STONES)
@@ -189,8 +192,9 @@ public class LargeLakeFeature extends Feature<LargeLakeFeatureConfig> {
                 || state.is(MLBlockTags.ORES) // Handles floating ores
                 || state.is(BlockTags.DIRT)
                 || state.is(BlockTags.TERRACOTTA)
-                || state.is(CommonBlockTags.PLANT)
-                || state.is(CommonBlockTags.WATER_PLANT)
-                || state.is(Blocks.CACTUS);
+                || material == Material.PLANT
+                || material == Material.WATER_PLANT
+                || material == Material.REPLACEABLE_WATER_PLANT
+                || material == Material.CACTUS;
     }
 }

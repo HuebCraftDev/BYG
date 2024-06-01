@@ -49,6 +49,7 @@ public class BYGBlockTagsProvider extends BlockTagsProvider {
                 LUSH_GRASS_PATH, LUSH_GRASS_BLOCK, LUSH_FARMLAND
         );
 
+        final Material[] shovelMaterials = {Material.DIRT, Material.GRASS, Material.SAND, Material.CLAY};
 
         new PredicatedTagProvider<>(PROVIDER)
                 .forInstance(SlabBlock.class, bygTag(SLABS))
@@ -60,10 +61,10 @@ public class BYGBlockTagsProvider extends BlockTagsProvider {
                 .forInstance(CampfireBlock.class, bygTag(CAMPFIRES))
                 .forInstance(BYGScaffoldingBlock.class, bygTag(SCAFFOLDING))
                 .checkRegistryName(name -> name.endsWith("_ore"), bygTag(ORES))
-                .add(isTag(BlockTags.MINEABLE_WITH_SHOVEL, BlockTags.DIRT, BlockTags.SAND), BlockTags.MINEABLE_WITH_SHOVEL)
-                .add(isTag(BlockTags.LEAVES), bygTag(LEAVES))
-                .add(isTag(BlockTags.SAND), bygTag(SAND))
-                .add(isTag(BlockTags.ICE), bygTag(ICE))
+                .add(isMaterial(shovelMaterials), BlockTags.MINEABLE_WITH_SHOVEL)
+                .add(isMaterial(Material.LEAVES), bygTag(LEAVES))
+                .add(isMaterial(Material.SAND), bygTag(SAND))
+                .add(isMaterial(Material.ICE, Material.ICE_SOLID), bygTag(ICE))
                 .run(super::tag);
 
         tag(BlockTags.MINEABLE_WITH_SHOVEL).add(WAILING_NYLIUM.get());
@@ -182,17 +183,18 @@ public class BYGBlockTagsProvider extends BlockTagsProvider {
         return tags.byg(BYGTags.RegistryType.BLOCKS);
     }
 
-    private static Predicate<ResourceKey<Block>> isTag(TagKey<Block>... tagKeys) {
-        final var materialsList = List.of(tagKeys);
+    private static Predicate<ResourceKey<Block>> isMaterial(Material... materials) {
+        final var materialsList = List.of(materials);
         return blockResourceKey -> {
             Block bl = BuiltInRegistries.BLOCK.get(blockResourceKey);
 
-            for (final var tag : tagKeys) {
-                if (!bl.builtInRegistryHolder().is(tag)) {
-                    return false;
+            if (bl instanceof HasMaterial hasMaterial) {
+                final var material = hasMaterial.byg$getMaterial();
+                if (material != null) {
+                    return materialsList.contains(material);
                 }
             }
-            return true;
+            return false;
         };
     }
 

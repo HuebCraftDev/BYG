@@ -14,9 +14,10 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import org.jetbrains.annotations.NotNull;
+import potionstudios.byg.common.block.HasMaterial;
+import potionstudios.byg.common.block.Material;
 import potionstudios.byg.common.world.feature.config.BYGMushroomConfig;
 import potionstudios.byg.common.world.feature.gen.FeatureGenUtil;
-import potionstudios.byg.util.CommonBlockTags;
 import potionstudios.byg.util.MLBlockTags;
 
 @Deprecated(forRemoval = true)
@@ -68,14 +69,15 @@ public abstract class BYGAbstractMushroomFeature<T extends BYGMushroomConfig> ex
      * @return Determine whether or not the pos can support a sapling's tree.
      */
     public boolean canGiantMushroomGrowHere(LevelSimulatedReader reader, BlockPos pos) {
-        return reader.isStateAtPosition(pos, (state) ->
-                state.isAir() ||
-                        state.is(BlockTags.LOGS) ||
-                        state.is(BlockTags.LEAVES) ||
-                        state.is(BlockTags.DIRT) ||
-                        state.is(CommonBlockTags.PLANT) ||
-                        state.is(CommonBlockTags.WATER_PLANT)
-        );
+        return reader.isStateAtPosition(pos, (state) -> {
+            final var stateAccess = (HasMaterial) state;
+            return state.isAir() ||
+                    stateAccess.is(Material.PLANT) ||
+                    stateAccess.is(Material.REPLACEABLE_PLANT) ||
+                    stateAccess.is(Material.WATER_PLANT) ||
+                    stateAccess.is(Material.LEAVES) ||
+                    stateAccess.is(Material.DIRT);
+        });
     }
 
     /**

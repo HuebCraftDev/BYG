@@ -2,14 +2,12 @@ package potionstudios.byg.common.item;
 
 
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -27,6 +25,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 import potionstudios.byg.common.block.BYGBlocks;
+import potionstudios.byg.common.block.HasMaterial;
+import potionstudios.byg.common.block.Material;
 
 public class BYGWaterSilkItem extends BlockItem {
     public BYGWaterSilkItem(Block blockIn, Properties builder) {
@@ -53,8 +53,9 @@ public class BYGWaterSilkItem extends BlockItem {
 
                 BlockPos blockpos1 = blockpos.above();
                 BlockState blockstate = worldIn.getBlockState(blockpos);
+                Material material = ((HasMaterial)blockstate).byg$getMaterial();
                 FluidState FluidState = worldIn.getFluidState(blockpos);
-                if ((FluidState.getType() == Fluids.WATER || blockstate.is(BlockTags.ICE)) && worldIn.isEmptyBlock(blockpos1)) {
+                if ((FluidState.getType() == Fluids.WATER || material == Material.ICE) && worldIn.isEmptyBlock(blockpos1)) {
                     // special case for handling block placement with water lilies
                     worldIn.setBlock(blockpos1, BYGBlocks.WATER_SILK.defaultBlockState(), 11);
                     if (playerIn instanceof ServerPlayer) {

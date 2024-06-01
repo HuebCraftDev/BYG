@@ -1,16 +1,14 @@
 package potionstudios.byg.client.textures;
 
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
-
-import java.util.function.Supplier;
+import potionstudios.byg.common.block.Material;
 
 public class BYGMaterials {
-    public static final Supplier<BlockBehaviour.Properties> AMETRINE;
-    public static final Supplier<BlockBehaviour.Properties> SUBZERO_CRYSTAL;
+    public static final Material AMETRINE;
+    public static final Material SUBZERO_CRYSTAL;
 
     static {
-        AMETRINE = () -> BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PINK).forceSolidOff();
-        SUBZERO_CRYSTAL = () -> BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_BLUE).forceSolidOff();
+        AMETRINE = new Material.Builder(MapColor.COLOR_PINK).nonSolid().build();
+        SUBZERO_CRYSTAL = new Material.Builder(MapColor.COLOR_LIGHT_BLUE).nonSolid().build();
     }
 }

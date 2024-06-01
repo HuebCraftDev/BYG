@@ -4,21 +4,23 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.LevelSimulatedReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
-import potionstudios.byg.common.BYGTags;
+import potionstudios.byg.common.block.HasMaterial;
+import potionstudios.byg.common.block.Material;
 import potionstudios.byg.util.BlockHelper;
-import potionstudios.byg.util.CommonBlockTags;
 
 public class FeatureGenUtil {
 
     public static boolean isPlant(LevelSimulatedReader world, BlockPos pos) {
-        return world.isStateAtPosition(pos, (state) -> state.is(BlockTags.LEAVES) || state.getBlock() instanceof LeavesBlock || state.is(CommonBlockTags.PLANT) || state.is(CommonBlockTags.WATER_PLANT) || state.getBlock() instanceof BushBlock);
+        return world.isStateAtPosition(pos, (state) -> state.is(BlockTags.LEAVES) || ((HasMaterial) state).is(Material.LEAVES) || ((HasMaterial) state).is(Material.PLANT) || ((HasMaterial) state).is(Material.REPLACEABLE_PLANT) || ((HasMaterial) state).is(Material.WATER_PLANT) || ((HasMaterial) state).is(Material.REPLACEABLE_FIREPROOF_PLANT));
     }
 
     public static boolean isTerrainOrRock(LevelSimulatedReader world, BlockPos pos) {
-        return world.isStateAtPosition(pos, (state) -> state.is(BlockTags.BASE_STONE_OVERWORLD) || state.is(BYGTags.STONES.all(BYGTags.RegistryType.BLOCKS)) || state.is(BlockTags.BASE_STONE_OVERWORLD) || state.is(BlockTags.DIRT) || state.is(BlockTags.SAND) || state.getBlock() == Blocks.GRASS_BLOCK);
+        return world.isStateAtPosition(pos, (state) -> state.is(BlockTags.BASE_STONE_OVERWORLD) || ((HasMaterial) state).is(Material.STONE) || state.is(BlockTags.BASE_STONE_OVERWORLD) || ((HasMaterial) state).is(Material.DIRT) || state.is(BlockTags.SAND) || ((HasMaterial) state).is(Material.SAND) || state.getBlock() == Blocks.GRASS_BLOCK);
     }
 
     public static boolean isAir(LevelSimulatedReader reader, BlockPos pos) {

@@ -6,7 +6,8 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.material.PushReaction;
 import org.jetbrains.annotations.NotNull;
 import potionstudios.byg.common.block.nether.DoubleNetherPlantBlock;
@@ -25,27 +26,26 @@ import potionstudios.byg.common.block.nether.warped.BYGWarpedCoralWallFanBlock;
 import potionstudios.byg.common.block.nether.weepingmire.LamentVineBlock;
 import potionstudios.byg.common.block.nether.weepingmire.LamentVinePlantBlock;
 
-import java.util.function.Supplier;
-
 @SuppressWarnings("deprecation")
 public class BYGBlockProperties {
-    public static Supplier<BlockBehaviour.Properties> FIREPROOF_PLANT = () -> BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).forceSolidOff().noCollission().isViewBlocking((a, b, c) -> false).pushReaction(PushReaction.DESTROY);
-    public static Supplier<BlockBehaviour.Properties> FIREPROOF_LEAVES = () -> BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).forceSolidOn().isViewBlocking((a, b, c) -> false).pushReaction(PushReaction.DESTROY);
+    public static Material FIREPROOF_PLANT = new Material(MaterialColor.PLANT, false, false, false, false, false, false, PushReaction.DESTROY);
+    public static Material FIREPROOF_LEAVES = new Material(MaterialColor.PLANT, false, true, true, false, false, false, PushReaction.DESTROY);
 
     public static class BYGDoubleNetherPlant extends DoubleNetherPlantBlock {
         public BYGDoubleNetherPlant() {
-            super(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS)
+            super(BlockBehaviour.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT)
                     .sound(SoundType.ROOTS)
                     .strength(0.0f)
                     .noCollission()
                     .noOcclusion()
             );
+
         }
     }
 
     public static class BYGSnowyPlant extends BYGSnowyPlants {
         public BYGSnowyPlant() {
-            super(BlockBehaviour.Properties.copy(Blocks.GRASS)
+            super(BlockBehaviour.Properties.of(Material.PLANT)
                     .sound(SoundType.GRASS)
                     .strength(0.0f)
                     .noCollission()
@@ -56,7 +56,7 @@ public class BYGBlockProperties {
 
     public static class BYGEmburLily extends BYGLilyBlock {
         public BYGEmburLily() {
-            super(FIREPROOF_PLANT.get()
+            super(BlockBehaviour.Properties.of(FIREPROOF_PLANT)
                             .sound(SoundType.LILY_PAD)
                             .instabreak()
                             .noOcclusion(),
@@ -75,7 +75,7 @@ public class BYGBlockProperties {
 
     public static class BYGFrostMagma extends BYGFrostMagmaBlock {
         public BYGFrostMagma() {
-            super(BlockBehaviour.Properties.copy(Blocks.STONE)
+            super(BlockBehaviour.Properties.of(Material.STONE)
                     .sound(SoundType.STONE)
                     .strength(0.2f)
                     .friction(0.98F)
@@ -88,77 +88,92 @@ public class BYGBlockProperties {
 
     public static class BYGMagma extends MagmaBlock {
         public BYGMagma() {
-            super(BlockBehaviour.Properties.copy(Blocks.STONE)
+            super(BlockBehaviour.Properties.of(Material.STONE)
                     .sound(SoundType.STONE)
                     .strength(0.2f)
                     .randomTicks()
                     .lightLevel((state) -> 10)
                     .requiresCorrectToolForDrops()
+
             );
+
         }
     }
 
     public static class BYGSubzeroAsh extends SubzeroAshBlock {
         public BYGSubzeroAsh() {
-            super(BlockBehaviour.Properties.copy(Blocks.SNOW)
+            super(BlockBehaviour.Properties.of(Material.TOP_SNOW)
                     .sound(SoundType.SAND)
                     .strength(0.1f)
                     .speedFactor(0.6F)
             );
+
         }
     }
 
     public static class BYGSubzeroAshBlock extends Block {
         public BYGSubzeroAshBlock() {
-            super(BlockBehaviour.Properties.copy(Blocks.SNOW)
+            super(BlockBehaviour.Properties.of(Material.SNOW)
                     .sound(SoundType.SAND)
                     .strength(0.2f)
             );
+
         }
     }
 
     public static class BYGMud extends Block {
         public BYGMud() {
-            super(BlockBehaviour.Properties.copy(Blocks.DIRT)
+            super(BlockBehaviour.Properties.of(Material.DIRT)
                     .sound(SoundType.GRAVEL)
                     .strength(0.2f)
                     .speedFactor(0.4F)
             );
+
         }
     }
 
     public static class BYGNyliumSoulSand extends Block {
+
         public BYGNyliumSoulSand() {
-            super(BlockBehaviour.Properties.copy(Blocks.SAND)
+            super(BlockBehaviour.Properties.of(Material.SAND)
                     .sound(SoundType.SOUL_SAND)
                     .strength(0.5f)
                     .speedFactor(0.6F)
 
             );
+
         }
+
     }
 
     public static class BYGNyliumSoulSoil extends Block {
+
         public BYGNyliumSoulSoil() {
-            super(BlockBehaviour.Properties.copy(Blocks.SAND)
+            super(BlockBehaviour.Properties.of(Material.SAND)
                     .sound(SoundType.SOUL_SOIL)
                     .strength(0.5f)
+
+
             );
+
         }
+
     }
 
     public static class BYGQuartziteSand extends Block {
         public BYGQuartziteSand() {
-            super(BlockBehaviour.Properties.copy(Blocks.SAND)
+            super(BlockBehaviour.Properties.of(Material.SAND)
                     .sound(SoundType.SAND)
                     .strength(0.2f)
+
             );
+
         }
     }
 
     public static class HangingBones extends HangingBonesBlock {
         public HangingBones() {
-            super(BlockBehaviour.Properties.copy(Blocks.STONE)
+            super(BlockBehaviour.Properties.of(Material.STONE)
                     .sound(SoundType.BONE_BLOCK)
                     .strength(0.0F)
                     .noCollission()
@@ -169,30 +184,32 @@ public class BYGBlockProperties {
 
     public static class ScorchedPlant extends ScorchedPlantBlock {
         public ScorchedPlant() {
-            super(BlockBehaviour.Properties.copy(Blocks.GRASS)
+            super(BlockBehaviour.Properties.of(Material.PLANT)
                     .sound(SoundType.GRASS)
                     .strength(0.0F)
                     .noCollission()
                     .noOcclusion()
             );
+
         }
     }
 
     public static class BYGWarpedCoral extends BYGWarpedCoralPlantBlock {
         public BYGWarpedCoral() {
-            super(BlockBehaviour.Properties.copy(Blocks.KELP)
+            super(BlockBehaviour.Properties.of(Material.WATER_PLANT)
                     .sound(SoundType.WET_GRASS)
                     .strength(0.0F)
                     .noCollission()
                     .noOcclusion()
                     .lightLevel((state) -> 8)
             );
+
         }
     }
 
     public static class BYGWarpedWallFanCoral extends BYGWarpedCoralWallFanBlock {
         public BYGWarpedWallFanCoral() {
-            super(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS)
+            super(BlockBehaviour.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT)
                     .sound(SoundType.WET_GRASS)
                     .strength(0.0F)
                     .noCollission()
@@ -200,12 +217,13 @@ public class BYGBlockProperties {
                     .dropsLike(BYGBlocks.WARPED_CORAL.get())
                     .lightLevel((state) -> 8)
             );
+
         }
     }
 
     public static class BYGWarpedBush extends BYGWarpedBushBlock {
         public BYGWarpedBush() {
-            super(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS)
+            super(BlockBehaviour.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT)
                     .sound(SoundType.GRASS)
                     .strength(0.0f)
                     .noCollission()
@@ -219,19 +237,21 @@ public class BYGBlockProperties {
 
     public static class SythianStalk extends SythianStalkBlock {
         public SythianStalk() {
-            super(BlockBehaviour.Properties.copy(Blocks.BAMBOO)
+            super(BlockBehaviour.Properties.of(Material.BAMBOO)
                     .sound(SoundType.BAMBOO)
                     .strength(0.2f)
                     .noOcclusion()
                     .randomTicks()
                     .lightLevel((state) -> 8).dynamicShape()
             );
+
+
         }
     }
 
     public static class BYGWartBlock extends Block {
         public BYGWartBlock() {
-            super(BlockBehaviour.Properties.copy(Blocks.GRASS)
+            super(BlockBehaviour.Properties.of(Material.GRASS)
                     .sound(SoundType.WART_BLOCK)
                     .strength(1.0F)
             );
@@ -240,74 +260,84 @@ public class BYGBlockProperties {
 
     public static class BYGLamentPlant extends NetherSproutsBlock {
         public BYGLamentPlant() {
-            super(FIREPROOF_PLANT.get()
+            super(BlockBehaviour.Properties.of(FIREPROOF_PLANT)
                     .sound(SoundType.ROOTS)
                     .strength(0.0F)
                     .noCollission()
                     .noOcclusion()
             );
+
+
         }
     }
 
     public static class BYGLamentVinePlant extends LamentVinePlantBlock {
         public BYGLamentVinePlant() {
-            super(FIREPROOF_LEAVES.get()
+            super(BlockBehaviour.Properties.of(FIREPROOF_LEAVES)
                     .sound(SoundType.WEEPING_VINES)
                     .strength(0.2f)
                     .randomTicks()
                     .noCollission()
             );
+
         }
     }
 
     public static class BYGLamentVine extends LamentVineBlock {
         public BYGLamentVine() {
-            super(FIREPROOF_LEAVES.get()
+            super(BlockBehaviour.Properties.of(FIREPROOF_LEAVES)
                     .sound(SoundType.WEEPING_VINES)
                     .strength(0.2f)
                     .randomTicks()
                     .noCollission()
             );
+
         }
     }
 
     public static class BYGEmburPlant extends EmburPlantBlock {
         public BYGEmburPlant() {
-            super(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS)
+            super(BlockBehaviour.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT)
                     .sound(SoundType.ROOTS)
                     .strength(0.0F)
                     .noCollission()
                     .noOcclusion()
             );
+
+
         }
     }
 
     public static class SythianSapling extends SythianSaplingBlock {
         public SythianSapling() {
-            super(BlockBehaviour.Properties.copy(Blocks.BAMBOO_SAPLING)
+            super(BlockBehaviour.Properties.of(Material.BAMBOO_SAPLING)
                     .sound(SoundType.BAMBOO_SAPLING)
                     .strength(0.0f)
                     .noCollission()
                     .noOcclusion()
                     .randomTicks()
             );
+
+
         }
     }
 
     public static class SythianPlant extends BYGSythianPlantBlock {
         public SythianPlant() {
-            super(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS)
+            super(BlockBehaviour.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT)
                     .sound(SoundType.ROOTS)
                     .strength(0.0f)
                     .noCollission()
                     .noOcclusion()
             );
+
+
         }
     }
 
     public static class BYGWarpedCoralBlock extends Block {
         public BYGWarpedCoralBlock() {
-            super(BlockBehaviour.Properties.copy(Blocks.STONE)
+            super(BlockBehaviour.Properties.of(Material.STONE)
                     .sound(SoundType.CORAL_BLOCK)
                     .strength(0.2f)
                     .lightLevel((state) -> 8)
@@ -318,7 +348,7 @@ public class BYGBlockProperties {
 
     public static class BYGPollen extends BYGPollenBlock {
         public BYGPollen() {
-            super(BlockBehaviour.Properties.copy(Blocks.WHITE_WOOL)
+            super(BlockBehaviour.Properties.of(Material.WOOL)
                     .sound(SoundType.CORAL_BLOCK)
                     .strength(0.2f)
                     .randomTicks()
@@ -326,24 +356,27 @@ public class BYGBlockProperties {
                     .noCollission()
                     .lightLevel((state) -> 9)
             );
+
         }
     }
 
     public static class BYGThatch extends HayBlock {
         public BYGThatch() {
-            super(BlockBehaviour.Properties.copy(Blocks.GRASS)
+            super(BlockBehaviour.Properties.of(Material.GRASS)
                     .sound(SoundType.GRASS)
                     .strength(0.5f)
             );
+
         }
     }
 
     public static class ThatchCarpet extends WoolCarpetBlock {
         public ThatchCarpet() {
-            super(DyeColor.BROWN, BlockBehaviour.Properties.copy(Blocks.GRASS)
+            super(DyeColor.BROWN, BlockBehaviour.Properties.of(Material.GRASS)
                     .sound(SoundType.GRASS)
                     .strength(0.5f)
             );
+
         }
     }
 
@@ -359,7 +392,7 @@ public class BYGBlockProperties {
 
     public static class ThatchSlab extends SlabBlock {
         public ThatchSlab() {
-            super(BlockBehaviour.Properties.copy(Blocks.GRASS)
+            super(BlockBehaviour.Properties.of(Material.GRASS)
                     .sound(SoundType.GRASS)
                     .strength(0.5f)
             );
@@ -369,7 +402,7 @@ public class BYGBlockProperties {
 
     public static class BYGPoisonIvy extends PoisonIvyBlock {
         public BYGPoisonIvy() {
-            super(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)
+            super(BlockBehaviour.Properties.of(Material.LEAVES)
                     .sound(SoundType.GRASS)
                     .strength(0.2f)
                     .randomTicks()
@@ -381,7 +414,7 @@ public class BYGBlockProperties {
 
     public static class BYGSkyrisVine extends VineBlock {
         public BYGSkyrisVine() {
-            super(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)
+            super(BlockBehaviour.Properties.of(Material.LEAVES)
                     .sound(SoundType.GRASS)
                     .strength(0.2f)
                     .randomTicks()
@@ -393,7 +426,7 @@ public class BYGBlockProperties {
 
     public static class BYGHangingVine extends HangingVinesBlock {
         public BYGHangingVine() {
-            super(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS)
+            super(BlockBehaviour.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT)
                     .sound(SoundType.WEEPING_VINES)
                     .strength(0.2f)
                     .randomTicks()
@@ -407,7 +440,7 @@ public class BYGBlockProperties {
 
     public static class BYGHangingVinePlant extends HangingVinesPlantBlock {
         public BYGHangingVinePlant() {
-            super(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS)
+            super(BlockBehaviour.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT)
                     .sound(SoundType.WEEPING_VINES)
                     .strength(0.2f)
                     .randomTicks()
@@ -419,7 +452,7 @@ public class BYGBlockProperties {
 
     public static class BYGSoulShroomSporeEnd extends SoulShroomSporeEndBlock {
         public BYGSoulShroomSporeEnd() {
-            super(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS)
+            super(BlockBehaviour.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT)
                     .sound(SoundType.FUNGUS)
                     .strength(0.2f)
                     .randomTicks()
@@ -433,7 +466,7 @@ public class BYGBlockProperties {
 
     public static class BYGSoulShroomSpore extends SoulShroomSporeBlock {
         public BYGSoulShroomSpore() {
-            super(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS)
+            super(BlockBehaviour.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT)
                     .sound(SoundType.FUNGUS)
                     .strength(0.2f)
                     .randomTicks()
@@ -445,7 +478,7 @@ public class BYGBlockProperties {
 
     public static class BYGSythianHangingRootsPlant extends HangingSythanRootsPlantBlock {
         public BYGSythianHangingRootsPlant() {
-            super(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS)
+            super(BlockBehaviour.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT)
                     .sound(SoundType.WEEPING_VINES)
                     .strength(0.2f)
                     .randomTicks()
@@ -457,7 +490,7 @@ public class BYGBlockProperties {
 
     public static class BYGSythianHangingRoots extends HangingSythanRootsBlock {
         public BYGSythianHangingRoots() {
-            super(BlockBehaviour.Properties.copy(Blocks.CRIMSON_ROOTS)
+            super(BlockBehaviour.Properties.of(Material.REPLACEABLE_FIREPROOF_PLANT)
                     .sound(SoundType.WEEPING_VINES)
                     .strength(0.2f)
                     .randomTicks()
@@ -475,7 +508,7 @@ public class BYGBlockProperties {
 
     public static class BYGNetherLog extends LogBlock {
         public BYGNetherLog() {
-            super(BlockBehaviour.Properties.copy(Blocks.CRIMSON_STEM)
+            super(BlockBehaviour.Properties.of(Material.NETHER_WOOD)
                     .sound(SoundType.STEM)
                     .strength(2.0f)
             );
@@ -485,7 +518,7 @@ public class BYGBlockProperties {
 
     public static class BYGNetherWood extends RotatedPillarBlock {
         public BYGNetherWood() {
-            super(BlockBehaviour.Properties.copy(Blocks.CRIMSON_STEM)
+            super(BlockBehaviour.Properties.of(Material.NETHER_WOOD)
                     .sound(SoundType.STEM)
                     .strength(2.0f)
             );
@@ -501,7 +534,7 @@ public class BYGBlockProperties {
 
     public static class BYGPervadedNetherrack extends DropExperienceBlock {
         public BYGPervadedNetherrack() {
-            super(BlockBehaviour.Properties.copy(Blocks.STONE)
+            super(BlockBehaviour.Properties.of(Material.STONE)
                     .sound(SoundType.NETHER_GOLD_ORE)
                     .strength(0.4F, 0.4F)
                     .lightLevel((state) -> 13)
@@ -514,7 +547,7 @@ public class BYGBlockProperties {
 
     public static class AnthraciteOre extends DropExperienceBlock {
         public AnthraciteOre() {
-            super(BlockBehaviour.Properties.copy(Blocks.STONE)
+            super(BlockBehaviour.Properties.of(Material.STONE)
                     .sound(SoundType.NETHER_ORE)
                     .strength(0.4F, 0.4F)
                     .requiresCorrectToolForDrops()
@@ -527,7 +560,7 @@ public class BYGBlockProperties {
 
     public static class BlockHugeMushroom extends HugeMushroomBlock {
         public BlockHugeMushroom() {
-            super(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).mapColor(MapColor.DIRT)
+            super(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.DIRT)
                     .sound(SoundType.STEM)
                     .strength(0.2F)
             );
@@ -538,7 +571,7 @@ public class BYGBlockProperties {
 
     public static class BlockHugeNetherMushroom extends HugeMushroomBlock {
         public BlockHugeNetherMushroom() {
-            super(BlockBehaviour.Properties.copy(Blocks.CRIMSON_STEM).mapColor(MapColor.DIRT)
+            super(BlockBehaviour.Properties.of(Material.NETHER_WOOD, MaterialColor.DIRT)
                     .sound(SoundType.STEM)
                     .strength(0.2F)
                     .lightLevel((state) -> 12)
@@ -555,7 +588,7 @@ public class BYGBlockProperties {
 
     public static class BlockHugeNetherMushroomStem extends HugeMushroomBlock {
         public BlockHugeNetherMushroomStem() {
-            super(BlockBehaviour.Properties.copy(Blocks.CRIMSON_STEM).mapColor(MapColor.DIRT)
+            super(BlockBehaviour.Properties.of(Material.NETHER_WOOD, MaterialColor.DIRT)
                     .sound(SoundType.STEM)
                     .strength(0.2F)
             );
@@ -571,7 +604,7 @@ public class BYGBlockProperties {
 
     public static class BulbisShell extends HugeMushroomBlock {
         public BulbisShell() {
-            super(BlockBehaviour.Properties.copy(Blocks.GLASS).mapColor(MapColor.COLOR_CYAN)
+            super(BlockBehaviour.Properties.of(Material.GLASS, MaterialColor.COLOR_CYAN)
                     .sound(SoundType.SHROOMLIGHT)
                     .strength(0.2F)
                     .noOcclusion()
@@ -580,6 +613,7 @@ public class BYGBlockProperties {
 
             this.registerDefaultState(this.stateDefinition.any().setValue(NORTH, true).setValue(EAST, true).setValue(SOUTH, true).setValue(WEST, true).setValue(UP, true).setValue(DOWN, true));
         }
+
 
         public boolean skipRendering(@NotNull BlockState state, BlockState adjacentBlockState, @NotNull Direction side) {
             return adjacentBlockState.getBlock() == this || super.skipRendering(state, adjacentBlockState, side);
@@ -593,44 +627,48 @@ public class BYGBlockProperties {
                     .sound(SoundType.STONE)
                     .strength(2.0f, 6.0f)
                     .requiresCorrectToolForDrops()
+
             );
+
         }
     }
 
     public static class BYGGlowCaneBlock extends Block {
         public BYGGlowCaneBlock() {
-            super(BlockBehaviour.Properties.copy(Blocks.GRASS)
+            super(BlockBehaviour.Properties.of(Material.GRASS)
                     .sound(SoundType.SHROOMLIGHT)
                     .strength(0.3F)
                     .lightLevel((state) -> 15)
             );
+
         }
     }
 
     public static class BYGStone extends Block {
         public BYGStone() {
-            super(BlockBehaviour.Properties.copy(Blocks.STONE)
+            super(BlockBehaviour.Properties.of(Material.STONE)
                     .sound(SoundType.STONE)
                     .strength(1.5f, 6.0f)
                     .requiresCorrectToolForDrops()
+
             );
+
         }
     }
 
     public static class BYGNetherrack extends Block {
         public BYGNetherrack() {
-            super(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.TERRACOTTA_BLUE)
+            super(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BLUE)
                     .sound(SoundType.NETHERRACK)
                     .strength(0.4F, 0.4F)
                     .requiresCorrectToolForDrops()
+
             );
         }
     }
-
     public static class BygNetherBricks extends Block {
-        public BygNetherBricks(MapColor color) {
-            super(BlockBehaviour.Properties.of()
-                    .mapColor(color)
+        public BygNetherBricks(MaterialColor color) {
+            super(BlockBehaviour.Properties.of(Material.STONE, color)
                     .sound(SoundType.NETHER_BRICKS)
                     .strength(2.0F, 6.0F)
                     .requiresCorrectToolForDrops()
@@ -640,23 +678,29 @@ public class BYGBlockProperties {
 
     public static class BYGPillar extends RotatedPillarBlock {
         public BYGPillar() {
-            super(BlockBehaviour.Properties.copy(Blocks.STONE)
+            super(BlockBehaviour.Properties.of(Material.STONE)
                     .sound(SoundType.STONE)
                     .strength(1.5f, 6.0f)
                     .requiresCorrectToolForDrops()
+
+
             );
+
         }
     }
 
     public static class BYGLantern extends LanternBlock {
         public BYGLantern() {
-            super(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
+            super(BlockBehaviour.Properties.of(Material.METAL)
                     .sound(SoundType.LANTERN)
                     .strength(3.5F)
                     .lightLevel((state) -> 15)
                     .noOcclusion()
+
                     .requiresCorrectToolForDrops()
+
             );
+
         }
     }
 }
